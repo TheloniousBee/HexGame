@@ -13,8 +13,8 @@ var y_spacing = 27
 var hex_offset_x = x_spacing+spacer
 var hex_offset_y = y_spacing+spacer
 
-var col_size = 2
-var row_size = 2
+var col_size = 6
+var row_size = 6
 
 #var origin_hex = Vector2(16,14)
 #var origin_hex = Vector2(178,46)
@@ -28,8 +28,8 @@ var columns = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	origin_hex = Vector2((get_viewport().size.x / 2) - (hex_grid_width / 2 - (hex_offset_x / 2)), (get_viewport().size.y / 2) - (hex_grid_height / 2 - (hex_offset_y / 2)))
-	setup_grid()
-	#build_grid_from_coordinates_test()
+	#setup_grid()
+	build_grid_from_coordinates_test()
 	return
 	
 func setup_grid():
@@ -45,12 +45,14 @@ func setup_grid():
 				x_pos = j*hex_offset_x
 				y_pos = i*hex_offset_y
 			var hex = Hex.instance()
+			hex.on_grid = true
 			hex.grid_coordinate = Vector2(j,i)
 			hex.position = Vector2(origin_hex.x + x_pos, origin_hex.y + y_pos)
 			add_child(hex)
-			row.append(hex.grid_coordinate)
+			row.append(hex)
 		columns.append(row)
 	return
+
 
 func build_grid_from_coordinates_test():
 	var row1 = []
@@ -81,6 +83,7 @@ func build_grid_from_coordinates_test():
 				x_pos = j.x*27
 				y_pos = j.y*30
 			var hex = Hex.instance()
+			hex.on_grid = true
 			hex.grid_coordinate = Vector2(j.x,j.y)
 			hex.position = Vector2(origin_hex.x + x_pos, origin_hex.y + y_pos)
 			add_child(hex)
@@ -89,6 +92,11 @@ func build_grid_from_coordinates_test():
 		print(i)
 	return
 
+
+func proliferate_hexes():
+	for hex in get_children():
+		hex.proliferate()
+	return
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
