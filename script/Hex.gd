@@ -6,14 +6,24 @@ var grid_coordinate : Vector2
 var is_dragging = false
 var on_grid = false
 var colliding_hexes = []
-var candidate_flavour = []
+var candidate_flavours = []
+
+const SOUTHEAST = 0
+const NORTHEAST = 1
+const NORTH = 2
+const NORTHWEST = 3
+const SOUTHWEST = 4
+const SOUTH = 5
 
 signal player_made_move
+signal hex_spread_to_neighbour(grid_coordinate, direction, flavour_type)
 
 func _ready():
 	set_flavour()
 	$CoordinateLabel.text = (grid_coordinate.x as String) + "," + (grid_coordinate.y as String)
+	$Name.text = name
 	self.connect("player_made_move", get_parent(), "advance_turn")
+	self.connect("hex_spread_to_neighbour", get_parent(), "spread_to_neighbour")
 	return
 
 func _on_Hex_area_shape_entered(area_id, area, area_shape, self_shape):
@@ -63,8 +73,9 @@ func place_on_grid(hex : Node2D):
 	return
 
 func change_hex_type(new_flavour : String):
-	flavour_type = new_flavour
-	set_flavour()
+	if new_flavour != flavour_type:
+		flavour_type = new_flavour
+		set_flavour()
 	return
 
 func add_grid_hex_to_list(hex : Node):
@@ -89,11 +100,50 @@ func set_flavour():
 	add_child(flavour)
 	return
 
-func proliferate():
-	if flavour_type != "Empty" and flavour_type != "Mountain":
-		print("Proliferate!")
+func add_candidate(new_flavour : String):
+	candidate_flavours.append(new_flavour)
 	return
 	
-func spread_down():
+func transform_to_new_flavour():
+	if !candidate_flavours.empty():
+		change_hex_type(candidate_flavours.back())
+		print("new coord")
+		print(grid_coordinate)
+	return
+
+func proliferate():
+	if flavour_type != "Empty" and flavour_type != "Mountain":
+		match flavour_type:
+			"Lava":
+				spread_lava()
+			"Village":
+				spread_village()
+			"Glacier":
+				spread_glacier()
+			"Grass":
+				spread_grass()
+			"Water":
+				spread_water()
+	return
 	
+func spread_lava():
+	emit_signal("hex_spread_to_neighbour", grid_coordinate, SOUTH, flavour_type)
+	return
+	
+func spread_village():
+	emit_signal("hex_spread_to_neighbour", grid_coordinate, NORTHEAST, flavour_type)
+	emit_signal("hex_spread_to_neighbour", grid_coordinate, NORTHWEST, flavour_type)
+	emit_signal("hex_spread_to_neighbour", grid_coordinate, SOUTH, flavour_type)
+	return
+	
+func spread_glacier():
+	
+	return
+	
+func spread_grass():
+	
+	return
+	
+func spread_water():
+	emit_signal("hex_spread_to_neighbour", grid_coordinate, NORTHWEST, flavour_type)
 	return

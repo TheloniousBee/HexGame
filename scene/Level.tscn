@@ -16,3 +16,27 @@ flavour_type = "Lava"
 [node name="Hex2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 31, 214 )
 flavour_type = "Water"
+
+[node name="Hex3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 44, 95 )
+flavour_type = "Lava"
+
+[node name="Hex4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 39, 135 )
+flavour_type = "Water"
+
+[node name="Hex5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 28, 18 )
+flavour_type = "Lava"
+
+[node name="Hex6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 23, 58 )
+flavour_type = "Water"
+
+[node name="Hex7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 67, 236 )
+flavour_type = "Village"
+
+[node name="Hex8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 62, 276 )
+flavour_type = "Water"
