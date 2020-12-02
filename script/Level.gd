@@ -14,6 +14,6 @@ func advance_turn():
 	grid.proliferate_hexes()
 	
 	#Activate its "Spread" function
-#Each spread function will mark hexes that it would like to spread to
-#Each hex will then resolve the conflicts for all the candidate spread
+	#Each spread function will mark hexes that it would like to spread to
+	#Each hex will then resolve the conflicts for all the candidate spread
 	return

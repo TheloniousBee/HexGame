@@ -129,8 +129,8 @@ func build_grid_from_coordinates_test():
 			add_child(hex)
 			row.append(hex)
 			
-	for i in columns:
-		print(i)
+	#for i in columns:
+	#	print(i)
 	return
 
 
@@ -172,7 +172,7 @@ func get_neighbour(coordinate : Vector2, direction : int):
 	return Vector2(coordinate.x+dir[0],coordinate.y+dir[1])
 
 func get_hex_for_coord(coordinate : Vector2):
-	print("Getting hex for:" + (coordinate as String))
+	#print("Getting hex for:" + (coordinate as String))
 	if coordinate.y >= columns.size() or coordinate.y < 0:
 		return null
 	else:
