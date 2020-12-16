@@ -1,5 +1,6 @@
 extends Node
 
+
 func _ready():
 	pass
 
@@ -10,7 +11,7 @@ func _unhandled_input(event):
 	return
 
 func advance_turn():
-	var grid = get_node("HexGrid")
+	var grid = get_node("PlayHexGrid")
 	grid.proliferate_hexes()
 	
 	#Activate its "Spread" function

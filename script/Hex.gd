@@ -4,9 +4,11 @@ export var speed = 30
 export var flavour_type = "Empty"
 var grid_coordinate : Vector2
 var is_dragging = false
-var on_grid = false
+export var on_grid = false
 var colliding_hexes = []
 var candidate_flavours = []
+
+export var interactable = false
 
 signal player_made_move
 signal hex_spread_to_neighbour(grid_coordinate, direction, flavour_type)
@@ -19,13 +21,13 @@ func _ready():
 	return
 
 func _on_Hex_area_shape_entered(area_id, area, area_shape, self_shape):
-	if on_grid and area != null:
+	if on_grid and area != null and interactable:
 		area.call("add_grid_hex_to_list", self)
 	return
 
 
 func _on_Hex_area_shape_exited(area_id, area, area_shape, self_shape):
-	if on_grid and area != null:
+	if on_grid and area != null and interactable:
 		area.call("remove_grid_hex_from_list", self)
 	return
 
@@ -41,10 +43,14 @@ func _physics_process(delta):
 
 func _on_Hex_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and !on_grid:
-			is_dragging = event.pressed
-			if not event.pressed:
-				center_on_grid_hex()
+		if event.button_index == BUTTON_LEFT:
+			if !on_grid:
+				is_dragging = event.pressed
+				if not event.pressed:
+					center_on_grid_hex()
+			elif Global.is_level_editor:
+				if event.pressed:
+					get_tree().get_root().get_node("LevelEditor").change_flavour(self)
 	return
 	
 func center_on_grid_hex():
@@ -53,7 +59,8 @@ func center_on_grid_hex():
 		closest_hex.position = Vector2(100000,100000)
 		for hex in colliding_hexes:
 			if hex.position.distance_to(position) < closest_hex.position.distance_to(position):
-				closest_hex = hex
+				if hex.interactable:
+					closest_hex = hex
 		position = closest_hex.position
 		place_on_grid(closest_hex)
 	return

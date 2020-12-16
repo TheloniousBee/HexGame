@@ -9,5 +9,7 @@ enum {
 	SOUTH
 }
 
+var is_level_editor = false
+
 func _ready():
 	pass

@@ -7,7 +7,12 @@
 [node name="Level" type="Node"]
 script = ExtResource( 3 )
 
-[node name="HexGrid" parent="." instance=ExtResource( 1 )]
+[node name="PlayHexGrid" parent="." instance=ExtResource( 1 )]
+origin_hex = Vector2( 160, 180 )
+placeable = true
+
+[node name="ExampleHexGrid" parent="." instance=ExtResource( 1 )]
+origin_hex = Vector2( 480, 180 )
 
 [node name="Hex" parent="." instance=ExtResource( 2 )]
 position = Vector2( 36, 174 )

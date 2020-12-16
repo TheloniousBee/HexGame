@@ -12,31 +12,31 @@ var y_spacing = 27
 var hex_offset_x = x_spacing+spacer
 var hex_offset_y = y_spacing+spacer
 
-var col_size = 7
-var row_size = 15
+var col_size = 0
+var row_size = 0
 
 #var origin_hex = Vector2(16,14)
 #var origin_hex = Vector2(178,46)
-var hex_grid_width = row_size * hex_offset_x
-var hex_grid_height = col_size * hex_offset_y
 
-var origin_hex : Vector2
+
+export var origin_hex : Vector2
+export var placeable : bool
 
 var columns = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	origin_hex = Vector2((get_viewport().size.x / 2) - (hex_grid_width / 2 - (hex_offset_x / 2)), (get_viewport().size.y / 2) - (hex_grid_height / 2 - (hex_offset_y / 2)))
 	setup_grid()
 	#setup_grid_old()
 	build_grid_from_coordinates_test()
 	return
 	
+	
 func setup_grid():
 	for n in MAX_COL_SIZE:
 		var row = []
 		columns.append(row)
-	print(columns.size())
+	#print(columns.size())
 	return
 	
 func setup_grid_old():
@@ -111,28 +111,49 @@ func build_grid_from_coordinates_test():
 	var row6 = loaded_grid[6]
 	row6.append(Vector2(6,6))
 		
+	var running_row_size = 0
+	var max_row_size = 0
+	for i in loaded_grid:
+		if !i.empty():
+			col_size += 1
+			running_row_size = 0
+			for j in i:
+				running_row_size += 1
+			if running_row_size > max_row_size:
+				max_row_size = running_row_size
+	row_size = max_row_size
+	print(col_size)
+	print(row_size)
+	
+	var hex_grid_width = row_size * hex_offset_x
+	var hex_grid_height = col_size * hex_offset_y
+	#origin_hex = Vector2((get_viewport().size.x / 2) - (hex_grid_width / 2 - (hex_offset_x / 2)), (get_viewport().size.y / 2) - (hex_grid_height / 2 - (hex_offset_y / 2)))
+	origin_hex.x -= hex_grid_width - (hex_offset_x)
+	origin_hex.y -= hex_grid_height / 2 - (hex_offset_y)
+	
+	print(origin_hex)
 	for i in range(loaded_grid.size()):
 		var row = columns[i]
 		for j in loaded_grid[i]:
 			var x_pos : int
 			var y_pos : int
 			if (j.x as int) % 2 != 0:
-				x_pos = j.x*27
-				y_pos = j.y*30 + (30/2)
+				x_pos = j.x*hex_offset_x
+				y_pos = j.y*hex_offset_y + (hex_offset_y/2)
 			else:
-				x_pos = j.x*27
-				y_pos = j.y*30
+				x_pos = j.x*hex_offset_x
+				y_pos = j.y*hex_offset_y
 			var hex = Hex.instance()
 			hex.on_grid = true
 			hex.grid_coordinate = Vector2(j.x,j.y)
 			hex.position = Vector2(origin_hex.x + x_pos, origin_hex.y + y_pos)
+			hex.interactable = placeable
 			add_child(hex)
 			row.append(hex)
 			
-	#for i in columns:
-	#	print(i)
+	for i in columns:
+		print(i)
 	return
-
 
 func proliferate_hexes():
 	for hex in get_children():
