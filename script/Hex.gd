@@ -15,9 +15,13 @@ signal hex_spread_to_neighbour(grid_coordinate, direction, flavour_type)
 
 func _ready():
 	set_flavour()
-	$CoordinateLabel.text = (grid_coordinate.x as String) + "," + (grid_coordinate.y as String)
+	set_coordinate_text()
 	self.connect("player_made_move", get_parent(), "advance_turn")
 	self.connect("hex_spread_to_neighbour", get_parent(), "spread_to_neighbour")
+	return
+	
+func set_coordinate_text():
+	$CoordinateLabel.text = (grid_coordinate.x as String) + "," + (grid_coordinate.y as String)
 	return
 
 func _on_Hex_area_shape_entered(area_id, area, area_shape, self_shape):

@@ -98,5 +98,39 @@ interactable = true
 
 [node name="PaintBrush" parent="." instance=ExtResource( 3 )]
 position = Vector2( 618, 41 )
+input_pickable = false
 script = ExtResource( 4 )
+
+[node name="RemoveRow" type="Button" parent="."]
+margin_left = 538.0
+margin_top = 328.0
+margin_right = 628.0
+margin_bottom = 348.0
+text = "Remove Row"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddRow" type="Button" parent="."]
+margin_left = 454.0
+margin_top = 328.0
+margin_right = 521.0
+margin_bottom = 348.0
+text = "Add Row"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RowControlsVisibility" type="Button" parent="."]
+margin_left = 307.0
+margin_top = 328.0
+margin_right = 439.0
+margin_bottom = 348.0
+text = "Hide Row Controls"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="RemoveRow" to="." method="_on_RemoveRow_pressed"]
+[connection signal="pressed" from="AddRow" to="." method="_on_AddRow_pressed"]
+[connection signal="pressed" from="RowControlsVisibility" to="." method="_on_RowControlsVisibility_pressed"]

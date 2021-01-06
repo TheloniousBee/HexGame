@@ -131,6 +131,7 @@ func build_grid_from_coordinates_test():
 	origin_hex.x -= hex_grid_width - (hex_offset_x)
 	origin_hex.y -= hex_grid_height / 2 - (hex_offset_y)
 	
+	print("Origin_hex")
 	print(origin_hex)
 	for i in range(loaded_grid.size()):
 		var row = columns[i]
@@ -153,6 +154,93 @@ func build_grid_from_coordinates_test():
 			
 	for i in columns:
 		print(i)
+	return
+	
+func convert_grid_coord_to_pos(coordinate : Vector2):
+	var new_pos = Vector2.ZERO
+	var x_pos : int
+	var y_pos : int
+	if (coordinate.x as int) % 2 != 0:
+		x_pos = coordinate.x*hex_offset_x
+		y_pos = coordinate.y*hex_offset_y + (hex_offset_y/2)
+	else:
+		x_pos = coordinate.x*hex_offset_x
+		y_pos = coordinate.y*hex_offset_y
+	new_pos = Vector2(origin_hex.x + x_pos, origin_hex.y + y_pos)
+	return new_pos
+	
+func create_empty_hex(coord : Vector2):
+	var x_pos : int
+	var y_pos : int
+	if (coord.x as int) % 2 != 0:
+		x_pos = coord.x*hex_offset_x
+		y_pos = coord.y*hex_offset_y + (hex_offset_y/2)
+	else:
+		x_pos = coord.x*hex_offset_x
+		y_pos = coord.y*hex_offset_y
+	var hex = Hex.instance()
+	hex.on_grid = true
+	hex.grid_coordinate = Vector2(coord.x,coord.y)
+	hex.position = Vector2(origin_hex.x + x_pos, origin_hex.y + y_pos)
+	hex.interactable = placeable
+	add_child(hex)
+	return hex
+
+func create_empty_row(column_pos, new_row_size):
+	var row = []
+	for i in new_row_size:
+		row.append(create_empty_hex(Vector2(i,column_pos)))
+	return row
+	
+func change_column_count(new_col_count : int):
+	if new_col_count > 0 and new_col_count <= MAX_COL_SIZE:
+		if(new_col_count > columns.size()):
+			while(columns.size() < new_col_count):
+				var last_row_size = columns.back().size()
+				var new_row = create_empty_row(columns.size(),last_row_size)
+				columns.append(new_row)
+		elif(new_col_count < columns.size()):
+			while(columns.size() > new_col_count):
+				for i in columns.back():
+					i.queue_free()
+				columns.pop_back()
+	return
+	
+func shift_row_right(index : int):
+	if(index >= 0 and index <= columns.size()-1):
+		var row = columns[index]
+		if(row.back().grid_coordinate.x < MAX_ROW_SIZE):
+			for i in row:
+				i.grid_coordinate.x += 1
+				i.position = convert_grid_coord_to_pos(i.grid_coordinate)
+				i.set_coordinate_text()
+	return
+	
+func shift_row_left(index : int):
+	if(index >= 0 and index <= columns.size()-1):
+		var row = columns[index]
+		if(row.front().grid_coordinate.x > 0):
+			for i in row:
+				i.grid_coordinate.x -= 1
+				i.position = convert_grid_coord_to_pos(i.grid_coordinate)
+				i.set_coordinate_text()
+	return
+	
+func increment_row_size(index : int):
+	if(index >= 0 and index <= columns.size()-1):
+		var row = columns[index]
+		if(row.size() < MAX_ROW_SIZE):
+			var last_hex = row.back()
+			var new_hex = create_empty_hex(Vector2(last_hex.grid_coordinate.x+1,index))
+			row.append(new_hex)
+	return
+
+func decrement_row_size(index : int):
+	if(index >= 0 and index <= columns.size()-1):
+		var row = columns[index]
+		if(row.size() > 1):
+			row.back().queue_free()
+			row.pop_back()
 	return
 
 func proliferate_hexes():
