@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scene/HexGrid.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scene/Hex.tscn" type="PackedScene" id=2]
 [ext_resource path="res://script/Level.gd" type="Script" id=3]
 
 [node name="Level" type="Node"]
@@ -13,27 +12,3 @@ placeable = true
 
 [node name="ExampleHexGrid" parent="." instance=ExtResource( 1 )]
 origin_hex = Vector2( 480, 180 )
-
-[node name="Hex" parent="." instance=ExtResource( 2 )]
-position = Vector2( 36, 174 )
-flavour_type = "Lava"
-
-[node name="Hex2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 31, 214 )
-flavour_type = "Water"
-
-[node name="Hex3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 44, 95 )
-flavour_type = "Glacier"
-
-[node name="Hex4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 39, 135 )
-flavour_type = "Grass"
-
-[node name="Hex5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 28, 18 )
-flavour_type = "Mountain"
-
-[node name="Hex6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 23, 58 )
-flavour_type = "Village"
