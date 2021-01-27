@@ -109,7 +109,8 @@ func add_candidate(new_flavour : String):
 	
 func transform_to_new_flavour():
 	if !candidate_flavours.empty():
-		change_hex_type(candidate_flavours.back())
+		if flavour_type != "Mountain":
+			change_hex_type(candidate_flavours.back())
 	return
 
 func proliferate():

@@ -1,10 +1,46 @@
 extends Node
 
+var current_level_num = 0
+
 func _ready():
-	load_level_from_file("D://Game Development/Godot Projects/HexGame/leveldevelopment/test_level1.txt")
+	pass
+
+func start_game_from_level_select(filepath, level_num):
+	current_level_num = level_num
+	var level_select = get_node("LevelSelect")
+	remove_child(level_select)
+	level_select.call_deferred("free")
+	var level_resource = load("res://scene/Level.tscn")
+	var level = level_resource.instance()
+	add_child(level)
+	
+	load_level(filepath)
+	return
+	
+func continue_to_next_level():
+	if(Global.level_directory.size() == current_level_num+1):
+		print("Last level completed!")
+		return_to_level_select()
+	else:
+		var level = get_node("Level")
+		remove_child(level)
+		level.queue_free()
+		var level_resource = load("res://scene/Level.tscn")
+		level = level_resource.instance()
+		add_child(level)	
+		load_level(Global.level_directory[current_level_num+1])
+	return
+	
+func return_to_level_select():
+	var level = get_node("Level")
+	remove_child(level)
+	level.queue_free()
+	var level_select_resource = load("res://scene/LevelSelect.tscn")
+	var level_select = level_select_resource.instance()
+	add_child(level_select)
 	return
 
-func load_level_from_file(filepath : String):
+func load_level(filepath : String):	
 	var level = get_node("Level")
 	var playable_hex_grid = level.get_node("PlayHexGrid")
 	var example_hex_grid = level.get_node("ExampleHexGrid")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://script/TimeControls.gd" type="Script" id=1]
+
+[node name="TimeControls" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -361.0
+margin_bottom = -340.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reverse Step" type="Button" parent="."]
+margin_right = 95.0
+margin_bottom = 20.0
+text = "Reverse Step"
+
+[node name="Play" type="Button" parent="."]
+margin_left = 99.0
+margin_right = 137.0
+margin_bottom = 20.0
+text = "Play"
+
+[node name="Forward Step" type="Button" parent="."]
+margin_left = 141.0
+margin_right = 235.0
+margin_bottom = 20.0
+text = "Forward Step"
+[connection signal="pressed" from="Reverse Step" to="." method="_on_Reverse_Step_pressed"]
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Forward Step" to="." method="_on_Forward_Step_pressed"]

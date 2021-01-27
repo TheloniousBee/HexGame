@@ -1,8 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://script/MainMenu.gd" type="Script" id=1]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -54,3 +57,8 @@ margin_top = 96.0
 margin_right = 87.0
 margin_bottom = 116.0
 text = "Exit"
+[connection signal="pressed" from="MainMenuButtons/New Game" to="." method="_on_New_Game_pressed"]
+[connection signal="pressed" from="MainMenuButtons/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="MainMenuButtons/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="MainMenuButtons/Level Editor" to="." method="_on_Level_Editor_pressed"]
+[connection signal="pressed" from="MainMenuButtons/Exit" to="." method="_on_Exit_pressed"]

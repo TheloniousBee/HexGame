@@ -11,5 +11,6 @@ enum {
 
 var is_level_editor = false
 
-func _ready():
-	pass
+var level_directory = [
+	"res://levels/test_level1.txt",
+]

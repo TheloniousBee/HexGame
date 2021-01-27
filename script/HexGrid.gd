@@ -209,3 +209,13 @@ func get_hex_for_coord(coordinate : Vector2):
 			else:
 				return row[coordinate.x-row_start]
 	return
+
+func get_whole_grid_state():
+	var grid_state = []
+	for i in columns:
+		var row = []
+		for j in i:
+			row.append(j.grid_coordinate)
+			row.append(j.flavour_type)
+		grid_state.append(row)
+	return grid_state

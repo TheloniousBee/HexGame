@@ -36,3 +36,11 @@ func load_options():
 	add_child(option)
 	current_scene = option
 	return
+
+func load_level_editor():
+	remove_current_scene()
+	var editor_resource = load("res://scene/LevelEditor.tscn")
+	var editor = editor_resource.instance()
+	add_child(editor)
+	current_scene = editor
+	return

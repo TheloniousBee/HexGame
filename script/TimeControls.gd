@@ -1,0 +1,34 @@
+extends HBoxContainer
+
+var playing = false
+
+signal reverse_step_pressed
+signal play_pressed
+signal pause_pressed
+signal forward_step_pressed
+
+func _ready():
+	connect("reverse_step_pressed", get_parent(), "reverse_turn")
+	connect("play_pressed", get_parent(), "start_play_timer")
+	connect("pause_pressed", get_parent(), "stop_play_timer")
+	connect("forward_step_pressed", get_parent(), "advance_turn")
+	return
+
+func _on_Reverse_Step_pressed():
+	emit_signal("reverse_step_pressed")
+	return
+
+func _on_Play_pressed():
+	if playing:
+		emit_signal("pause_pressed")
+		get_node("Play").text = "Play"
+		playing = false
+	else:
+		emit_signal("play_pressed")
+		get_node("Play").text = "Pause"
+		playing = true
+	return
+
+func _on_Forward_Step_pressed():
+	emit_signal("forward_step_pressed")
+	return
