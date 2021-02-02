@@ -30,6 +30,16 @@ func continue_to_next_level():
 		add_child(level)	
 		load_level(Global.level_directory[current_level_num+1])
 	return
+
+func reset_level():
+	var level = get_node("Level")
+	remove_child(level)
+	level.queue_free()
+	var level_resource = load("res://scene/Level.tscn")
+	level = level_resource.instance()
+	add_child(level)	
+	load_level(Global.level_directory[current_level_num])
+	return
 	
 func return_to_level_select():
 	var level = get_node("Level")
@@ -102,6 +112,8 @@ func load_level(filepath : String):
 		example_hex_grid.columns.append(row)
 	example_hex_grid.recenter_grid()
 	save_file.close()
+	
+	level.record_game_state()
 	return
 
 

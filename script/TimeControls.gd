@@ -11,7 +11,7 @@ func _ready():
 	connect("reverse_step_pressed", get_parent(), "reverse_turn")
 	connect("play_pressed", get_parent(), "start_play_timer")
 	connect("pause_pressed", get_parent(), "stop_play_timer")
-	connect("forward_step_pressed", get_parent(), "advance_turn")
+	connect("forward_step_pressed", get_parent(), "record_and_advance")
 	return
 
 func _on_Reverse_Step_pressed():

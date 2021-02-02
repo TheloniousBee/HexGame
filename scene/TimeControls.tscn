@@ -13,19 +13,19 @@ __meta__ = {
 }
 
 [node name="Reverse Step" type="Button" parent="."]
-margin_right = 95.0
+margin_right = 46.0
 margin_bottom = 20.0
-text = "Reverse Step"
+text = "Undo"
 
 [node name="Play" type="Button" parent="."]
-margin_left = 99.0
-margin_right = 137.0
+margin_left = 50.0
+margin_right = 88.0
 margin_bottom = 20.0
 text = "Play"
 
 [node name="Forward Step" type="Button" parent="."]
-margin_left = 141.0
-margin_right = 235.0
+margin_left = 92.0
+margin_right = 186.0
 margin_bottom = 20.0
 text = "Forward Step"
 [connection signal="pressed" from="Reverse Step" to="." method="_on_Reverse_Step_pressed"]
