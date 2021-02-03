@@ -73,10 +73,15 @@ func center_on_grid_hex():
 	return
 
 func place_on_grid(hex : Node2D):
-	emit_signal("player_made_move")
-	hex.change_hex_type(flavour_type)
-	emit_signal("move_is_resolved")
-	call_deferred("queue_free")
+	#If the hex to be placed is a higher value than the one on the grid, we replace
+	if(Global.flavour_dictionary.get(flavour_type) > Global.flavour_dictionary.get(hex.flavour_type)):
+		emit_signal("player_made_move")
+		hex.change_hex_type(flavour_type)
+		emit_signal("move_is_resolved")
+		call_deferred("queue_free")
+	else:
+		#Reset position if the player makes a illegal move
+		position = original_placeable_pos
 	return
 
 func change_hex_type(new_flavour : String):
@@ -113,8 +118,16 @@ func add_candidate(new_flavour : String):
 	
 func transform_to_new_flavour():
 	if !candidate_flavours.empty():
-		if flavour_type != "Mountain":
-			change_hex_type(candidate_flavours.back())
+		var highest_value_flavour = -1
+		var new_flavour = ""
+		for f in candidate_flavours:
+			var flavour_val = Global.flavour_dictionary.get(f)
+			if(flavour_val > highest_value_flavour):
+				new_flavour = f
+				highest_value_flavour = flavour_val
+		
+		if(Global.flavour_dictionary.get(new_flavour) > Global.flavour_dictionary.get(flavour_type)):
+			change_hex_type(new_flavour)
 	return
 
 func proliferate():
