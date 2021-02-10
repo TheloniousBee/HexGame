@@ -31,9 +31,9 @@ var columns = []
 func _ready():
 	return
 
-func set_origin(row_size : int, col_size : int):
-	var hex_grid_width = row_size * hex_offset_x
-	var hex_grid_height = col_size * hex_offset_y
+func set_origin(r_size : int, c_size : int):
+	var hex_grid_width = r_size * hex_offset_x
+	var hex_grid_height = c_size * hex_offset_y
 	centered_origin_hex.x = origin_hex.x - (hex_grid_width / 2)
 	centered_origin_hex.y = origin_hex.y - (hex_grid_height / 2)
 	return
@@ -48,10 +48,10 @@ func recenter_grid():
 				max_hex = i.back().grid_coordinate.x
 			if i.front().grid_coordinate.x < min_hex:
 				min_hex = i.front().grid_coordinate.x
-	var row_size = max_hex - min_hex
-	var col_size = columns.size()
+	var r_size = max_hex - min_hex
+	var c_size = columns.size()
 	
-	set_origin(row_size, col_size)
+	set_origin(r_size, c_size)
 	for i in columns:
 		for j in i:
 			j.position.x += -previous_origin.x + centered_origin_hex.x
@@ -159,6 +159,9 @@ func decrement_row_size(index : int):
 func proliferate_hexes():
 	for hex in get_children():
 		hex.proliferate()
+	
+	for hex in get_children():
+		hex.resolve_competition()
 		
 	for hex in get_children():
 		hex.transform_to_new_flavour()
@@ -167,8 +170,13 @@ func proliferate_hexes():
 func spread_to_neighbour(coord : Vector2, direction : int, flavour : String):
 	var hex = get_hex_for_coord(get_neighbour(coord,direction))
 	if hex != null:
-		hex.add_candidate(flavour)
+		hex.add_candidate(flavour, coord)
 		return
+
+func process_post_battle(coord : Vector2):
+	var hex = get_hex_for_coord(coord)
+	hex.resolve_post_win()
+	return
 
 var directions = [
 	#Even columns
@@ -208,7 +216,6 @@ func get_hex_for_coord(coordinate : Vector2):
 				return null
 			else:
 				return row[coordinate.x-row_start]
-	return
 
 func get_whole_grid_state():
 	var grid_state = []

@@ -6,7 +6,8 @@ var grid_coordinate : Vector2
 var is_dragging = false
 export var on_grid = false
 var colliding_hexes = []
-var candidate_flavours = []
+var candidate_flavours = {}
+var final_candidate_flavour = ""
 var original_placeable_pos : Vector2
 
 export var interactable = false
@@ -14,6 +15,9 @@ export var interactable = false
 signal player_made_move
 signal move_is_resolved
 signal hex_spread_to_neighbour(grid_coordinate, direction, flavour_type)
+signal hex_won(coord)
+signal picked_up_hex
+signal hex_let_go
 
 func _ready():
 	set_flavour()
@@ -21,19 +25,22 @@ func _ready():
 	connect("player_made_move", get_parent(), "record_game_state")
 	connect("move_is_resolved", get_parent(), "advance_turn")
 	connect("hex_spread_to_neighbour", get_parent(), "spread_to_neighbour")
+	connect("hex_won", get_parent(), "process_post_battle")
+	connect("picked_up_hex", get_parent(), "hex_picked_up")
+	connect("hex_let_go", get_parent(), "hex_released")
 	return
 	
 func set_coordinate_text():
 	$CoordinateLabel.text = (grid_coordinate.x as String) + "," + (grid_coordinate.y as String)
 	return
 
-func _on_Hex_area_shape_entered(area_id, area, area_shape, self_shape):
+func _on_Hex_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 	if on_grid and area != null and interactable:
 		area.call("add_grid_hex_to_list", self)
 	return
 
 
-func _on_Hex_area_shape_exited(area_id, area, area_shape, self_shape):
+func _on_Hex_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 	if on_grid and area != null and interactable:
 		area.call("remove_grid_hex_from_list", self)
 	return
@@ -46,18 +53,33 @@ func _physics_process(delta):
 			velocity = new_position - position;
 		
 		position += velocity*delta*speed
+		
+		#Keep within bounds of screen
+		if(position.x > ProjectSettings.get_setting("display/window/size/width")):
+			position.x = ProjectSettings.get_setting("display/window/size/width")
+		elif position.x < 0:
+			position.x = 0
+		if(position.y > ProjectSettings.get_setting("display/window/size/height")):
+			position.y = ProjectSettings.get_setting("display/window/size/height")
+		elif position.y < 0:
+			position.y = 0
 	return
 
-func _on_Hex_input_event(viewport, event, shape_idx):
+func _on_Hex_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			if !on_grid:
-				is_dragging = event.pressed
+				if(get_parent().hex_selected == false):
+					is_dragging = true
+					emit_signal("picked_up_hex")
 				if not event.pressed:
-					center_on_grid_hex()
+					if(get_parent().hex_selected == true):
+						is_dragging = false
+						center_on_grid_hex()
+						emit_signal("hex_let_go")
 			elif Global.is_level_editor:
 				if event.pressed:
-					get_tree().get_root().get_node("LevelEditor").change_flavour(self)
+					get_tree().get_root().find_node("LevelEditor", true, false).change_flavour(self)
 	return
 	
 func center_on_grid_hex():
@@ -112,22 +134,43 @@ func set_flavour():
 	add_child(flavour)
 	return
 
-func add_candidate(new_flavour : String):
-	candidate_flavours.append(new_flavour)
+func add_candidate(new_flavour : String, coord : Vector2):
+	candidate_flavours[coord] = new_flavour
 	return
 	
-func transform_to_new_flavour():
+func resolve_competition():
 	if !candidate_flavours.empty():
 		var highest_value_flavour = -1
 		var new_flavour = ""
-		for f in candidate_flavours:
-			var flavour_val = Global.flavour_dictionary.get(f)
+		var winning_hex : Vector2
+		for f in candidate_flavours.keys():
+			var flavour_val = Global.flavour_dictionary.get(candidate_flavours.get(f))
 			if(flavour_val > highest_value_flavour):
-				new_flavour = f
+				new_flavour = candidate_flavours.get(f)
+				winning_hex = f
 				highest_value_flavour = flavour_val
 		
 		if(Global.flavour_dictionary.get(new_flavour) > Global.flavour_dictionary.get(flavour_type)):
-			change_hex_type(new_flavour)
+			final_candidate_flavour = new_flavour
+			message_winner(winning_hex)
+		candidate_flavours.clear()
+	return
+	
+func message_winner(coord : Vector2):
+	emit_signal("hex_won", coord)
+	return
+	
+func resolve_post_win():
+	if has_node("Flavour"):
+		var flavour = get_node("Flavour")
+		if(flavour.has_method("won")):
+			flavour.won()
+	return
+
+func transform_to_new_flavour():
+	if(final_candidate_flavour != ""):
+		change_hex_type(final_candidate_flavour)
+		final_candidate_flavour = ""
 	return
 
 func proliferate():
@@ -138,4 +181,50 @@ func proliferate():
 	
 func spread_to_neighbour(direction):
 	emit_signal("hex_spread_to_neighbour", grid_coordinate, direction, flavour_type)
+	return
+	
+func delete_flavour_from_hex():
+	change_hex_type("Empty")
+	return
+	
+func rotate_clockwise():
+	if has_node("Flavour"):
+		var flavour = get_node("Flavour")
+		if(flavour.direction != null):
+			match flavour.direction:
+				Global.SOUTHEAST:
+					change_hex_type("S_Traveller")
+				Global.NORTHEAST:
+					change_hex_type("SE_Traveller")
+				Global.NORTH:
+					change_hex_type("NE_Traveller")
+				Global.NORTHWEST:
+					change_hex_type("N_Traveller")
+				Global.SOUTHWEST:
+					change_hex_type("NW_Traveller")
+				Global.SOUTH:
+					change_hex_type("SW_Traveller")
+		else:
+			print_debug("Tried to rotate non-rotating tile")
+	return
+	
+func rotate_counterclockwise():
+	if has_node("Flavour"):
+		var flavour = get_node("Flavour")
+		if(flavour.direction != null):
+			match flavour.direction:
+				Global.SOUTHEAST:
+					change_hex_type("NE_Traveller")
+				Global.NORTHEAST:
+					change_hex_type("N_Traveller")
+				Global.NORTH:
+					change_hex_type("NW_Traveller")
+				Global.NORTHWEST:
+					change_hex_type("SW_Traveller")
+				Global.SOUTHWEST:
+					change_hex_type("S_Traveller")
+				Global.SOUTH:
+					change_hex_type("SE_Traveller")
+		else:
+			print_debug("Tried to rotate non-rotating tile")
 	return

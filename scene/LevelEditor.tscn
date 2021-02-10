@@ -130,7 +130,18 @@ text = "Hide Row Controls"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Reload" type="Button" parent="."]
+margin_left = 102.0
+margin_top = 328.0
+margin_right = 157.0
+margin_bottom = 348.0
+text = "Reload"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="RemoveRow" to="." method="_on_RemoveRow_pressed"]
 [connection signal="pressed" from="AddRow" to="." method="_on_AddRow_pressed"]
 [connection signal="pressed" from="RowControlsVisibility" to="." method="_on_RowControlsVisibility_pressed"]
+[connection signal="pressed" from="Reload" to="." method="_on_Reload_pressed"]

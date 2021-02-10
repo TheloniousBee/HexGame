@@ -6,6 +6,8 @@ signal reset_pressed
 
 const Hex = preload("res://scene/Hex.tscn")
 
+var hex_selected = false
+
 var undo_grid_stack = []
 var undo_placeable_stack = []
 
@@ -86,6 +88,9 @@ func reverse_turn():
 		last_grid_state = undo_grid_stack.pop_back()
 		last_placeable_tile_state  = undo_placeable_stack.pop_back()
 	
+	for i in get_tree().get_nodes_in_group("placeable"):
+		i.queue_free()
+	
 	for tile in last_placeable_tile_state:
 		var hex = Hex.instance()
 		hex.on_grid = false
@@ -150,4 +155,12 @@ func _on_Return_pressed():
 
 func _on_Reset_pressed():
 	emit_signal("reset_pressed")
+	return
+	
+func hex_picked_up():
+	hex_selected = true
+	return
+
+func hex_released():
+	hex_selected = false
 	return

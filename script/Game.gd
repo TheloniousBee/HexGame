@@ -2,6 +2,7 @@ extends Node
 
 var current_level_num = 0
 
+
 func _ready():
 	pass
 

@@ -1,14 +1,6 @@
 extends "res://script/Hex.gd"
 
-var flavour_list = [
-	"Empty",
-	"Glacier",
-	"Grass",
-	"Lava",
-	"Mountain",
-	"Village",
-	"Water"
-]
+var flavour_list = Global.flavour_dictionary.keys()
 
 var flavour_index = 0
 

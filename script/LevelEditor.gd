@@ -6,7 +6,10 @@ var playable_hex_grid : Node2D
 var cell_controls_list = []
 var cell_controls_visible = true
 
+signal level_editor_reload_pressed()
+
 func _ready():
+	connect("level_editor_reload_pressed",get_parent(),"load_level_editor")
 	paintbrush = get_node("PaintBrush")
 	Global.is_level_editor = true
 	example_hex_grid = get_node("ExampleHexGrid")
@@ -26,6 +29,8 @@ func _input(event):
 			paintbrush.increment_flavour()
 		if event.button_index == BUTTON_WHEEL_DOWN and event.pressed:
 			paintbrush.decrement_flavour()
+		#if event.button_index == BUTTON_RIGHT and event.pressed:
+			#paintbrush.rotate_clockwise()
 	return
 	
 func setup_row_controls():
@@ -67,7 +72,7 @@ func recenter_row_controls():
 
 func _on_Save_pressed():
 	var saved_level = File.new()
-	saved_level.open("D://Game Development/Godot Projects/HexGame/leveldevelopment/new_level.txt", File.WRITE)
+	saved_level.open("D://Game Development/Godot Projects/HexGame/leveldevelopment/new_level.lvl", File.WRITE)
 	
 	var grid = get_node("PlayableHexGrid")
 	var grid_size = []
@@ -166,4 +171,9 @@ func _on_RowControlsVisibility_pressed():
 		cell_controls_visible = true
 		for i in cell_controls_list:
 			i.visible = true
+	return
+
+
+func _on_Reload_pressed():
+	emit_signal("level_editor_reload_pressed")
 	return
