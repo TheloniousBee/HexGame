@@ -8,3 +8,9 @@ func _ready():
 
 func proliferate():
 	pass
+
+func won():
+	pass
+
+func reflect():
+	pass

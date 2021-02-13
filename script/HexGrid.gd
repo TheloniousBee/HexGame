@@ -167,10 +167,11 @@ func proliferate_hexes():
 		hex.transform_to_new_flavour()
 	return
 
-func spread_to_neighbour(coord : Vector2, direction : int, flavour : String):
-	var hex = get_hex_for_coord(get_neighbour(coord,direction))
+func spread_to_neighbour(original_hex : Node2D, direction : int):
+	var hex = get_hex_for_coord(get_neighbour(original_hex.grid_coordinate,direction))
 	if hex != null:
-		hex.add_candidate(flavour, coord)
+		hex.add_candidate(original_hex.flavour_type, original_hex.grid_coordinate)
+		hex.reflect(original_hex)
 		return
 
 func process_post_battle(coord : Vector2):

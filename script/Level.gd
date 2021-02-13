@@ -49,7 +49,6 @@ func record_game_state():
 	
 	var grid = get_node("PlayHexGrid")
 	undo_grid_stack.append(grid.get_whole_grid_state())
-	
 	return
 
 func advance_turn():

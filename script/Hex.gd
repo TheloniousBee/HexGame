@@ -14,7 +14,7 @@ export var interactable = false
 
 signal player_made_move
 signal move_is_resolved
-signal hex_spread_to_neighbour(grid_coordinate, direction, flavour_type)
+signal hex_spread_to_neighbour(hex, direction)
 signal hex_won(coord)
 signal picked_up_hex
 signal hex_let_go
@@ -141,6 +141,8 @@ func add_candidate(new_flavour : String, coord : Vector2):
 func resolve_competition():
 	if !candidate_flavours.empty():
 		var highest_value_flavour = -1
+		var second_highest_value = -1
+		var second_highest_flavour = ""
 		var new_flavour = ""
 		var winning_hex : Vector2
 		for f in candidate_flavours.keys():
@@ -149,10 +151,17 @@ func resolve_competition():
 				new_flavour = candidate_flavours.get(f)
 				winning_hex = f
 				highest_value_flavour = flavour_val
+			elif(flavour_val == highest_value_flavour):
+				second_highest_value = flavour_val
+				second_highest_flavour = candidate_flavours.get(f)
 		
 		if(Global.flavour_dictionary.get(new_flavour) > Global.flavour_dictionary.get(flavour_type)):
-			final_candidate_flavour = new_flavour
-			message_winner(winning_hex)
+			#If we have a draw, create a Rubble. Draws only happen if two different tiles with the same value win the candidacy
+			if(second_highest_value == highest_value_flavour and second_highest_flavour != new_flavour):
+				final_candidate_flavour = "Rubble"
+			else:
+				final_candidate_flavour = new_flavour
+				message_winner(winning_hex)
 		candidate_flavours.clear()
 	return
 	
@@ -163,8 +172,7 @@ func message_winner(coord : Vector2):
 func resolve_post_win():
 	if has_node("Flavour"):
 		var flavour = get_node("Flavour")
-		if(flavour.has_method("won")):
-			flavour.won()
+		flavour.won()
 	return
 
 func transform_to_new_flavour():
@@ -180,17 +188,28 @@ func proliferate():
 	return
 	
 func spread_to_neighbour(direction):
-	emit_signal("hex_spread_to_neighbour", grid_coordinate, direction, flavour_type)
+	emit_signal("hex_spread_to_neighbour", self, direction)
 	return
 	
 func delete_flavour_from_hex():
 	change_hex_type("Empty")
 	return
 	
+func reflect(sending_hex : Node2D):
+	if has_node("Flavour"):
+		var flavour = get_node("Flavour")
+		if("reflects" in flavour and flavour.reflects == true):
+			match flavour_type:
+				"CCW_Rotator":
+					sending_hex.rotate_counterclockwise()
+				"CW_Rotator":
+					sending_hex.rotate_clockwise()
+	return
+	
 func rotate_clockwise():
 	if has_node("Flavour"):
 		var flavour = get_node("Flavour")
-		if(flavour.direction != null):
+		if("direction" in flavour):
 			match flavour.direction:
 				Global.SOUTHEAST:
 					change_hex_type("S_Traveller")
