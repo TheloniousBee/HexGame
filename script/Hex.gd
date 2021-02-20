@@ -195,6 +195,10 @@ func delete_flavour_from_hex():
 	change_hex_type("Empty")
 	return
 	
+func leave_path_behind():
+	change_hex_type("Path")
+	return
+	
 func reflect(sending_hex : Node2D):
 	if has_node("Flavour"):
 		var flavour = get_node("Flavour")
@@ -210,19 +214,21 @@ func rotate_clockwise():
 	if has_node("Flavour"):
 		var flavour = get_node("Flavour")
 		if("direction" in flavour):
+			var str_arr = flavour_type.rsplit("_")
+			var base_name = str_arr[1]
 			match flavour.direction:
 				Global.SOUTHEAST:
-					change_hex_type("S_Traveller")
+					change_hex_type("S_" + base_name)
 				Global.NORTHEAST:
-					change_hex_type("SE_Traveller")
+					change_hex_type("SE_" + base_name)
 				Global.NORTH:
-					change_hex_type("NE_Traveller")
+					change_hex_type("NE_" + base_name)
 				Global.NORTHWEST:
-					change_hex_type("N_Traveller")
+					change_hex_type("N_" + base_name)
 				Global.SOUTHWEST:
-					change_hex_type("NW_Traveller")
+					change_hex_type("NW_" + base_name)
 				Global.SOUTH:
-					change_hex_type("SW_Traveller")
+					change_hex_type("SW_" + base_name)
 		else:
 			print_debug("Tried to rotate non-rotating tile")
 	return
@@ -230,20 +236,22 @@ func rotate_clockwise():
 func rotate_counterclockwise():
 	if has_node("Flavour"):
 		var flavour = get_node("Flavour")
-		if(flavour.direction != null):
+		if("direction" in flavour):
+			var str_arr = flavour_type.rsplit("_")
+			var base_name = str_arr[1]
 			match flavour.direction:
 				Global.SOUTHEAST:
-					change_hex_type("NE_Traveller")
+					change_hex_type("NE_" + base_name)
 				Global.NORTHEAST:
-					change_hex_type("N_Traveller")
+					change_hex_type("N_" + base_name)
 				Global.NORTH:
-					change_hex_type("NW_Traveller")
+					change_hex_type("NW_" + base_name)
 				Global.NORTHWEST:
-					change_hex_type("SW_Traveller")
+					change_hex_type("SW_" + base_name)
 				Global.SOUTHWEST:
-					change_hex_type("S_Traveller")
+					change_hex_type("S_" + base_name)
 				Global.SOUTH:
-					change_hex_type("SE_Traveller")
+					change_hex_type("SE_" + base_name)
 		else:
 			print_debug("Tried to rotate non-rotating tile")
 	return

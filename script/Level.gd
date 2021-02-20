@@ -138,7 +138,7 @@ func add_placeable_hex(flavour : String):
 func level_completed():
 	stop_play_timer()
 	$LevelFinish.visible = true
-	#Mark down the level completed so it can be changed in the level editor
+	#Mark down the level completed so it can be changed in level select
 	return
 
 
