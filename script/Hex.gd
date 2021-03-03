@@ -109,6 +109,11 @@ func place_on_grid(hex : Node2D):
 		hex.change_hex_type("Empty")
 		emit_signal("move_is_resolved")
 		call_deferred("queue_free")
+	elif(flavour_type == "Clone"):
+		emit_signal("player_made_move")	
+		change_hex_type(hex.flavour_type)
+		position = original_placeable_pos
+		emit_signal("move_is_resolved")
 	else:
 		#Reset position if the player makes a illegal move
 		position = original_placeable_pos

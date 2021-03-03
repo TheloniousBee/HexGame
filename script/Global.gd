@@ -12,11 +12,12 @@ enum {
 var is_level_editor = false
 
 var level_directory = [
-	"res://levels/lock_test.lvl",
+	"res://levels/clone_test.lvl",
 ]
 
 var flavour_dictionary = {
 	"Empty":0,
+	"Clone":5,
 	"Key": 10,
 	"N_Pathmaker":250,
 	"NE_Pathmaker":250,
