@@ -12,5 +12,8 @@ func proliferate():
 func won():
 	pass
 
+func lost():
+	pass
+
 func reflect():
 	pass

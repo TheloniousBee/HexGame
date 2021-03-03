@@ -18,6 +18,7 @@ signal hex_spread_to_neighbour(hex, direction)
 signal hex_won(coord)
 signal picked_up_hex
 signal hex_let_go
+signal tile_becomes_placeable(flavour)
 
 func _ready():
 	set_flavour()
@@ -28,6 +29,7 @@ func _ready():
 	connect("hex_won", get_parent(), "process_post_battle")
 	connect("picked_up_hex", get_parent(), "hex_picked_up")
 	connect("hex_let_go", get_parent(), "hex_released")
+	connect("tile_becomes_placeable", get_parent().get_parent(), "add_placeable_hex")
 	return
 	
 func set_coordinate_text():
@@ -101,6 +103,12 @@ func place_on_grid(hex : Node2D):
 		hex.change_hex_type(flavour_type)
 		emit_signal("move_is_resolved")
 		call_deferred("queue_free")
+	elif(flavour_type == "Key" and hex.flavour_type == "Lock"):
+		#Special case for Lock/Key, we resolve by destroying both.
+		emit_signal("player_made_move")
+		hex.change_hex_type("Empty")
+		emit_signal("move_is_resolved")
+		call_deferred("queue_free")
 	else:
 		#Reset position if the player makes a illegal move
 		position = original_placeable_pos
@@ -162,6 +170,14 @@ func resolve_competition():
 			else:
 				final_candidate_flavour = new_flavour
 				message_winner(winning_hex)
+		
+		if final_candidate_flavour != "":
+			#Process anything that this hex does just before being changed
+			if has_node("Flavour"):
+				var flavour = get_node("Flavour")
+				flavour.lost()
+			
+			
 		candidate_flavours.clear()
 	return
 	
@@ -197,6 +213,10 @@ func delete_flavour_from_hex():
 	
 func leave_path_behind():
 	change_hex_type("Path")
+	return
+	
+func return_tile_to_inventory():
+	emit_signal("tile_becomes_placeable", flavour_type)
 	return
 	
 func reflect(sending_hex : Node2D):

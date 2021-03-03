@@ -12,11 +12,12 @@ enum {
 var is_level_editor = false
 
 var level_directory = [
-	"res://levels/bouncy2.lvl",
+	"res://levels/lock_test.lvl",
 ]
 
 var flavour_dictionary = {
 	"Empty":0,
+	"Key": 10,
 	"N_Pathmaker":250,
 	"NE_Pathmaker":250,
 	"SE_Pathmaker":250,
@@ -35,4 +36,5 @@ var flavour_dictionary = {
 	"CW_Rotator":900,
 	"Rubble":990,
 	"Mountain":1000,
+	"Lock":10000,
 }
