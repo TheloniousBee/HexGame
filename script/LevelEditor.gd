@@ -7,9 +7,11 @@ var cell_controls_list = []
 var cell_controls_visible = true
 
 signal level_editor_reload_pressed()
+signal return_to_main_menu
 
 func _ready():
 	connect("level_editor_reload_pressed",get_parent(),"load_level_editor")
+	connect("return_to_main_menu", get_parent(), "load_main_menu")
 	paintbrush = get_node("PaintBrush")
 	Global.is_level_editor = true
 	example_hex_grid = get_node("ExampleHexGrid")
@@ -31,6 +33,9 @@ func _input(event):
 			paintbrush.decrement_flavour()
 		#if event.button_index == BUTTON_RIGHT and event.pressed:
 			#paintbrush.rotate_clockwise()
+	elif event is InputEventKey:
+		if event.scancode == KEY_ESCAPE and event.pressed:
+			emit_signal("return_to_main_menu")
 	return
 	
 func setup_row_controls():
@@ -70,9 +75,11 @@ func recenter_row_controls():
 		index += 1
 	return
 
-func _on_Save_pressed():
+func _on_OK_pressed():
 	var saved_level = File.new()
-	saved_level.open("D://Game Development/Godot Projects/HexGame/leveldevelopment/new_level.lvl", File.WRITE)
+	var level_name = $SaveDialog/LevelName.text
+	var filepath = "D://Game Development/Godot Projects/HexGame/leveldevelopment/" + level_name + ".lvl"
+	saved_level.open(filepath, File.WRITE)
 	
 	var grid = get_node("PlayableHexGrid")
 	var grid_size = []
@@ -107,6 +114,7 @@ func _on_Save_pressed():
 			row.append(j.flavour_type)
 		saved_level.store_line(to_json(row))
 	saved_level.close()
+	$SaveDialog.visible = false
 	return
 
 
@@ -176,4 +184,14 @@ func _on_RowControlsVisibility_pressed():
 
 func _on_Reload_pressed():
 	emit_signal("level_editor_reload_pressed")
+	return
+
+
+func _on_Save_pressed():
+	$SaveDialog.visible = true
+	return
+
+
+func _on_Cancel_pressed():
+	$SaveDialog.visible = false
 	return

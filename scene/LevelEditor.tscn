@@ -140,8 +140,58 @@ text = "Reload"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SaveDialog" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -136.0
+margin_top = -76.5
+margin_right = 136.0
+margin_bottom = 76.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelName" type="TextEdit" parent="SaveDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.0
+margin_top = -20.0
+margin_right = 110.0
+margin_bottom = 20.0
+text = "level_name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OK" type="Button" parent="SaveDialog"]
+anchor_left = 0.956
+anchor_top = 0.944
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -26.032
+margin_top = -17.932
+margin_right = -7.0
+margin_bottom = -6.5
+text = "OK"
+
+[node name="Cancel" type="Button" parent="SaveDialog"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -26.5
+margin_right = 62.0
+margin_bottom = -6.5
+text = "Cancel"
 [connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="RemoveRow" to="." method="_on_RemoveRow_pressed"]
 [connection signal="pressed" from="AddRow" to="." method="_on_AddRow_pressed"]
 [connection signal="pressed" from="RowControlsVisibility" to="." method="_on_RowControlsVisibility_pressed"]
 [connection signal="pressed" from="Reload" to="." method="_on_Reload_pressed"]
+[connection signal="pressed" from="SaveDialog/OK" to="." method="_on_OK_pressed"]
+[connection signal="pressed" from="SaveDialog/Cancel" to="." method="_on_Cancel_pressed"]
