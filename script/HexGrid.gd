@@ -18,7 +18,7 @@ var row_size = 0
 #var origin_hex = Vector2(16,14)
 #var origin_hex = Vector2(178,46)
 
-
+export var coordinates_showing : bool
 export var origin_hex : Vector2
 export var placeable : bool
 
@@ -91,6 +91,8 @@ func create_empty_hex(coord : Vector2):
 	hex.grid_coordinate = Vector2(coord.x,coord.y)
 	hex.position = Vector2(centered_origin_hex.x + x_pos, centered_origin_hex.y + y_pos)
 	hex.interactable = placeable
+	if(coordinates_showing):
+		hex.set_coordinate_text()
 	add_child(hex)
 	return hex
 

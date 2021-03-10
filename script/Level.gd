@@ -35,6 +35,8 @@ func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_SPACE:
 			record_and_advance()
+		if event.scancode == KEY_ESCAPE and event.pressed:
+			emit_signal("return_pressed")
 	return
 
 func record_game_state():

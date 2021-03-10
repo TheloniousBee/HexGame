@@ -22,7 +22,6 @@ signal tile_becomes_placeable(flavour)
 
 func _ready():
 	set_flavour()
-	set_coordinate_text()
 	connect("player_made_move", get_parent(), "record_game_state")
 	connect("move_is_resolved", get_parent(), "advance_turn")
 	connect("hex_spread_to_neighbour", get_parent(), "spread_to_neighbour")

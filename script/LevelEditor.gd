@@ -175,3 +175,15 @@ func _on_Save_pressed():
 func _on_Cancel_pressed():
 	$SaveDialog.visible = false
 	return
+
+
+func _on_Clear_pressed():
+	var placeable_hexes = []
+	for i in get_tree().get_nodes_in_group("placeable"):
+		i.change_hex_type("Empty")
+		
+	for i in playable_hex_grid.columns:
+		var row = []
+		for j in i:
+			j.change_hex_type("Empty")
+	return

@@ -9,6 +9,7 @@
 script = ExtResource( 2 )
 
 [node name="PlayableHexGrid" parent="." instance=ExtResource( 1 )]
+coordinates_showing = true
 origin_hex = Vector2( 320, 180 )
 placeable = true
 
@@ -137,6 +138,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Clear" type="Button" parent="."]
+margin_left = 171.0
+margin_top = 328.0
+margin_right = 259.0
+margin_bottom = 348.0
+text = "Clear Hexes"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SaveDialog" type="Panel" parent="."]
 visible = false
 anchor_left = 0.5
@@ -189,5 +200,6 @@ text = "Cancel"
 [connection signal="pressed" from="AddRow" to="." method="_on_AddRow_pressed"]
 [connection signal="pressed" from="RowControlsVisibility" to="." method="_on_RowControlsVisibility_pressed"]
 [connection signal="pressed" from="Reload" to="." method="_on_Reload_pressed"]
+[connection signal="pressed" from="Clear" to="." method="_on_Clear_pressed"]
 [connection signal="pressed" from="SaveDialog/OK" to="." method="_on_OK_pressed"]
 [connection signal="pressed" from="SaveDialog/Cancel" to="." method="_on_Cancel_pressed"]
