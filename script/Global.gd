@@ -11,9 +11,9 @@ enum {
 
 var is_level_editor = false
 
-var level_directory = [
-	"res://levels/clone_test.lvl",
-]
+var level_directory = []
+
+var level_directory_file = "res://levels.dat"
 
 var flavour_dictionary = {
 	"Empty":0,

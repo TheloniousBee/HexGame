@@ -29,7 +29,8 @@ func continue_to_next_level():
 		var level_resource = load("res://scene/Level.tscn")
 		level = level_resource.instance()
 		add_child(level)	
-		load_level(Global.level_directory[current_level_num+1])
+		current_level_num += 1
+		load_level(Global.level_directory[current_level_num])
 	return
 
 func reset_level():

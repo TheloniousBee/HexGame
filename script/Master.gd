@@ -5,6 +5,7 @@ const MainMenu = preload("res://scene/MainMenu.tscn")
 var current_scene
 
 func _ready():
+	import_level_list()
 	load_main_menu()
 	return
 	
@@ -43,4 +44,19 @@ func load_level_editor():
 	var editor = editor_resource.instance()
 	add_child(editor)
 	current_scene = editor
+	return
+
+func import_level_list():
+	var levels = File.new()
+	if !levels.file_exists(Global.level_directory_file):
+		printerr("Level directory could not be found")
+		return
+	
+	levels.open(Global.level_directory_file, File.READ)
+	while levels.get_position() < levels.get_len():
+		var level = levels.get_line()
+		if level.begins_with("res://levels/"):
+			Global.level_directory.append(level)
+	
+	levels.close()
 	return

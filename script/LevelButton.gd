@@ -5,7 +5,7 @@ export var level_num : int
 signal level_button_pressed
 
 func _ready():
-	connect("level_button_pressed", get_parent(), "level_selected")
+	connect("level_button_pressed", get_parent().get_parent().get_parent(), "level_selected")
 	return
 
 

@@ -1,0 +1,10 @@
+[0,0]
+["NE_Traveller","SW_Traveller"]
+PlayableGrid:
+["(3, 0)","Mountain","(4, 0)","Mountain","(5, 0)","Empty","(6, 0)","Empty"]
+["(1, 1)","Mountain","(2, 1)","Mountain","(3, 1)","Empty","(4, 1)","Empty","(5, 1)","Mountain","(6, 1)","Mountain"]
+["(0, 2)","Mountain","(1, 2)","Empty","(2, 2)","Empty","(3, 2)","Mountain","(4, 2)","Mountain","(5, 2)","Mountain"]
+ExampleGrid:
+["(3, 0)","Mountain","(4, 0)","Mountain","(5, 0)","Empty","(6, 0)","Empty"]
+["(1, 1)","Mountain","(2, 1)","Mountain","(3, 1)","Rubble","(4, 1)","SW_Traveller","(5, 1)","Mountain","(6, 1)","Mountain"]
+["(0, 2)","Mountain","(1, 2)","Empty","(2, 2)","NE_Traveller","(3, 2)","Mountain","(4, 2)","Mountain","(5, 2)","Mountain"]
