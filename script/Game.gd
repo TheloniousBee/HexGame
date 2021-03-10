@@ -55,7 +55,6 @@ func return_to_level_select():
 func load_level(filepath : String):	
 	var level = get_node("Level")
 	var playable_hex_grid = level.get_node("PlayHexGrid")
-	var example_hex_grid = level.get_node("ExampleHexGrid")
 	
 	#load in the file from a specific path as the function argument
 	
@@ -79,40 +78,19 @@ func load_level(filepath : String):
 	if playable_grid_line == "PlayableGrid:":
 		while(save_file.get_position() < save_file.get_len()):
 			var line = save_file.get_line()
-			if(line.begins_with("ExampleGrid:")):
-				break
-			else:
-				var parsed_line = parse_json(line)
-				#Create the row
-				var row = []
-				while(parsed_line.size() >= 2):
-					#Add hex to row, and set coordinate and flavour here
-					var coordinate = parsed_line.pop_front()
-					var flavour = parsed_line.pop_front()
-					var new_hex = playable_hex_grid.create_empty_hex(str_to_vec2(coordinate))
-					if flavour != "Empty":
-						new_hex.change_hex_type(flavour)
-					row.append(new_hex)
-				playable_hex_grid.columns.append(row)
+			var parsed_line = parse_json(line)
+			#Create the row
+			var row = []
+			while(parsed_line.size() >= 2):
+				#Add hex to row, and set coordinate and flavour here
+				var coordinate = parsed_line.pop_front()
+				var flavour = parsed_line.pop_front()
+				var new_hex = playable_hex_grid.create_empty_hex(str_to_vec2(coordinate))
+				if flavour != "Empty":
+					new_hex.change_hex_type(flavour)
+				row.append(new_hex)
+			playable_hex_grid.columns.append(row)
 		playable_hex_grid.recenter_grid()
-		
-	
-	#get example grid
-	while(save_file.get_position() < save_file.get_len()):
-		var line = save_file.get_line()
-		var parsed_line = parse_json(line)
-		#Create the row
-		var row = []
-		while(parsed_line.size() >= 2):
-			#Add hex to row, and set coordinate and flavour here
-			var coordinate = parsed_line.pop_front()
-			var flavour = parsed_line.pop_front()
-			var new_hex = example_hex_grid.create_empty_hex(str_to_vec2(coordinate))
-			if flavour != "Empty":
-				new_hex.change_hex_type(flavour)
-			row.append(new_hex)
-		example_hex_grid.columns.append(row)
-	example_hex_grid.recenter_grid()
 	save_file.close()
 	
 	level.record_game_state()

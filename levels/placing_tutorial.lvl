@@ -4,7 +4,3 @@ PlayableGrid:
 ["(1, 0)","Mountain"]
 ["(0, 1)","Mountain","(1, 1)","Empty","(2, 1)","Mountain"]
 ["(0, 2)","Mountain","(1, 2)","Mountain","(2, 2)","Mountain"]
-ExampleGrid:
-["(1, 0)","Mountain"]
-["(0, 1)","Mountain","(1, 1)","Mountain","(2, 1)","Mountain"]
-["(0, 2)","Mountain","(1, 2)","Mountain","(2, 2)","Mountain"]

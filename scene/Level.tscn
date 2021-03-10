@@ -8,11 +8,8 @@
 script = ExtResource( 3 )
 
 [node name="PlayHexGrid" parent="." instance=ExtResource( 1 )]
-origin_hex = Vector2( 160, 180 )
+origin_hex = Vector2( 320, 180 )
 placeable = true
-
-[node name="ExampleHexGrid" parent="." instance=ExtResource( 1 )]
-origin_hex = Vector2( 480, 180 )
 
 [node name="TimeControls" parent="." instance=ExtResource( 2 )]
 anchor_left = 0.5

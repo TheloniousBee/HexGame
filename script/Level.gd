@@ -69,9 +69,8 @@ func record_and_advance():
 
 func check_victory():
 	var play_grid = get_node("PlayHexGrid")
-	var example_grid = get_node("ExampleHexGrid")
 	
-	if(play_grid.get_whole_grid_state() == example_grid.get_whole_grid_state()):
+	if(play_grid.is_grid_full()):
 		level_completed()
 	return
 	

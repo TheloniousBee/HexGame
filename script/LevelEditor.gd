@@ -1,7 +1,6 @@
 extends Node
 
 var paintbrush : Node2D
-var example_hex_grid : Node2D
 var playable_hex_grid : Node2D
 var cell_controls_list = []
 var cell_controls_visible = true
@@ -14,9 +13,7 @@ func _ready():
 	connect("return_to_main_menu", get_parent(), "load_main_menu")
 	paintbrush = get_node("PaintBrush")
 	Global.is_level_editor = true
-	example_hex_grid = get_node("ExampleHexGrid")
 	playable_hex_grid = get_node("PlayableHexGrid")
-	example_hex_grid.initialize_full_size_grid()
 	playable_hex_grid.initialize_full_size_grid()
 	setup_row_controls()
 	return
@@ -40,7 +37,7 @@ func _input(event):
 	
 func setup_row_controls():
 	var index = 0
-	for i in example_hex_grid.columns:
+	for i in playable_hex_grid.columns:
 		var back_hex = i.back()
 		add_row_controls(back_hex, index)
 		index += 1
@@ -64,7 +61,7 @@ func add_row_controls(hex : Node2D, index : int):
 	
 func recenter_row_controls():
 	var index = 0
-	for i in example_hex_grid.columns:
+	for i in playable_hex_grid.columns:
 		if cell_controls_list[index] != null:
 			var hex = i.back()
 			var cell_controls = cell_controls_list[index]
@@ -102,27 +99,15 @@ func _on_OK_pressed():
 			row.append(j.grid_coordinate)
 			row.append(j.flavour_type)
 		saved_level.store_line(to_json(row))
-		
-	var start_of_example_grid = "ExampleGrid:"
-	saved_level.store_line((start_of_example_grid))
-	
-	var example_grid = get_node("ExampleHexGrid")
-	for i in example_grid.columns:
-		var row = []
-		for j in i:
-			row.append(j.grid_coordinate)
-			row.append(j.flavour_type)
-		saved_level.store_line(to_json(row))
 	saved_level.close()
 	$SaveDialog.visible = false
 	return
 
 
 func _on_RemoveRow_pressed():
-	var old_size = example_hex_grid.columns.size()
-	example_hex_grid.change_column_count(example_hex_grid.columns.size()-1)
+	var old_size = playable_hex_grid.columns.size()
 	playable_hex_grid.change_column_count(playable_hex_grid.columns.size()-1)
-	var new_size = example_hex_grid.columns.size()
+	var new_size = playable_hex_grid.columns.size()
 	
 	if new_size < old_size:
 		cell_controls_list.pop_back().queue_free()
@@ -131,39 +116,34 @@ func _on_RemoveRow_pressed():
 
 
 func _on_AddRow_pressed():
-	var old_size = example_hex_grid.columns.size()
-	example_hex_grid.change_column_count(example_hex_grid.columns.size()+1)
+	var old_size = playable_hex_grid.columns.size()
 	playable_hex_grid.change_column_count(playable_hex_grid.columns.size()+1)
-	var new_size = example_hex_grid.columns.size()
+	var new_size = playable_hex_grid.columns.size()
 	
 	if new_size > old_size:
-		var last_row = example_hex_grid.columns.back()
+		var last_row = playable_hex_grid.columns.back()
 		var last_hex = last_row.back()
-		var new_row_controls = add_row_controls(last_hex,example_hex_grid.columns.size()-1)
+		var new_row_controls = add_row_controls(last_hex,playable_hex_grid.columns.size()-1)
 		recenter_row_controls()
 	return
 
 
 func shift_row_right(index):
-	example_hex_grid.shift_row_right(index)
 	playable_hex_grid.shift_row_right(index)
 	return
 
 
 func shift_row_left(index):
-	example_hex_grid.shift_row_left(index)
 	playable_hex_grid.shift_row_left(index)
 	return
 
 
 func add_cell_to_row(index):
-	example_hex_grid.increment_row_size(index)
 	playable_hex_grid.increment_row_size(index)
 	return
 
 
 func remove_cell_from_row(index):
-	example_hex_grid.decrement_row_size(index)
 	playable_hex_grid.decrement_row_size(index)
 	return
 
