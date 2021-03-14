@@ -232,7 +232,6 @@ func get_whole_grid_state():
 	
 func is_grid_full():
 	for i in columns:
-		var row = []
 		for j in i:
 			if j.flavour_type == "Empty":
 				return false

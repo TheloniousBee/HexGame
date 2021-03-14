@@ -27,7 +27,7 @@ func init_level_editor():
 func load_playtesting_level(level_data):
 	#Load level scene with our cached data
 	#get row and column numbers first
-	var grid_size_line = level_data.pop_front()
+	var _grid_size_line = level_data.pop_front()
 	
 	#get playable tiles
 	var playable_tiles = parse_json(level_data.pop_front())
@@ -164,7 +164,7 @@ func _on_AddRow_pressed():
 	if new_size > old_size:
 		var last_row = playable_hex_grid.columns.back()
 		var last_hex = last_row.back()
-		var new_row_controls = add_row_controls(last_hex,playable_hex_grid.columns.size()-1)
+		add_row_controls(last_hex,playable_hex_grid.columns.size()-1)
 		recenter_row_controls()
 	return
 
@@ -219,12 +219,10 @@ func _on_Cancel_pressed():
 
 
 func _on_Clear_pressed():
-	var placeable_hexes = []
 	for i in get_tree().get_nodes_in_group("placeable"):
 		i.change_hex_type("Empty")
 		
 	for i in playable_hex_grid.columns:
-		var row = []
 		for j in i:
 			j.change_hex_type("Empty")
 	return

@@ -3,25 +3,39 @@ extends Node
 var current_level_num = 0
 signal nav_to_editor(load_playtest_data)
 
+var level_scene
+var level_select_scene
+
 func _ready():
 	connect("nav_to_editor", get_parent(), "load_level_editor")
 	pass
 	
-func load_level_select():
+func init_level_select_scene():
 	var ls_resource = load("res://scene/LevelSelect.tscn")
-	var ls = ls_resource.instance()
-	add_child(ls)
+	level_select_scene = ls_resource.instance()
+	add_child(level_select_scene)
+	return
+	
+func init_level_scene():
+	var level_resource = load("res://scene/Level.tscn")
+	level_scene = level_resource.instance()
+	add_child(level_scene)
+	return
+	
+func destroy_level_scene():
+	remove_child(level_scene)
+	level_scene.call_deferred("free")
+	return
+	
+func destroy_level_select_scene():
+	remove_child(level_select_scene)
+	level_select_scene.call_deferred("free")
 	return
 
 func start_game_from_level_select(filepath, level_num):
 	current_level_num = level_num
-	var level_select = get_node("LevelSelect")
-	remove_child(level_select)
-	level_select.call_deferred("free")
-	var level_resource = load("res://scene/Level.tscn")
-	var level = level_resource.instance()
-	add_child(level)
-	
+	destroy_level_select_scene()
+	init_level_scene()
 	load_level(filepath)
 	return
 	
@@ -30,12 +44,8 @@ func continue_to_next_level():
 		print("Last level completed!")
 		return_to_level_select()
 	else:
-		var level = get_node("Level")
-		remove_child(level)
-		level.queue_free()
-		var level_resource = load("res://scene/Level.tscn")
-		level = level_resource.instance()
-		add_child(level)	
+		destroy_level_scene()
+		init_level_scene()
 		current_level_num += 1
 		load_level(Global.level_directory[current_level_num])
 	return
@@ -43,21 +53,19 @@ func continue_to_next_level():
 func load_level_from_playtest(level_data):
 	#Copy the whole level_data array, so we don't pop things off we need if we reset
 	var duped_ldata = level_data.duplicate(true)
-	var level_resource = load("res://scene/Level.tscn")
-	var level = level_resource.instance()
-	add_child(level)
-	level.playtest = true
+	init_level_scene()
+	level_scene.playtest = true
 	
 	#Load level scene with our cached data
-	var playable_hex_grid = level.get_node("PlayHexGrid")
+	var playable_hex_grid = level_scene.get_node("PlayHexGrid")
 	
 	#get row and column numbers first
-	var grid_size_line = duped_ldata.pop_front()
+	var _grid_size_line = duped_ldata.pop_front()
 	
 	#get playable tiles
 	var playable_tiles = parse_json(duped_ldata.pop_front())
 	for i in playable_tiles:
-		level.add_placeable_hex(i)
+		level_scene.add_placeable_hex(i)
 	
 	#get playable grid
 	var playable_grid_line = duped_ldata.pop_front()
@@ -77,23 +85,17 @@ func load_level_from_playtest(level_data):
 			playable_hex_grid.columns.append(row)
 		playable_hex_grid.recenter_grid()
 	
-	level.record_game_state()
+	level_scene.record_game_state()
 	return
 	
 func reset_level():
-	var level = get_node("Level")
-	remove_child(level)
-	level.queue_free()
-	var level_resource = load("res://scene/Level.tscn")
-	level = level_resource.instance()
-	add_child(level)	
+	destroy_level_scene()
+	init_level_scene()
 	load_level(Global.level_directory[current_level_num])
 	return
 	
 func reset_playtest_level():
-	var level = get_node("Level")
-	remove_child(level)
-	level.queue_free()
+	destroy_level_scene()
 	if get_parent().playtest_cache != null:
 		load_level_from_playtest(get_parent().playtest_cache)
 	else:
@@ -101,12 +103,8 @@ func reset_playtest_level():
 	return 
 	
 func return_to_level_select():
-	var level = get_node("Level")
-	remove_child(level)
-	level.queue_free()
-	var level_select_resource = load("res://scene/LevelSelect.tscn")
-	var level_select = level_select_resource.instance()
-	add_child(level_select)
+	destroy_level_scene()
+	init_level_select_scene()
 	return
 	
 	
@@ -115,8 +113,7 @@ func nav_to_editor():
 	return
 
 func load_level(filepath : String):	
-	var level = get_node("Level")
-	var playable_hex_grid = level.get_node("PlayHexGrid")
+	var playable_hex_grid = level_scene.get_node("PlayHexGrid")
 	
 	#load in the file from a specific path as the function argument
 	
@@ -128,12 +125,12 @@ func load_level(filepath : String):
 	
 	save_file.open(filepath, File.READ)
 	#get row and column numbers first
-	var grid_size_line = save_file.get_line()
+	var _grid_size_line = save_file.get_line()
 	
 	#get playable tiles
 	var playable_tiles = parse_json(save_file.get_line())
 	for i in playable_tiles:
-		level.add_placeable_hex(i)
+		level_scene.add_placeable_hex(i)
 	
 	#get playable grid
 	var playable_grid_line = save_file.get_line()
@@ -155,7 +152,7 @@ func load_level(filepath : String):
 		playable_hex_grid.recenter_grid()
 	save_file.close()
 	
-	level.record_game_state()
+	level_scene.record_game_state()
 	return
 
 
