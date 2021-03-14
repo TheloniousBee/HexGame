@@ -3,13 +3,13 @@ extends Control
 signal new_game_pressed
 signal continue_pressed
 signal options_pressed
-signal editor_pressed
+signal editor_pressed(load_playtest_data)
 
 func _ready():
-	self.connect("new_game_pressed", get_parent(), "load_game")
-	self.connect("continue_pressed", get_parent(), "load_game")
-	self.connect("options_pressed", get_parent(), "load_options")
-	self.connect("editor_pressed", get_parent(), "load_level_editor")
+	connect("new_game_pressed", get_parent(), "load_game")
+	connect("continue_pressed", get_parent(), "load_game")
+	connect("options_pressed", get_parent(), "load_options")
+	connect("editor_pressed", get_parent(), "load_level_editor")
 	return
 
 
@@ -28,7 +28,7 @@ func _on_Options_pressed():
 
 
 func _on_Level_Editor_pressed():
-	emit_signal("editor_pressed")
+	emit_signal("editor_pressed", false)
 	return
 
 

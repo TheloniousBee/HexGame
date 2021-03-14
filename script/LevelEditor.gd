@@ -7,14 +7,55 @@ var cell_controls_visible = true
 
 signal level_editor_reload_pressed()
 signal return_to_main_menu
+signal playtest_pressed(cache)
 
 func _ready():
 	connect("level_editor_reload_pressed",get_parent(),"load_level_editor")
+	connect("playtest_pressed",get_parent(),"load_playtest")
 	connect("return_to_main_menu", get_parent(), "load_main_menu")
 	paintbrush = get_node("PaintBrush")
 	Global.is_level_editor = true
 	playable_hex_grid = get_node("PlayableHexGrid")
+	return
+
+func init_level_editor():
+	#If we're starting the level editor from a blank state, ie. not returning from a playtest
 	playable_hex_grid.initialize_full_size_grid()
+	setup_row_controls()
+	return
+
+func load_playtesting_level(level_data):
+	#Load level scene with our cached data
+	#get row and column numbers first
+	var grid_size_line = level_data.pop_front()
+	
+	#get playable tiles
+	var playable_tiles = parse_json(level_data.pop_front())
+	var editor_placeable_tiles = get_tree().get_nodes_in_group("placeable")
+	for i in playable_tiles:
+		for j in editor_placeable_tiles:
+			if j.flavour_type == "Empty":
+				j.change_hex_type(i)
+				break
+	
+	#get playable grid
+	var playable_grid_line = level_data.pop_front()
+	if playable_grid_line == "PlayableGrid:":
+		for line in level_data:
+			var parsed_line = parse_json(line)
+			#Create the row
+			var row = []
+			while(parsed_line.size() >= 2):
+				#Add hex to row, and set coordinate and flavour here
+				var coordinate = parsed_line.pop_front()
+				var flavour = parsed_line.pop_front()
+				var new_hex = playable_hex_grid.create_empty_hex(str_to_vec2(coordinate))
+				if flavour != "Empty":
+					new_hex.change_hex_type(flavour)
+				row.append(new_hex)
+			playable_hex_grid.columns.append(row)
+		playable_hex_grid.recenter_grid()
+		
 	setup_row_controls()
 	return
 
@@ -187,3 +228,40 @@ func _on_Clear_pressed():
 		for j in i:
 			j.change_hex_type("Empty")
 	return
+
+
+func _on_Playtest_pressed():
+	#Cache current level setup so we can return to it later
+	var level_cache = []
+	var grid = get_node("PlayableHexGrid")
+	var grid_size = []
+	grid_size.append(grid.row_size)
+	grid_size.append(grid.col_size)
+	level_cache.append(to_json(grid_size))
+
+	var placeable_hexes = []
+	for i in get_tree().get_nodes_in_group("placeable"):
+		if i.flavour_type != "Empty":
+			placeable_hexes.append(i.flavour_type)
+	level_cache.append(to_json(placeable_hexes))
+	
+	var start_of_playable_grid = "PlayableGrid:"
+	level_cache.append((start_of_playable_grid))
+	
+	for i in grid.columns:
+		var row = []
+		for j in i:
+			row.append(j.grid_coordinate)
+			row.append(j.flavour_type)
+		level_cache.append(to_json(row))
+	
+	emit_signal("playtest_pressed", level_cache)
+	return
+	
+func str_to_vec2(string : String):
+	#Assumption is that the string looks like: "(5,3)"
+	var left_stripped_string = string.lstrip("(")
+	var stripped_string = left_stripped_string.rstrip(")")
+	var vec2 = Array(stripped_string.split(","))
+	return Vector2(vec2.front(),vec2.back())
+

@@ -195,6 +195,16 @@ margin_top = -26.5
 margin_right = 62.0
 margin_bottom = -6.5
 text = "Cancel"
+
+[node name="Playtest" type="Button" parent="."]
+margin_left = 46.0
+margin_top = 301.0
+margin_right = 109.0
+margin_bottom = 321.0
+text = "Playtest"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="RemoveRow" to="." method="_on_RemoveRow_pressed"]
 [connection signal="pressed" from="AddRow" to="." method="_on_AddRow_pressed"]
@@ -203,3 +213,4 @@ text = "Cancel"
 [connection signal="pressed" from="Clear" to="." method="_on_Clear_pressed"]
 [connection signal="pressed" from="SaveDialog/OK" to="." method="_on_OK_pressed"]
 [connection signal="pressed" from="SaveDialog/Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="Playtest" to="." method="_on_Playtest_pressed"]

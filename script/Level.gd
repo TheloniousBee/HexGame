@@ -3,11 +3,14 @@ extends Node
 signal continue_pressed
 signal return_pressed
 signal reset_pressed
+signal return_to_editor
+signal reset_playtest
 
 const Hex = preload("res://scene/Hex.tscn")
 
 var hex_selected = false
 
+var playtest = false
 var undo_grid_stack = []
 var undo_placeable_stack = []
 
@@ -29,6 +32,8 @@ func _ready():
 	connect("continue_pressed", get_parent(), "continue_to_next_level")
 	connect("return_pressed", get_parent(), "return_to_level_select")
 	connect("reset_pressed", get_parent(), "reset_level")
+	connect("return_to_editor", get_parent(), "nav_to_editor")
+	connect("reset_playtest", get_parent(), "reset_playtest_level")
 	return
 
 func _unhandled_input(event):
@@ -36,7 +41,14 @@ func _unhandled_input(event):
 		if event.pressed and event.scancode == KEY_SPACE:
 			record_and_advance()
 		if event.scancode == KEY_ESCAPE and event.pressed:
-			emit_signal("return_pressed")
+			return_to_previous_screen()
+	return
+	
+func return_to_previous_screen():
+	if playtest:
+		emit_signal("return_to_editor")
+	else:
+		emit_signal("return_pressed")
 	return
 
 func record_game_state():
@@ -138,7 +150,10 @@ func add_placeable_hex(flavour : String):
 
 func level_completed():
 	stop_play_timer()
-	$LevelFinish.visible = true
+	if playtest:
+		emit_signal("return_to_editor")
+	else:
+		$LevelFinish.visible = true
 	#Mark down the level completed so it can be changed in level select
 	return
 
@@ -154,7 +169,10 @@ func _on_Return_pressed():
 
 
 func _on_Reset_pressed():
-	emit_signal("reset_pressed")
+	if playtest:
+		emit_signal("reset_playtest")
+	else:
+		emit_signal("reset_pressed")
 	return
 	
 func hex_picked_up():

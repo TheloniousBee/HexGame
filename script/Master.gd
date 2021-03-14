@@ -3,6 +3,7 @@ extends Node
 const MainMenu = preload("res://scene/MainMenu.tscn")
 
 var current_scene
+var playtest_cache
 
 func _ready():
 	import_level_list()
@@ -28,6 +29,7 @@ func load_game():
 	var game = game_resource.instance()
 	add_child(game)
 	current_scene = game
+	game.load_level_select()
 	return
 	
 func load_options():
@@ -38,12 +40,27 @@ func load_options():
 	current_scene = option
 	return
 
-func load_level_editor():
+func load_level_editor(load_playtest_data):
 	remove_current_scene()
 	var editor_resource = load("res://scene/LevelEditor.tscn")
 	var editor = editor_resource.instance()
 	add_child(editor)
 	current_scene = editor
+	if load_playtest_data and playtest_cache != null:
+		editor.load_playtesting_level(playtest_cache)
+		playtest_cache = null
+	else:
+		editor.init_level_editor()
+	return
+	
+func load_playtest(level_data):
+	playtest_cache = level_data
+	remove_current_scene()
+	var game_resource = load("res://scene/Game.tscn")
+	var game = game_resource.instance()
+	add_child(game)
+	current_scene = game
+	game.load_level_from_playtest(level_data)
 	return
 
 func import_level_list():
