@@ -204,7 +204,7 @@ func _on_RowControlsVisibility_pressed():
 
 
 func _on_Reload_pressed():
-	emit_signal("level_editor_reload_pressed")
+	emit_signal("level_editor_reload_pressed", false)
 	return
 
 

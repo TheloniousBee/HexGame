@@ -29,7 +29,7 @@ func load_game():
 	var game = game_resource.instance()
 	add_child(game)
 	current_scene = game
-	game.load_level_select()
+	game.init_level_select_scene()
 	return
 	
 func load_options():
