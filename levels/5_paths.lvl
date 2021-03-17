@@ -1,0 +1,7 @@
+[0,0]
+["SW_Pathmaker","SW_Pathmaker","S_Pathmaker","SE_Pathmaker","NE_Pathmaker"]
+PlayableGrid:
+["(1, 0)","Empty","(2, 0)","Empty","(3, 0)","Empty","(4, 0)","Empty","(5, 0)","Empty","(6, 0)","Empty","(7, 0)","Empty"]
+["(1, 1)","Empty","(2, 1)","Empty","(3, 1)","Empty","(4, 1)","Empty","(5, 1)","Empty","(6, 1)","Empty"]
+["(1, 2)","Empty","(2, 2)","Empty","(3, 2)","Empty","(4, 2)","Empty"]
+["(1, 3)","Empty","(2, 3)","Empty"]

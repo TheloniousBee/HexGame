@@ -1,0 +1,6 @@
+[0,0]
+["SW_Pathmaker"]
+PlayableGrid:
+["(1, 0)","Empty","(2, 0)","Empty","(3, 0)","CW_Rotator","(4, 0)","Mountain","(5, 0)","CW_Rotator"]
+["(0, 1)","CCW_Rotator","(1, 1)","Empty","(2, 1)","Empty","(3, 1)","Empty","(4, 1)","Empty","(5, 1)","Empty","(6, 1)","Empty"]
+["(0, 2)","CCW_Rotator","(1, 2)","CCW_Rotator","(2, 2)","CCW_Rotator","(3, 2)","Mountain","(4, 2)","CCW_Rotator","(5, 2)","Mountain","(6, 2)","CCW_Rotator"]

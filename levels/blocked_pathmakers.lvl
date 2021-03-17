@@ -1,0 +1,10 @@
+[0,0]
+["SE_Traveller","NW_Traveller"]
+PlayableGrid:
+["(1, 0)","Mountain","(2, 0)","Empty","(3, 0)","Land","(4, 0)","SW_Pathmaker","(5, 0)","SW_Pathmaker"]
+["(0, 1)","Mountain","(1, 1)","Empty","(2, 1)","Empty","(3, 1)","Empty","(4, 1)","Land","(5, 1)","Land","(6, 1)","SW_Pathmaker"]
+["(0, 2)","Empty","(1, 2)","Empty","(2, 2)","Empty","(3, 2)","Empty","(4, 2)","Empty","(5, 2)","Empty","(6, 2)","Empty"]
+["(0, 3)","Empty","(1, 3)","Empty","(2, 3)","Empty","(3, 3)","Empty","(4, 3)","Empty","(5, 3)","Empty","(6, 3)","Empty"]
+["(0, 4)","Empty","(1, 4)","Land","(2, 4)","Empty","(3, 4)","Empty","(4, 4)","Empty","(5, 4)","Empty","(6, 4)","Empty"]
+["(0, 5)","NE_Pathmaker","(1, 5)","NE_Pathmaker","(2, 5)","Land","(3, 5)","Land","(4, 5)","Empty"]
+["(2, 6)","NE_Pathmaker","(3, 6)","Mountain","(4, 6)","Empty"]

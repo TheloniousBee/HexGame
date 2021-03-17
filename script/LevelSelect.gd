@@ -28,18 +28,26 @@ func create_level_buttons_by_number():
 		#last_pos = button.rect_position
 		
 		#yeah i know this is ugly but I can't be bothered coming up with something more elegant
-		if i >= 0 and i < 10:
+		if i >= 0 and i < 6:
 			$VBoxContainer/HBoxContainer.add_child(button)
-		elif i >= 10 and i < 20:
+		elif i >= 6 and i < 12:
 			$VBoxContainer/HBoxContainer2.add_child(button)
-		elif i >= 20 and i < 30:
+		elif i >= 12 and i < 18:
 			$VBoxContainer/HBoxContainer3.add_child(button)
-		elif i >= 30 and i < 40:
+		elif i >= 18 and i < 24:
 			$VBoxContainer/HBoxContainer4.add_child(button)
-		elif i >= 40 and i < 50:
+		elif i >= 24 and i < 30:
 			$VBoxContainer/HBoxContainer5.add_child(button)
-		elif i >= 50 and i < 60:
+		elif i >= 30 and i < 36:
 			$VBoxContainer/HBoxContainer6.add_child(button)
+		elif i >= 36 and i < 42:
+			$VBoxContainer/HBoxContainer7.add_child(button)
+		elif i >= 42 and i < 48:
+			$VBoxContainer/HBoxContainer8.add_child(button)
+		elif i >= 48 and i < 54:
+			$VBoxContainer/HBoxContainer9.add_child(button)
+		elif i >= 54 and i < 60:
+			$VBoxContainer/HBoxContainer10.add_child(button)
 	return
 	
 #func create_level_buttons_by_dir():

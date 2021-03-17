@@ -229,6 +229,7 @@ func _on_Clear_pressed():
 
 
 func _on_Playtest_pressed():
+	Global.is_level_editor = false
 	#Cache current level setup so we can return to it later
 	var level_cache = []
 	var grid = get_node("PlayableHexGrid")
