@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scene/Flavours/Empty.tscn" type="PackedScene" id=1]
-[ext_resource path="res://sprite/grass.png" type="Texture" id=2]
+[ext_resource path="res://sprite/pathmaker_base.png" type="Texture" id=2]
 [ext_resource path="res://script/Flavours/Pathmaker.gd" type="Script" id=3]
 [ext_resource path="res://sprite/arrow.png" type="Texture" id=4]
 

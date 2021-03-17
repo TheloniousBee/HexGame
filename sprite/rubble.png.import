@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/village.png-cecdcd2e582e22813552bcb138455297.stex"
+path="res://.import/rubble.png-d5a5148eaee69785fbd4e890ae16fe11.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/village.png"
-dest_files=[ "res://.import/village.png-cecdcd2e582e22813552bcb138455297.stex" ]
+source_file="res://sprite/rubble.png"
+dest_files=[ "res://.import/rubble.png-d5a5148eaee69785fbd4e890ae16fe11.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/glacier.png-e0e17fb4b7ebe957ea91112f57eeec8b.stex"
+path="res://.import/pathmaker_base.png-769a9da6d9cf23a5b050dc034642dd33.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/glacier.png"
-dest_files=[ "res://.import/glacier.png-e0e17fb4b7ebe957ea91112f57eeec8b.stex" ]
+source_file="res://sprite/pathmaker_base.png"
+dest_files=[ "res://.import/pathmaker_base.png-769a9da6d9cf23a5b050dc034642dd33.stex" ]
 
 [params]
 
