@@ -13,7 +13,8 @@ var original_placeable_pos : Vector2
 export var interactable = false
 
 signal player_made_move
-signal move_is_resolved
+signal move_is_resolved(hexpos)
+signal clone_is_resolved()
 signal hex_spread_to_neighbour(hex, direction)
 signal hex_won(coord)
 signal picked_up_hex
@@ -23,7 +24,8 @@ signal tile_becomes_placeable(flavour)
 func _ready():
 	set_flavour()
 	connect("player_made_move", get_parent(), "record_game_state")
-	connect("move_is_resolved", get_parent(), "advance_turn")
+	connect("move_is_resolved", get_parent(), "player_move_successful")
+	connect("clone_is_resolved", get_parent(), "advance_turn")
 	connect("hex_spread_to_neighbour", get_parent(), "spread_to_neighbour")
 	connect("hex_won", get_parent(), "process_post_battle")
 	connect("picked_up_hex", get_parent(), "hex_picked_up")
@@ -100,19 +102,19 @@ func place_on_grid(hex : Node2D):
 	if(Global.flavour_dictionary.get(flavour_type) > Global.flavour_dictionary.get(hex.flavour_type)):
 		emit_signal("player_made_move")
 		hex.change_hex_type(flavour_type)
-		emit_signal("move_is_resolved")
+		emit_signal("move_is_resolved", original_placeable_pos)
 		call_deferred("queue_free")
 	elif(flavour_type == "Key" and hex.flavour_type == "Lock"):
 		#Special case for Lock/Key, we resolve by destroying both.
 		emit_signal("player_made_move")
 		hex.change_hex_type("Empty")
-		emit_signal("move_is_resolved")
+		emit_signal("move_is_resolved", original_placeable_pos)
 		call_deferred("queue_free")
 	elif(flavour_type == "Clone"):
 		emit_signal("player_made_move")	
 		change_hex_type(hex.flavour_type)
 		position = original_placeable_pos
-		emit_signal("move_is_resolved")
+		emit_signal("clone_is_resolved")
 	else:
 		#Reset position if the player makes a illegal move
 		position = original_placeable_pos

@@ -65,6 +65,13 @@ func record_game_state():
 	undo_grid_stack.append(grid.get_whole_grid_state())
 	return
 
+func player_move_successful(hexpos : Vector2):
+	#Free up a 'slot' and then sort the remaining positions
+	placeable_hex_positions.append(hexpos)
+	placeable_hex_positions.sort()
+	advance_turn()
+	return
+
 func advance_turn():
 	#Activate each Hexes "Spread" function
 	#Each spread function will mark hexes that it would like to spread to
@@ -136,11 +143,19 @@ func stop_play_timer():
 func _on_TurnTimer_timeout():
 	record_and_advance()
 	return
+	
+func get_next_available_placeable_slot():
+	var position : Vector2
+	if placeable_hex_positions.empty():
+		printerr("No more positions available")
+	else:
+		position = placeable_hex_positions.pop_front()
+	return position
 
 func add_placeable_hex(flavour : String):
 	var hex = Hex.instance()
 	hex.on_grid = false
-	hex.position = placeable_hex_positions.pop_front()
+	hex.position = get_next_available_placeable_slot()
 	hex.original_placeable_pos = hex.position
 	hex.interactable = false
 	hex.add_to_group("placeable")
