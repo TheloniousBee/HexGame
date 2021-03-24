@@ -11,10 +11,10 @@ res://levels/ugly_arrows.lvl
 res://levels/more_paths.lvl
 res://levels/many_paths_and_water.lvl
 res://levels/Traveller_land_barrier.lvl
-res://levels/rubble_tutorial.lvl
+res://levels/rubble_intro.lvl
 res://levels/ribbon_cut.lvl
 res://levels/blocked_pathmakers.lvl
-res://levels/rubbon_cut2.lvl
+res://levels/ribbon_cut2.lvl
 res://levels/imperfect_snowflake.lvl
 res://levels/rotation_tutorial1.lvl
 res://levels/snakin.lvl
@@ -24,10 +24,10 @@ res://levels/tri_pronged_attack.lvl
 res://levels/dorito.lvl
 res://levels/snakin2.lvl
 res://levels/open_the_floodgates.lvl
+res://levels/circle.lvl
+res://levels/destroying_the_amazon.lvl
+res://levels/passing_through_the_valley.lvl
 res://levels/macheting.lvl
-res://levels/.lvl
-res://levels/.lvl
-res://levels/.lvl
 res://levels/lock_introduction.lvl
 res://levels/water and key.lvl
 res://levels/unlock_water1.lvl

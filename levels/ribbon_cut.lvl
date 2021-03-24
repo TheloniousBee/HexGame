@@ -2,8 +2,8 @@
 ["SW_Traveller","NE_Pathmaker"]
 PlayableGrid:
 ["(2, 0)","S_Pathmaker","(3, 0)","Empty","(4, 0)","S_Pathmaker"]
-["(2, 1)","Empty","(3, 1)","Empty","(4, 1)","Empty","(5, 1)","Empty"]
+["(2, 1)","Empty","(3, 1)","Empty","(4, 1)","Empty","(5, 1)","Empty","(6, 1)","Empty"]
 ["(2, 2)","Empty","(3, 2)","Empty","(4, 2)","Empty"]
 ["(1, 3)","Empty","(2, 3)","Empty","(3, 3)","Empty","(4, 3)","Empty"]
 ["(2, 4)","Empty","(3, 4)","Empty","(4, 4)","Empty"]
-["(2, 5)","Empty","(3, 5)","N_Pathmaker","(4, 5)","Empty"]
+["(2, 5)","Empty","(3, 5)","Empty","(4, 5)","Empty"]
