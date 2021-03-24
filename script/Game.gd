@@ -2,12 +2,14 @@ extends Node
 
 var current_level_num = 0
 signal nav_to_editor(load_playtest_data)
+signal return_to_main_menu
 
 var level_scene
 var level_select_scene
 
 func _ready():
 	connect("nav_to_editor", get_parent(), "load_level_editor")
+	connect("return_to_main_menu", get_parent(), "load_main_menu")
 	pass
 	
 func init_level_select_scene():
@@ -37,6 +39,10 @@ func start_game_from_level_select(filepath, level_num):
 	destroy_level_select_scene()
 	init_level_scene()
 	load_level(filepath)
+	return
+	
+func return_to_main_menu():
+	emit_signal("return_to_main_menu")
 	return
 	
 func continue_to_next_level():
@@ -106,7 +112,6 @@ func return_to_level_select():
 	destroy_level_scene()
 	init_level_select_scene()
 	return
-	
 	
 func nav_to_editor():
 	emit_signal("nav_to_editor", true)

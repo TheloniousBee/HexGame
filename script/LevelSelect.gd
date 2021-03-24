@@ -1,6 +1,7 @@
 extends Node
 
 signal level_selected(file_path)
+signal escape_pressed
 
 var button_resource = load("res://scene/LevelButton.tscn")
 #var button_resource = load("res://scene/LevelButtonDir.tscn")
@@ -9,7 +10,15 @@ var last_pos = Vector2.ZERO
 func _ready():
 	connect("level_selected", get_parent(), "start_game_from_level_select")
 	create_level_buttons_by_number()
+	connect("escape_pressed", get_parent(), "return_to_main_menu")
 	return
+	
+func _input(event):
+	if event is InputEventKey:
+		if event.scancode == KEY_ESCAPE and event.pressed:
+			emit_signal("escape_pressed")
+	return
+	
 
 func level_selected(level_num):
 	emit_signal("level_selected", Global.level_directory[level_num], level_num)
@@ -28,26 +37,16 @@ func create_level_buttons_by_number():
 		#last_pos = button.rect_position
 		
 		#yeah i know this is ugly but I can't be bothered coming up with something more elegant
-		if i >= 0 and i < 6:
+		if i >= 0 and i < 12:
 			$VBoxContainer/HBoxContainer.add_child(button)
-		elif i >= 6 and i < 12:
+		elif i >= 12 and i < 24:
 			$VBoxContainer/HBoxContainer2.add_child(button)
-		elif i >= 12 and i < 18:
+		elif i >= 24 and i < 36:
 			$VBoxContainer/HBoxContainer3.add_child(button)
-		elif i >= 18 and i < 24:
+		elif i >= 36 and i < 48:
 			$VBoxContainer/HBoxContainer4.add_child(button)
-		elif i >= 24 and i < 30:
+		elif i >= 48 and i < 60:
 			$VBoxContainer/HBoxContainer5.add_child(button)
-		elif i >= 30 and i < 36:
-			$VBoxContainer/HBoxContainer6.add_child(button)
-		elif i >= 36 and i < 42:
-			$VBoxContainer/HBoxContainer7.add_child(button)
-		elif i >= 42 and i < 48:
-			$VBoxContainer/HBoxContainer8.add_child(button)
-		elif i >= 48 and i < 54:
-			$VBoxContainer/HBoxContainer9.add_child(button)
-		elif i >= 54 and i < 60:
-			$VBoxContainer/HBoxContainer10.add_child(button)
 	return
 	
 #func create_level_buttons_by_dir():
