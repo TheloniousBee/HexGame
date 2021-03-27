@@ -11,3 +11,7 @@ func proliferate():
 	emit_signal("spread_to_neighbour", Global.SOUTH)
 	emit_signal("spread_to_neighbour", Global.SOUTHEAST)
 	return
+
+func play_pickup_sfx():
+	Global.sound_mgr.tilePickupWater()
+	return

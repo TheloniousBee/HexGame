@@ -14,24 +14,29 @@ func _ready():
 
 
 func _on_New_Game_pressed():
+	Global.sound_mgr.playMainMenuClick()
 	emit_signal("new_game_pressed")
 	return
 
 func _on_Continue_pressed():
+	Global.sound_mgr.playMainMenuClick()
 	emit_signal("continue_pressed")
 	return
 
 
 func _on_Options_pressed():
+	Global.sound_mgr.playMainMenuClick()
 	emit_signal("options_pressed")
 	return
 
 
 func _on_Level_Editor_pressed():
+	Global.sound_mgr.playMainMenuClick()
 	emit_signal("editor_pressed", false)
 	return
 
 
 func _on_Exit_pressed():
+	Global.sound_mgr.playMainMenuClick()
 	get_tree().quit()
 	return

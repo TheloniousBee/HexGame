@@ -17,3 +17,6 @@ func lost():
 
 func reflect():
 	pass
+
+func play_pickup_sfx():
+	pass

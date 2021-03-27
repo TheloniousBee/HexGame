@@ -15,10 +15,12 @@ func _ready():
 	return
 
 func _on_Reverse_Step_pressed():
+	Global.sound_mgr.playUndoButton()
 	emit_signal("reverse_step_pressed")
 	return
 
 func _on_Play_pressed():
+	Global.sound_mgr.playPauseButton()
 	if playing:
 		emit_signal("pause_pressed")
 		get_node("Play").text = "Play"
@@ -30,5 +32,6 @@ func _on_Play_pressed():
 	return
 
 func _on_Forward_Step_pressed():
+	Global.sound_mgr.playForwardStep()
 	emit_signal("forward_step_pressed")
 	return

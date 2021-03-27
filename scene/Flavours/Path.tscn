@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scene/Flavours/Empty.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprite/path.png" type="Texture" id=2]
-[ext_resource path="res://script/Flavours/Mountain.gd" type="Script" id=3]
+[ext_resource path="res://script/Flavours/Path.gd" type="Script" id=3]
 
 [node name="Flavour" instance=ExtResource( 1 )]
 script = ExtResource( 3 )

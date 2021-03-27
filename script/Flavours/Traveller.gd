@@ -15,3 +15,7 @@ func proliferate():
 func won():
 	emit_signal("hex_departed")
 	return
+
+func play_pickup_sfx():
+	Global.sound_mgr.tilePickupTraveller()
+	return

@@ -27,7 +27,6 @@ var flavour_dictionary = {
 	"NW_Pathmaker":250,
 	"Path":300,
 	"Water":500,
-	"Ice":550,
 	"Land":600,
 	"N_Traveller":750,
 	"NE_Traveller":750,
@@ -41,3 +40,5 @@ var flavour_dictionary = {
 	"Mountain":1000,
 	"Lock":10000,
 }
+
+var sound_mgr : Node

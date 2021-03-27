@@ -6,6 +6,7 @@ var current_scene
 var playtest_cache
 
 func _ready():
+	Global.sound_mgr = $SoundManager
 	import_level_list()
 	load_main_menu()
 	return

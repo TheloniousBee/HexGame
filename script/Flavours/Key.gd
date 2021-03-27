@@ -9,3 +9,7 @@ func _ready():
 func lost():
 	emit_signal("tile_consumed")
 	return
+
+func play_pickup_sfx():
+	Global.sound_mgr.tilePickupKey()
+	return

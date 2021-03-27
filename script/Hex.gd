@@ -75,6 +75,7 @@ func _on_Hex_input_event(_viewport, event, _shape_idx):
 				if(get_parent().hex_selected == false):
 					is_dragging = true
 					emit_signal("picked_up_hex")
+					play_pickup_sfx()
 				if not event.pressed:
 					if(get_parent().hex_selected == true):
 						is_dragging = false
@@ -95,6 +96,9 @@ func center_on_grid_hex():
 					closest_hex = hex
 		position = closest_hex.position
 		place_on_grid(closest_hex)
+	else:
+		#Placing the tile off the grid
+		Global.sound_mgr.letTilego()
 	return
 
 func place_on_grid(hex : Node2D):
@@ -103,21 +107,25 @@ func place_on_grid(hex : Node2D):
 		emit_signal("player_made_move")
 		hex.change_hex_type(flavour_type)
 		emit_signal("move_is_resolved", original_placeable_pos)
+		play_placed_sfx()
 		call_deferred("queue_free")
 	elif(flavour_type == "Key" and hex.flavour_type == "Lock"):
 		#Special case for Lock/Key, we resolve by destroying both.
 		emit_signal("player_made_move")
 		hex.change_hex_type("Empty")
 		emit_signal("move_is_resolved", original_placeable_pos)
+		play_placed_sfx()
 		call_deferred("queue_free")
 	elif(flavour_type == "Clone"):
 		emit_signal("player_made_move")	
 		change_hex_type(hex.flavour_type)
 		position = original_placeable_pos
+		play_placed_sfx()
 		emit_signal("clone_is_resolved")
 	else:
 		#Reset position if the player makes a illegal move
 		position = original_placeable_pos
+		play_failed_sfx()
 	return
 
 func change_hex_type(new_flavour : String):
@@ -146,6 +154,11 @@ func set_flavour():
 	flavour_string += ".tscn"
 	var flavour = load(flavour_string).instance()
 	add_child(flavour)
+	return
+	
+func play_pickup_sfx():
+	if has_node("Flavour"):
+		get_node("Flavour").play_pickup_sfx()
 	return
 
 func add_candidate(new_flavour : String, coord : Vector2):
@@ -280,4 +293,12 @@ func rotate_counterclockwise():
 					change_hex_type("SE_" + base_name)
 		else:
 			print_debug("Tried to rotate non-rotating tile")
+	return
+
+func play_placed_sfx():
+	Global.sound_mgr.tilePlaceSuccess()
+	return
+	
+func play_failed_sfx():
+	Global.sound_mgr.tilePlaceFail()
 	return

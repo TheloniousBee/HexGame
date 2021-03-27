@@ -184,6 +184,7 @@ func _on_Return_pressed():
 
 
 func _on_Reset_pressed():
+	Global.sound_mgr.playReset()
 	if playtest:
 		emit_signal("reset_playtest")
 	else:
