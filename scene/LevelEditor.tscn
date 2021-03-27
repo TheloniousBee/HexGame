@@ -98,6 +98,19 @@ position = Vector2( 618, 41 )
 input_pickable = false
 script = ExtResource( 4 )
 
+[node name="PalettePanel" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 115.0
+margin_top = 24.0
+margin_right = -104.0
+margin_bottom = -32.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="RemoveRow" type="Button" parent="."]
 margin_left = 538.0
 margin_top = 328.0
@@ -205,6 +218,16 @@ text = "Playtest"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Palette" type="Button" parent="."]
+margin_left = 539.0
+margin_top = 8.0
+margin_right = 551.0
+margin_bottom = 28.0
+text = "Palette"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="RemoveRow" to="." method="_on_RemoveRow_pressed"]
 [connection signal="pressed" from="AddRow" to="." method="_on_AddRow_pressed"]
@@ -214,3 +237,4 @@ __meta__ = {
 [connection signal="pressed" from="SaveDialog/OK" to="." method="_on_OK_pressed"]
 [connection signal="pressed" from="SaveDialog/Cancel" to="." method="_on_Cancel_pressed"]
 [connection signal="pressed" from="Playtest" to="." method="_on_Playtest_pressed"]
+[connection signal="pressed" from="Palette" to="." method="_on_Palette_pressed"]

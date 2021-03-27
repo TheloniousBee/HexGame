@@ -4,12 +4,14 @@ var paintbrush : Node2D
 var playable_hex_grid : Node2D
 var cell_controls_list = []
 var cell_controls_visible = true
+var palette_visible = false
 
 signal level_editor_reload_pressed()
 signal return_to_main_menu
 signal playtest_pressed(cache)
 
 func _ready():
+	init_palette()
 	connect("level_editor_reload_pressed",get_parent(),"load_level_editor")
 	connect("playtest_pressed",get_parent(),"load_playtest")
 	connect("return_to_main_menu", get_parent(), "load_main_menu")
@@ -60,7 +62,16 @@ func load_playtesting_level(level_data):
 	return
 
 func change_flavour(clicked_hex : Node2D):
-	clicked_hex.change_hex_type(paintbrush.flavour_type)
+	if !palette_visible:
+		clicked_hex.change_hex_type(paintbrush.flavour_type)
+	return
+	
+func change_paintbrush(clicked_hex : Node2D):
+	#Set our painting tile to the clicked one in the palette,
+	#also, make sure we change the index, so we can continue scrolling properly
+	var new_flavour = clicked_hex.flavour_type
+	paintbrush.change_hex_type(new_flavour)
+	$PaintBrush.flavour_index = $PaintBrush.flavour_list.find(new_flavour)
 	return
 
 func _input(event):
@@ -264,3 +275,26 @@ func str_to_vec2(string : String):
 	var vec2 = Array(stripped_string.split(","))
 	return Vector2(vec2.front(),vec2.back())
 
+func init_palette():
+	var hex_res = load("res://scene/Hex.tscn")
+	var flavour_list = Global.flavour_dictionary.keys()
+	var tile_size = 35
+	var tiles_per_row = 10
+	for i in flavour_list.size():
+		var hex = hex_res.instance()
+		hex.on_grid = false
+		hex.position = Vector2((i % tiles_per_row)*tile_size,(i / tiles_per_row) * tile_size) + Vector2(tile_size,tile_size)
+		hex.interactable = false
+		hex.flavour_type = flavour_list[i]
+		hex.set_flavour()
+		$PalettePanel.add_child(hex)
+	return
+
+func _on_Palette_pressed():
+	if !palette_visible:
+		$PalettePanel.visible = true
+		palette_visible = true
+	else:
+		$PalettePanel.visible = false
+		palette_visible = false
+	return

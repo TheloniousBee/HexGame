@@ -71,19 +71,27 @@ func _physics_process(delta):
 func _on_Hex_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
-			if !on_grid:
-				if(get_parent().hex_selected == false):
-					is_dragging = true
-					emit_signal("picked_up_hex")
-					play_pickup_sfx()
-				if not event.pressed:
-					if(get_parent().hex_selected == true):
-						is_dragging = false
-						center_on_grid_hex()
-						emit_signal("hex_let_go")
-			elif Global.is_level_editor:
+			if Global.is_level_editor:
 				if event.pressed:
-					get_tree().get_root().find_node("LevelEditor", true, false).change_flavour(self)
+					if on_grid:
+						#Painting tiles
+						get_tree().get_root().find_node("LevelEditor", true, false).change_flavour(self)
+					else:
+						#Picking palette
+						get_tree().get_root().find_node("LevelEditor", true, false).change_paintbrush(self)
+			else:
+				if !on_grid:
+					#Pick tile up
+					if(get_parent().hex_selected == false):
+						is_dragging = true
+						emit_signal("picked_up_hex")
+						play_pickup_sfx()
+					#Put tile down
+					if not event.pressed:
+						if(get_parent().hex_selected == true):
+							is_dragging = false
+							center_on_grid_hex()
+							emit_signal("hex_let_go")
 	return
 	
 func center_on_grid_hex():
