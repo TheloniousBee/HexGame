@@ -16,6 +16,7 @@ signal player_made_move
 signal move_is_resolved(hexpos)
 signal clone_is_resolved()
 signal hex_spread_to_neighbour(hex, direction)
+signal hex_spread_to_end(hex, direction, fill_flavour)
 signal hex_won(coord)
 signal picked_up_hex
 signal hex_let_go
@@ -27,6 +28,7 @@ func _ready():
 	connect("move_is_resolved", get_parent(), "player_move_successful")
 	connect("clone_is_resolved", get_parent(), "advance_turn")
 	connect("hex_spread_to_neighbour", get_parent(), "spread_to_neighbour")
+	connect("hex_spread_to_end", get_parent(), "spread_to_end")
 	connect("hex_won", get_parent(), "process_post_battle")
 	connect("picked_up_hex", get_parent(), "hex_picked_up")
 	connect("hex_let_go", get_parent(), "hex_released")
@@ -234,12 +236,20 @@ func spread_to_neighbour(direction):
 	emit_signal("hex_spread_to_neighbour", self, direction)
 	return
 	
+func spread_to_end(direction, fill_flavour):
+	emit_signal("hex_spread_to_end", self, direction, fill_flavour)
+	return
+	
 func delete_flavour_from_hex():
 	change_hex_type("Empty")
 	return
 	
 func leave_path_behind():
 	change_hex_type("Path")
+	return
+	
+func leave_linepath_behind():
+	change_hex_type("LinePath")
 	return
 	
 func return_tile_to_inventory():
@@ -255,6 +265,8 @@ func reflect(sending_hex : Node2D):
 					sending_hex.rotate_counterclockwise()
 				"CW_Rotator":
 					sending_hex.rotate_clockwise()
+				"Reverse":
+					sending_hex.reverse()
 	return
 	
 func rotate_clockwise():
@@ -263,19 +275,28 @@ func rotate_clockwise():
 		if("direction" in flavour):
 			var str_arr = flavour_type.rsplit("_")
 			var base_name = str_arr[1]
-			match flavour.direction:
-				Global.SOUTHEAST:
-					change_hex_type("S_" + base_name)
-				Global.NORTHEAST:
-					change_hex_type("SE_" + base_name)
-				Global.NORTH:
-					change_hex_type("NE_" + base_name)
-				Global.NORTHWEST:
-					change_hex_type("N_" + base_name)
-				Global.SOUTHWEST:
-					change_hex_type("NW_" + base_name)
-				Global.SOUTH:
-					change_hex_type("SW_" + base_name)
+			if base_name == "Bidirect":
+				match flavour.direction:
+					Global.NORTHWEST:
+						change_hex_type("N_" + base_name)
+					Global.NORTHEAST:
+						change_hex_type("NW_" + base_name)
+					Global.NORTH:
+						change_hex_type("NE_" + base_name)
+			else:
+				match flavour.direction:
+					Global.SOUTHEAST:
+						change_hex_type("S_" + base_name)
+					Global.NORTHEAST:
+						change_hex_type("SE_" + base_name)
+					Global.NORTH:
+						change_hex_type("NE_" + base_name)
+					Global.NORTHWEST:
+						change_hex_type("N_" + base_name)
+					Global.SOUTHWEST:
+						change_hex_type("NW_" + base_name)
+					Global.SOUTH:
+						change_hex_type("SW_" + base_name)
 		else:
 			print_debug("Tried to rotate non-rotating tile")
 	return
@@ -286,21 +307,54 @@ func rotate_counterclockwise():
 		if("direction" in flavour):
 			var str_arr = flavour_type.rsplit("_")
 			var base_name = str_arr[1]
-			match flavour.direction:
-				Global.SOUTHEAST:
-					change_hex_type("NE_" + base_name)
-				Global.NORTHEAST:
-					change_hex_type("N_" + base_name)
-				Global.NORTH:
-					change_hex_type("NW_" + base_name)
-				Global.NORTHWEST:
-					change_hex_type("SW_" + base_name)
-				Global.SOUTHWEST:
-					change_hex_type("S_" + base_name)
-				Global.SOUTH:
-					change_hex_type("SE_" + base_name)
+			if base_name == "Bidirect":
+				match flavour.direction:
+					Global.NORTHWEST:
+						change_hex_type("NE_" + base_name)
+					Global.NORTHEAST:
+						change_hex_type("N_" + base_name)
+					Global.NORTH:
+						change_hex_type("NW_" + base_name)
+			else:
+				match flavour.direction:
+					Global.SOUTHEAST:
+						change_hex_type("NE_" + base_name)
+					Global.NORTHEAST:
+						change_hex_type("N_" + base_name)
+					Global.NORTH:
+						change_hex_type("NW_" + base_name)
+					Global.NORTHWEST:
+						change_hex_type("SW_" + base_name)
+					Global.SOUTHWEST:
+						change_hex_type("S_" + base_name)
+					Global.SOUTH:
+						change_hex_type("SE_" + base_name)
 		else:
 			print_debug("Tried to rotate non-rotating tile")
+	return
+	
+func reverse():
+	if has_node("Flavour"):
+		var flavour = get_node("Flavour")
+		if("direction" in flavour):
+			var str_arr = flavour_type.rsplit("_")
+			var base_name = str_arr[1]
+			if base_name != "Bidirect":
+				match flavour.direction:
+					Global.SOUTHEAST:
+						change_hex_type("NW_" + base_name)
+					Global.NORTHEAST:
+						change_hex_type("SW_" + base_name)
+					Global.NORTH:
+						change_hex_type("S_" + base_name)
+					Global.NORTHWEST:
+						change_hex_type("SE_" + base_name)
+					Global.SOUTHWEST:
+						change_hex_type("NE_" + base_name)
+					Global.SOUTH:
+						change_hex_type("N_" + base_name)
+		else:
+			print_debug("Tried to reverse non-rotating tile")
 	return
 
 func play_placed_sfx():

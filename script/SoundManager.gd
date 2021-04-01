@@ -46,6 +46,14 @@ func tilePickupClone():
 func tilePickupKey():
 	get_node("TileSounds/TilePickupOct6").play()
 	return
+	
+func tilePickupLinePath():
+	get_node("TileSounds/TilePickupOct6").play()
+	return
+	
+func tilePickupLineMaker():
+	get_node("TileSounds/TilePickupOct6").play()
+	return
 
 func tilePickupPathmaker():
 	get_node("TileSounds/TilePickupOct5").play()
@@ -66,13 +74,20 @@ func tilePickupLand():
 func tilePickupTraveller():
 	get_node("TileSounds/TilePickupOct4").play()
 	return
+
+func tilePickupBidirect():
+	get_node("TileSounds/TilePickupOct3").play()
+	return
 	
 func tilePickupRotator():
 	get_node("TileSounds/TilePickupOct3").play()
 	return
 	
+func tilePickupReverse():
+	get_node("TileSounds/TilePickupOct3").play()
+	return
+	
 func tilePickupRubble():
-	print("Rubble Picked Up")
 	get_node("TileSounds/TilePickupOct3").play()
 	return
 	

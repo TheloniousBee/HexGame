@@ -175,6 +175,40 @@ func spread_to_neighbour(original_hex : Node2D, direction : int):
 		hex.add_candidate(original_hex.flavour_type, original_hex.grid_coordinate)
 		hex.reflect(original_hex)
 		return
+		
+func spread_to_end(original_hex : Node2D, direction : int, fill_flavour):
+	#This tile spreads along an entire line.	
+	var end_reached = false
+	var hex = original_hex
+	var prev_hex_coord = original_hex.grid_coordinate
+	var travelled = false
+	while end_reached == false:
+		var next_hex = get_hex_for_coord(get_neighbour(hex.grid_coordinate,direction))
+		if next_hex != null:
+			#Check if we beat the next tile
+			if Global.flavour_dictionary.get(next_hex.flavour_type) > Global.flavour_dictionary.get(original_hex.flavour_type):
+				#We've hit another tile that beats us
+				hex.add_candidate(original_hex.flavour_type, prev_hex_coord)
+				end_reached = true
+				next_hex.reflect(hex)
+			else:
+				if travelled == false:
+					travelled = true
+				#Start loop again, this time starting from the next hex in the line
+				next_hex.add_candidate(fill_flavour, hex.grid_coordinate)
+				prev_hex_coord = next_hex.grid_coordinate
+				hex = next_hex
+		else:
+			#We've reached the end (of the grid)
+			hex.add_candidate(original_hex.flavour_type, prev_hex_coord)
+			end_reached = true
+			
+	#After looping through, we see if we have travelled (or at least attempted to travel anyway)
+	#If we have attempted, we delete the original hex we came from
+	#This means we delete the original hex if we have moved more than 1 tile away, but not if are stuck or just rotate
+	if travelled:
+		original_hex.leave_linepath_behind()
+	return
 
 func process_post_battle(coord : Vector2):
 	var hex = get_hex_for_coord(coord)
