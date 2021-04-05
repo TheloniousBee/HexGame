@@ -16,6 +16,7 @@ signal player_made_move
 signal move_is_resolved(hexpos)
 signal clone_is_resolved()
 signal hex_spread_to_neighbour(hex, direction)
+signal hex_spread_to_multiple_neighbours(hex, directions)
 signal hex_spread_to_end(hex, direction, fill_flavour)
 signal hex_won(coord)
 signal picked_up_hex
@@ -28,6 +29,7 @@ func _ready():
 	connect("move_is_resolved", get_parent(), "player_move_successful")
 	connect("clone_is_resolved", get_parent(), "advance_turn")
 	connect("hex_spread_to_neighbour", get_parent(), "spread_to_neighbour")
+	connect("hex_spread_to_multiple_neighbours", get_parent(), "spread_to_multiple_neighbours")
 	connect("hex_spread_to_end", get_parent(), "spread_to_end")
 	connect("hex_won", get_parent(), "process_post_battle")
 	connect("picked_up_hex", get_parent(), "hex_picked_up")
@@ -234,6 +236,10 @@ func proliferate():
 	
 func spread_to_neighbour(direction):
 	emit_signal("hex_spread_to_neighbour", self, direction)
+	return
+	
+func spread_to_multiple_neighbours(directions):
+	emit_signal("hex_spread_to_multiple_neighbours", self, directions)
 	return
 	
 func spread_to_end(direction, fill_flavour):

@@ -4,7 +4,9 @@ const Hex = preload("res://scene/Hex.tscn")
 
 
 var MAX_COL_SIZE = 7
-var MAX_ROW_SIZE = 13
+var MAX_ROW_SIZE = 7
+#BIG MODE
+#var MAX_ROW_SIZE = 13
 
 var spacer = 3
 var x_spacing = 24
@@ -175,6 +177,19 @@ func spread_to_neighbour(original_hex : Node2D, direction : int):
 		hex.add_candidate(original_hex.flavour_type, original_hex.grid_coordinate)
 		hex.reflect(original_hex)
 		return
+		
+func spread_to_multiple_neighbours(original_hex : Node2D, direction_array : Array):
+	var new_hexes = []
+	for direction in direction_array:
+		var hex = get_hex_for_coord(get_neighbour(original_hex.grid_coordinate,direction))
+		if hex != null:
+			hex.add_candidate(original_hex.flavour_type, original_hex.grid_coordinate)
+			new_hexes.append(hex)
+	 
+	#Do reflections last so we don't reflect in the middle of spreading
+	for h in new_hexes:
+		h.reflect(original_hex)
+	return
 		
 func spread_to_end(original_hex : Node2D, direction : int, fill_flavour):
 	#This tile spreads along an entire line.	

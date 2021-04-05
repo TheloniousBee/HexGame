@@ -2,13 +2,15 @@ extends "res://script/Flavours/Empty.gd"
 
 export var direction : int
 
+signal spread_to_multiple_neighbours(directions)
+
 func _ready():
-	pass
+	connect("spread_to_multiple_neighbours", get_parent(), "spread_to_multiple_neighbours")
+	return
 
 func proliferate():
-	emit_signal("spread_to_neighbour", direction)
-	#Spread in opposite direction
-	emit_signal("spread_to_neighbour", (direction+3) % 6)
+	var direction_array = [direction, (direction+3)%6]
+	emit_signal("spread_to_multiple_neighbours", direction_array)
 	return
 
 func play_pickup_sfx():
