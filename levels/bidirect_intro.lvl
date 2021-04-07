@@ -1,0 +1,7 @@
+[0,0]
+["N_Bidirect"]
+PlayableGrid:
+["(3, 0)","CW_Rotator"]
+["(3, 1)","Empty","(4, 1)","Empty"]
+["(1, 2)","Empty","(2, 2)","Empty","(3, 2)","Empty"]
+["(3, 3)","Empty"]

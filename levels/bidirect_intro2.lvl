@@ -1,0 +1,9 @@
+[0,0]
+["CW_Rotator","CW_Rotator","CW_Rotator"]
+PlayableGrid:
+["(2, 0)","Empty"]
+["(1, 1)","Empty","(2, 1)","Empty"]
+["(0, 2)","Land","(1, 2)","Land","(2, 2)","Empty","(3, 2)","Empty","(4, 2)","Mountain","(5, 2)","Empty"]
+["(0, 3)","Empty","(1, 3)","Empty","(2, 3)","Empty","(3, 3)","NE_Bidirect","(4, 3)","Empty","(5, 3)","Empty"]
+["(0, 4)","Mountain","(1, 4)","Empty","(2, 4)","Empty","(3, 4)","Empty","(4, 4)","Land","(5, 4)","Land","(6, 4)","Empty"]
+["(4, 5)","Empty","(5, 5)","Empty"]
