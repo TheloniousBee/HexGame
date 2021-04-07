@@ -168,8 +168,13 @@ func level_completed():
 	if playtest:
 		emit_signal("return_to_editor")
 	else:
-		$LevelFinish.visible = true
+		#Start short timer so we can actually see the final result
+		$LevelFinishDelay.start()
 	#Mark down the level completed so it can be changed in level select
+	return
+	
+func display_finished_level_dialog():
+	$LevelFinish.visible = true
 	return
 
 

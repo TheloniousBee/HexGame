@@ -74,7 +74,12 @@ margin_top = -42.0
 margin_right = 121.0
 margin_bottom = -22.0
 text = "Level Select"
+
+[node name="LevelFinishDelay" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 [connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_TurnTimer_timeout"]
 [connection signal="pressed" from="LevelFinish/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="LevelFinish/Return" to="." method="_on_Return_pressed"]
+[connection signal="timeout" from="LevelFinishDelay" to="." method="display_finished_level_dialog"]
