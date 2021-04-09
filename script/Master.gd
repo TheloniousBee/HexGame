@@ -13,6 +13,7 @@ func _ready():
 	
 func remove_current_scene():
 	if current_scene != null:
+		Global.is_level_editor = false
 		remove_child(current_scene)
 		current_scene.call_deferred("free")
 	return
