@@ -4,9 +4,9 @@ const Hex = preload("res://scene/Hex.tscn")
 
 
 var MAX_COL_SIZE = 7
-var MAX_ROW_SIZE = 7
+#var MAX_ROW_SIZE = 7
 #BIG MODE
-#var MAX_ROW_SIZE = 13
+var MAX_ROW_SIZE = 13
 
 var spacer = 3
 var x_spacing = 24
