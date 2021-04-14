@@ -5,6 +5,7 @@ signal return_pressed
 signal reset_pressed
 signal return_to_editor
 signal reset_playtest
+signal turn_reversed
 
 const Hex = preload("res://scene/Hex.tscn")
 
@@ -34,6 +35,7 @@ func _ready():
 	connect("reset_pressed", get_parent(), "reset_level")
 	connect("return_to_editor", get_parent(), "nav_to_editor")
 	connect("reset_playtest", get_parent(), "reset_playtest_level")
+	connect("turn_reversed", get_parent(), "undo_pressed")
 	return
 
 func _unhandled_input(event):
@@ -96,6 +98,7 @@ func check_victory():
 	return
 	
 func reverse_turn():
+	emit_signal("turn_reversed")
 	#get last snapshot off top of stack
 	var last_grid_state
 	var last_placeable_tile_state

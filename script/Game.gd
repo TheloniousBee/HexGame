@@ -7,10 +7,18 @@ signal return_to_main_menu
 var level_scene
 var level_select_scene
 
+#Variables for playtesting data
+var time_start
+var undo_presses = 0
+var reset_presses = 0
+var playtest_filepath : String
+var playtest_file
+
 func _ready():
 	connect("nav_to_editor", get_parent(), "load_level_editor")
 	connect("return_to_main_menu", get_parent(), "load_main_menu")
-	pass
+	init_playtest_recording()
+	return
 	
 func init_level_select_scene():
 	var ls_resource = load("res://scene/LevelSelect.tscn")
@@ -39,6 +47,7 @@ func start_game_from_level_select(filepath, level_num):
 	destroy_level_select_scene()
 	init_level_scene()
 	load_level(filepath)
+	init_playtest_data()
 	return
 	
 func return_to_main_menu():
@@ -46,6 +55,7 @@ func return_to_main_menu():
 	return
 	
 func continue_to_next_level():
+	record_playtest_data()
 	if(Global.level_directory.size() == current_level_num+1):
 		print("Last level completed!")
 		return_to_level_select()
@@ -54,6 +64,7 @@ func continue_to_next_level():
 		init_level_scene()
 		current_level_num += 1
 		load_level(Global.level_directory[current_level_num])
+		init_playtest_data()
 	return
 	
 func load_level_from_playtest(level_data):
@@ -95,6 +106,7 @@ func load_level_from_playtest(level_data):
 	return
 	
 func reset_level():
+	reset_presses += 1
 	destroy_level_scene()
 	init_level_scene()
 	load_level(Global.level_directory[current_level_num])
@@ -167,3 +179,55 @@ func str_to_vec2(string : String):
 	var stripped_string = left_stripped_string.rstrip(")")
 	var vec2 = Array(stripped_string.split(","))
 	return Vector2(vec2.front(),vec2.back())
+
+func init_playtest_recording():
+	var playtests_folder_path = "Playtests"
+	var dir = Directory.new()
+	if dir.open("user://") == OK:
+		if !dir.dir_exists(playtests_folder_path):
+			dir.make_dir(playtests_folder_path)
+		
+		if dir.change_dir(playtests_folder_path) == OK:
+			dir.list_dir_begin(true, false)
+			
+			var file_name = dir.get_next()
+			var count = 0
+			while file_name != "":
+				count += 1
+				file_name = dir.get_next()
+		
+			playtest_file = File.new()
+			playtest_filepath = "user://" + playtests_folder_path + "/Playtest_" + (count as String)
+			playtest_file.open(playtest_filepath, File.WRITE)
+			playtest_file.store_line("Initial Test Start:" + (OS.get_unix_time() as String))
+			playtest_file.close()
+	return
+
+func record_playtest_data():
+	if playtest_filepath != null:
+		playtest_file.open(playtest_filepath, File.READ_WRITE)
+		playtest_file.seek_end()
+		playtest_file.store_line(Global.level_directory[current_level_num])
+		playtest_file.store_line("Time Taken:"+level_completion_time())
+		playtest_file.store_line("Undos:" + (undo_presses as String))
+		playtest_file.store_line("Resets:" + (reset_presses as String))
+		playtest_file.close()
+	return
+	
+func init_playtest_data():
+	time_start = OS.get_unix_time()
+	undo_presses = 0
+	reset_presses = 0
+	return	
+
+func level_completion_time():
+	var time_end = OS.get_unix_time()
+	var elapsed_time = time_end - time_start
+	var minutes_taken = elapsed_time / 60
+	var seconds_taken = elapsed_time % 60
+	var time_string = (minutes_taken as String) + ":" + (seconds_taken as String)
+	return time_string
+
+func undo_pressed():
+	undo_presses += 1
+	return
