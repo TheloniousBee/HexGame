@@ -1,0 +1,10 @@
+[0,0]
+["NW_Bidirect","CCW_Rotator","CW_Rotator","CW_Rotator","CW_Rotator","Clone","Clone"]
+PlayableGrid:
+["(1, 0)","Empty","(2, 0)","Empty","(3, 0)","Empty","(4, 0)","Empty","(5, 0)","Land"]
+["(0, 1)","Empty","(1, 1)","Empty","(2, 1)","Empty","(3, 1)","Empty","(4, 1)","Empty","(5, 1)","Empty","(6, 1)","Land"]
+["(0, 2)","Empty","(1, 2)","Reverse","(2, 2)","Empty","(3, 2)","Empty","(4, 2)","Empty","(5, 2)","Empty","(6, 2)","Empty"]
+["(4, 3)","Empty","(5, 3)","Empty","(6, 3)","Empty","(7, 3)","Empty","(8, 3)","Empty","(9, 3)","Empty"]
+["(7, 4)","Empty","(8, 4)","Empty","(9, 4)","Empty","(10, 4)","Empty","(11, 4)","Empty","(12, 4)","Reverse","(13, 4)","Empty"]
+["(7, 5)","Land","(8, 5)","Empty","(9, 5)","Empty","(10, 5)","Empty","(11, 5)","Empty","(12, 5)","Empty","(13, 5)","Empty"]
+["(8, 6)","Land","(9, 6)","Empty","(10, 6)","Empty","(11, 6)","Empty","(12, 6)","Empty"]

@@ -1,0 +1,10 @@
+[0,0]
+["S_Traveller","CW_Rotator","Clone","Clone","Clone"]
+PlayableGrid:
+["(5, 0)","Empty","(6, 0)","Land","(7, 0)","Empty"]
+["(3, 1)","Empty","(4, 1)","Land","(5, 1)","Empty","(6, 1)","Land","(7, 1)","Empty","(8, 1)","Land","(9, 1)","Empty"]
+["(1, 2)","Land","(2, 2)","Land","(3, 2)","Empty","(4, 2)","Land","(5, 2)","Land","(6, 2)","Land","(7, 2)","Mountain","(8, 2)","Land","(9, 2)","Land","(10, 2)","Land","(11, 2)","Empty"]
+["(0, 3)","Empty","(1, 3)","Empty","(2, 3)","Land","(3, 3)","Land","(4, 3)","Mountain","(5, 3)","Mountain","(6, 3)","Water","(7, 3)","Land","(8, 3)","Mountain","(9, 3)","Empty","(10, 3)","Land","(11, 3)","Land","(12, 3)","Empty"]
+["(2, 4)","Land","(3, 4)","Empty","(4, 4)","Land","(5, 4)","Empty","(6, 4)","Land","(7, 4)","Empty","(8, 4)","Land","(9, 4)","Empty","(10, 4)","Land"]
+["(4, 5)","Land","(5, 5)","Empty","(6, 5)","Land","(7, 5)","Empty","(8, 5)","Land"]
+["(6, 6)","Land"]
