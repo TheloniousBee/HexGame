@@ -127,7 +127,7 @@ func recenter_row_controls():
 func _on_OK_pressed():
 	var saved_level = File.new()
 	var level_name = $SaveDialog/LevelName.text
-	var filepath = "D://Game Development/Godot Projects/HexGame/leveldevelopment/" + level_name + ".lvl"
+	var filepath = "res://leveldevelopment/" + level_name + ".lvl"
 	saved_level.open(filepath, File.WRITE)
 	
 	var grid = get_node("PlayableHexGrid")
