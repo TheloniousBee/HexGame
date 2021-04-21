@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/water.png-14d2cf0cbe7220d79d9616706893ffc5.stex"
+path="res://.import/line_tile_old.png-54a8ed493fe4b3d9fe9c5c1393a1877a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/water.png"
-dest_files=[ "res://.import/water.png-14d2cf0cbe7220d79d9616706893ffc5.stex" ]
+source_file="res://sprite/line_tile_old.png"
+dest_files=[ "res://.import/line_tile_old.png-54a8ed493fe4b3d9fe9c5c1393a1877a.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

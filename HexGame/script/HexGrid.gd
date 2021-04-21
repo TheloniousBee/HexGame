@@ -8,9 +8,12 @@ var MAX_COL_SIZE = 7
 #BIG MODE
 var MAX_ROW_SIZE = 13
 
-var spacer = 3
+#var spacer = 3
+#var x_spacing = 24
+#var y_spacing = 27
+var spacer = 2
 var x_spacing = 24
-var y_spacing = 27
+var y_spacing = 28
 var hex_offset_x = x_spacing+spacer
 var hex_offset_y = y_spacing+spacer
 

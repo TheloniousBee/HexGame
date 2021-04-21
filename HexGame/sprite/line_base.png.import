@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ice.png-19e328c94c511293cc1e2bee7fcd0431.stex"
+path="res://.import/line_base.png-64ade3f470796ba34d200eb83167cba5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/ice.png"
-dest_files=[ "res://.import/ice.png-19e328c94c511293cc1e2bee7fcd0431.stex" ]
+source_file="res://sprite/line_base.png"
+dest_files=[ "res://.import/line_base.png-64ade3f470796ba34d200eb83167cba5.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

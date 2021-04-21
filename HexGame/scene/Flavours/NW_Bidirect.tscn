@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scene/Flavours/Empty.tscn" type="PackedScene" id=1]
 [ext_resource path="res://script/Flavours/Bidirect.gd" type="Script" id=2]
-[ext_resource path="res://sprite/double_direction.png" type="Texture" id=3]
+[ext_resource path="res://sprite/bidirect_base.png" type="Texture" id=3]
 [ext_resource path="res://sprite/doublearrow.png" type="Texture" id=4]
 
 [node name="Flavour" instance=ExtResource( 1 )]
