@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CW_rotator.png-0495a96d52f1dfc4cb6580983a94d507.stex"
+path="res://.import/CW_Rotator.png-7c342bba631e253ce0d1b25a7905a400.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/CW_rotator.png"
-dest_files=[ "res://.import/CW_rotator.png-0495a96d52f1dfc4cb6580983a94d507.stex" ]
+source_file="res://sprite/CW_Rotator.png"
+dest_files=[ "res://.import/CW_Rotator.png-7c342bba631e253ce0d1b25a7905a400.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
