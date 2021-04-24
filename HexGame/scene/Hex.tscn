@@ -19,7 +19,9 @@ __meta__ = {
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -9, -14, -16, 0, -9, 14, 9, 14, 16, 0, 9, -14 )
+position = Vector2( -0.589913, 0.117985 )
+scale = Vector2( 2.71907, 2.98572 )
+polygon = PoolVector2Array( -8.62104, -14.0994, -17.4253, -0.0465837, -8.61695, 13.9941, 9.06306, 14.0274, 17.8667, -0.0391138, 9.05754, -14.0921 )
 [connection signal="area_shape_entered" from="." to="." method="_on_Hex_area_shape_entered"]
 [connection signal="area_shape_exited" from="." to="." method="_on_Hex_area_shape_exited"]
 [connection signal="input_event" from="." to="." method="_on_Hex_input_event"]

@@ -16,16 +16,16 @@ var undo_grid_stack = []
 var undo_placeable_stack = []
 
 var placeable_hex_positions = [
-	Vector2(21,29),
-	Vector2(21,62),
-	Vector2(21,95),
-	Vector2(21,128),
-	Vector2(21,161),
-	Vector2(21,194),
-	Vector2(21,227),
-	Vector2(21,260),
-	Vector2(21,293),
-	Vector2(21,326),
+	Vector2(63,87),
+	Vector2(63,186),
+	Vector2(63,285),
+	Vector2(63,384),
+	Vector2(63,483),
+	Vector2(63,582),
+	Vector2(63,681),
+	Vector2(63,780),
+	Vector2(63,879),
+	Vector2(63,978)
 ]
 
 func _ready():	

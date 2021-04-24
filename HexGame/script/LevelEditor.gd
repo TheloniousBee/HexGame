@@ -6,6 +6,10 @@ var cell_controls_list = []
 var cell_controls_visible = true
 var palette_visible = false
 
+var tile_size = 105
+var tiles_per_row = 10
+var cell_controls_width = 275
+
 signal level_editor_reload_pressed()
 signal return_to_main_menu
 signal playtest_pressed(cache)
@@ -24,6 +28,7 @@ func init_level_editor():
 	#If we're starting the level editor from a blank state, ie. not returning from a playtest
 	playable_hex_grid.initialize_full_size_grid()
 	setup_row_controls()
+	recenter_row_controls()
 	return
 
 func load_playtesting_level(level_data):
@@ -99,14 +104,11 @@ func add_row_controls(hex : Node2D, index : int):
 	var cell_controls_resource = load("res://scene/LevelEditor/CellControls.tscn")
 	var cell_controls = cell_controls_resource.instance()
 	
-	#A bit of positioning mess here, 99 is just the size of the 4 buttons	
-	cell_controls.margin_left = ProjectSettings.get_setting("display/window/size/width") - 99
-	if (hex.grid_coordinate.x) as int % 2 != 0:
-		cell_controls.margin_top = hex.position.y - 15 - (cell_controls.rect_size.y / 2)
-	else:
-		cell_controls.margin_top = hex.position.y - (cell_controls.rect_size.y / 2)
+	cell_controls.margin_left = ProjectSettings.get_setting("display/window/size/width") - cell_controls_width
+	cell_controls.rect_size.x = cell_controls_width
 	cell_controls.row_index = index
 	cell_controls.visible = cell_controls_visible
+	
 	add_child(cell_controls)
 	cell_controls_list.append(cell_controls)
 	return
@@ -118,7 +120,7 @@ func recenter_row_controls():
 			var hex = i.back()
 			var cell_controls = cell_controls_list[index]
 			if (hex.grid_coordinate.x) as int % 2 != 0:
-				cell_controls.margin_top = hex.position.y - 15 - (cell_controls.rect_size.y / 2)
+				cell_controls.margin_top = hex.position.y - 45 - (cell_controls.rect_size.y / 2)
 			else:
 				cell_controls.margin_top = hex.position.y - (cell_controls.rect_size.y / 2)
 		index += 1
@@ -278,8 +280,6 @@ func str_to_vec2(string : String):
 func init_palette():
 	var hex_res = load("res://scene/Hex.tscn")
 	var flavour_list = Global.flavour_dictionary.keys()
-	var tile_size = 35
-	var tiles_per_row = 10
 	for i in flavour_list.size():
 		var hex = hex_res.instance()
 		hex.on_grid = false
@@ -287,14 +287,14 @@ func init_palette():
 		hex.interactable = false
 		hex.flavour_type = flavour_list[i]
 		hex.set_flavour()
-		$PalettePanel.add_child(hex)
+		$CanvasLayer/PalettePanel.add_child(hex)
 	return
 
 func _on_Palette_pressed():
 	if !palette_visible:
-		$PalettePanel.visible = true
+		$CanvasLayer/PalettePanel.visible = true
 		palette_visible = true
 	else:
-		$PalettePanel.visible = false
+		$CanvasLayer/PalettePanel.visible = false
 		palette_visible = false
 	return

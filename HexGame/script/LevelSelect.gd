@@ -47,6 +47,7 @@ func create_level_buttons_by_number():
 			$VBoxContainer/HBoxContainer4.add_child(button)
 		elif i >= 48 and i < 60:
 			$VBoxContainer/HBoxContainer5.add_child(button)
+			
 	return
 	
 #func create_level_buttons_by_dir():

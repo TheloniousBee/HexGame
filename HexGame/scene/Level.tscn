@@ -1,30 +1,37 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scene/HexGrid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/TimeControls.tscn" type="PackedScene" id=2]
 [ext_resource path="res://script/Level.gd" type="Script" id=3]
+[ext_resource path="res://fonts/UI_dynamicfont.tres" type="DynamicFont" id=4]
 
 [node name="Level" type="Node"]
 script = ExtResource( 3 )
 
 [node name="PlayHexGrid" parent="." instance=ExtResource( 1 )]
-origin_hex = Vector2( 320, 180 )
+origin_hex = Vector2( 960, 540 )
 placeable = true
 
 [node name="TimeControls" parent="." instance=ExtResource( 2 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
-margin_left = -139.5
-margin_top = -34.0
-margin_right = 139.5
-margin_bottom = -14.0
+margin_left = -252.0
+margin_top = -74.8774
+margin_right = 252.0
+margin_bottom = -18.8774
+custom_constants/separation = 20
 
 [node name="Reset" type="Button" parent="."]
-margin_left = 576.0
-margin_top = 326.0
-margin_right = 624.0
-margin_bottom = 346.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -134.243
+margin_top = -74.0
+margin_right = -18.2427
+margin_bottom = -18.0
+custom_fonts/font = ExtResource( 4 )
 text = "Reset"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -38,10 +45,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -250.0
-margin_top = -100.0
-margin_right = 233.0
-margin_bottom = 93.0
+margin_left = -480.0
+margin_top = -270.0
+margin_right = 480.0
+margin_bottom = 270.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -50,6 +57,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -103.0
+custom_fonts/normal_font = ExtResource( 4 )
 text = "Congratulations"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -60,20 +68,28 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -107.0
-margin_top = -42.0
-margin_right = -27.0
-margin_bottom = -22.0
+margin_left = -210.495
+margin_top = -64.4949
+margin_right = -8.49487
+margin_bottom = -8.49487
+custom_fonts/font = ExtResource( 4 )
 text = "Next Level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Return" type="Button" parent="LevelFinish"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 22.0
-margin_top = -42.0
-margin_right = 121.0
-margin_bottom = -22.0
+margin_left = 6.60712
+margin_top = -64.4949
+margin_right = 234.607
+margin_bottom = -8.49487
+custom_fonts/font = ExtResource( 4 )
 text = "Level Select"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LevelFinishDelay" type="Timer" parent="."]
 wait_time = 0.5
