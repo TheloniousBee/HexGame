@@ -23,18 +23,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="396.25159"
-     inkscape:cy="517.32659"
+     inkscape:zoom="0.71854305"
+     inkscape:cx="288.88715"
+     inkscape:cy="452.00096"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="1672"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="-8"
+     inkscape:window-y="17"
+     inkscape:window-maximized="1"
+     objecttolerance="20" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -53,7 +54,7 @@
      id="layer1">
     <path
        sodipodi:type="star"
-       style="fill:#c3b2ff;fill-opacity:1;stroke:#000000;stroke-width:4.78219749;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:#9241f3;fill-opacity:1;stroke:#000000;stroke-width:4.78219749;stroke-miterlimit:4;stroke-dasharray:none"
        id="path30"
        sodipodi:sides="6"
        sodipodi:cx="96.217026"
@@ -69,5 +70,45 @@
        transform="matrix(1.0647183,0,0,1.0757487,0.05098981,8.351938)"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
+    <g
+       id="g1524"
+       transform="matrix(-0.53445216,0.29336175,0.29336175,0.53445216,-3.067556,85.933653)"
+       inkscape:transform-center-x="-0.30135876"
+       inkscape:transform-center-y="8.1413222"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <g
+         id="g1530"
+         transform="rotate(4.7627265,-119.84436,163.23068)">
+        <path
+           id="path1496"
+           style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:3.99999"
+           d="m -438.2832,336.79297 a 252.59446,252.59446 0 0 0 -178.01953,73.98242 252.59446,252.59446 0 0 0 0,357.22266 252.59446,252.59446 0 0 0 357.22265,0 L -321.07812,706 a 164.91705,164.91705 0 0 1 -116.61329,48.30469 164.91705,164.91705 0 0 1 -164.91601,-164.91797 164.91705,164.91705 0 0 1 164.91601,-164.91602 164.91705,164.91705 0 0 1 116.61329,48.30274 l 61.99804,-61.99805 A 252.59446,252.59446 0 0 0 -438.2832,336.79297 Z"
+           transform="scale(0.26458333)" />
+        <g
+           id="g1518">
+          <rect
+             style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.641178"
+             id="rect1510"
+             width="64.832687"
+             height="21.610897"
+             x="172.66357"
+             y="57.19545"
+             rx="0"
+             ry="10.805449"
+             transform="rotate(90)" />
+          <rect
+             style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.641178"
+             id="rect1514"
+             width="64.832687"
+             height="21.610897"
+             x="57.19545"
+             y="-194.27448"
+             rx="0"
+             ry="10.805449"
+             transform="scale(-1)" />
+        </g>
+      </g>
+    </g>
   </g>
 </svg>

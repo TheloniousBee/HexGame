@@ -14,4 +14,5 @@ texture = ExtResource( 2 )
 
 [node name="Direction" type="Sprite" parent="." index="1"]
 rotation = 5.23599
+scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 4 )
