@@ -90,12 +90,14 @@ func _on_Hex_input_event(_viewport, event, _shape_idx):
 						is_dragging = true
 						emit_signal("picked_up_hex")
 						play_pickup_sfx()
+						show_hex_glow()
 					#Put tile down
 					if not event.pressed:
 						if(get_parent().hex_selected == true):
 							is_dragging = false
 							center_on_grid_hex()
 							emit_signal("hex_let_go")
+							hide_hex_glow()
 	return
 	
 func center_on_grid_hex():
@@ -374,4 +376,16 @@ func play_failed_sfx():
 
 func emit_place_particles():
 	$PlaceParticles.emitting = true
+	return
+	
+func show_hex_glow():
+	if has_node("Flavour"):
+		var glow = get_node("Flavour/Glow")
+		glow.visible = true
+	return
+
+func hide_hex_glow():
+	if has_node("Flavour"):
+		var glow = get_node("Flavour/Glow")
+		glow.visible = false
 	return

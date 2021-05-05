@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/land2.png-02d2422cc2e7c4cc6d3d4652901af1d7.stex"
+path="res://.import/glow.png-2238726a53de68356d0e6fa6e77b98f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/land2.png"
-dest_files=[ "res://.import/land2.png-02d2422cc2e7c4cc6d3d4652901af1d7.stex" ]
+source_file="res://sprite/glow.png"
+dest_files=[ "res://.import/glow.png-2238726a53de68356d0e6fa6e77b98f5.stex" ]
 
 [params]
 
