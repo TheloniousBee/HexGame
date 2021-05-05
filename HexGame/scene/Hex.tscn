@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://particle/place_particle.png" type="Texture" id=1]
 [ext_resource path="res://script/Hex.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=2]
+max_value = 100.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 100 ), 311.756, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 131.03
+initial_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 100.0
+damping_curve = SubResource( 3 )
+angle_random = 1.0
+scale = 0.1
+scale_random = 0.1
+hue_variation_random = 1.0
 
 [node name="Hex" type="Area2D"]
 script = ExtResource( 2 )
@@ -22,6 +45,17 @@ __meta__ = {
 position = Vector2( -0.589913, 0.117985 )
 scale = Vector2( 2.71907, 2.98572 )
 polygon = PoolVector2Array( -8.62104, -14.0994, -17.4253, -0.0465837, -8.61695, 13.9941, 9.06306, 14.0274, 17.8667, -0.0391138, 9.05754, -14.0921 )
+
+[node name="PlaceParticles" type="Particles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 40
+lifetime = 0.75
+one_shot = true
+preprocess = 0.3
+explosiveness = 1.0
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
 [connection signal="area_shape_entered" from="." to="." method="_on_Hex_area_shape_entered"]
 [connection signal="area_shape_exited" from="." to="." method="_on_Hex_area_shape_exited"]
 [connection signal="input_event" from="." to="." method="_on_Hex_input_event"]

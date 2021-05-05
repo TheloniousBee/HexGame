@@ -168,6 +168,9 @@ func add_placeable_hex(flavour : String):
 
 func level_completed():
 	stop_play_timer()
+	$Confetti.emitting = true
+	$Confetti2.emitting = true
+	
 	if playtest:
 		emit_signal("return_to_editor")
 	else:

@@ -118,6 +118,7 @@ func place_on_grid(hex : Node2D):
 	if(Global.flavour_dictionary.get(flavour_type) > Global.flavour_dictionary.get(hex.flavour_type)):
 		emit_signal("player_made_move")
 		hex.change_hex_type(flavour_type)
+		hex.emit_place_particles()
 		emit_signal("move_is_resolved", original_placeable_pos)
 		play_placed_sfx()
 		call_deferred("queue_free")
@@ -369,4 +370,8 @@ func play_placed_sfx():
 	
 func play_failed_sfx():
 	Global.sound_mgr.tilePlaceFail()
+	return
+
+func emit_place_particles():
+	$PlaceParticles.emitting = true
 	return
