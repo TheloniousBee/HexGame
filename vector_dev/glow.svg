@@ -19,9 +19,13 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Blur"
-       id="filter1265">
+       id="filter1265"
+       x="-0.090471026"
+       width="1.1809421"
+       y="-0.10446694"
+       height="1.2089339">
       <feGaussianBlur
-         stdDeviation="3 2"
+         stdDeviation="5.7871209"
          result="fbSourceGraphic"
          id="feGaussianBlur1263" />
       <feColorMatrix
@@ -43,8 +47,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="476.08807"
+     inkscape:zoom="0.71854305"
+     inkscape:cx="719.63646"
      inkscape:cy="495.97863"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -54,7 +58,8 @@
      inkscape:window-height="987"
      inkscape:window-x="-8"
      inkscape:window-y="17"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     objecttolerance="1" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -73,7 +78,7 @@
      id="layer1">
     <path
        sodipodi:type="star"
-       style="fill:none;fill-opacity:0.713725;stroke:#92d3ff;stroke-width:4.78229093;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter1265)"
+       style="mix-blend-mode:normal;fill:none;fill-opacity:0.713725;stroke:#92d3ff;stroke-width:4.78229;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter1265)"
        id="path30"
        sodipodi:sides="6"
        sodipodi:cx="96.217026"
@@ -86,7 +91,7 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="m 134.59696,188.88545 -76.759878,0 -38.379936,-66.47601 38.379943,-66.476001 76.759881,3e-6 38.37994,66.476008 z"
-       transform="matrix(1.0647183,0,0,1.0757487,0.05098981,8.351938)"
+       transform="matrix(1.197209,0,0,1.209612,-8.9620122,-12.82108)"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
   </g>
