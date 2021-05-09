@@ -5,7 +5,7 @@
 [ext_resource path="res://sprite/hex.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
-resource_name = "GlowVibrate"
+resource_name = "GlowPulse"
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -35,5 +35,5 @@ z_index = -1
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "GlowVibrate"
-anims/GlowVibrate = SubResource( 1 )
+autoplay = "GlowPulse"
+anims/GlowPulse = SubResource( 1 )

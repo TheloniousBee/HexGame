@@ -1,6 +1,7 @@
 extends Node
 
 const MainMenu = preload("res://scene/MainMenu.tscn")
+const Spark = preload("res://scene/Particle/Clicksparks.tscn")
 
 var current_scene
 var playtest_cache
@@ -78,4 +79,13 @@ func import_level_list():
 			Global.level_directory.append(level)
 	
 	levels.close()
+	return
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			var spark = Spark.instance()
+			spark.position = event.position
+			spark.emitting = true
+			add_child(spark)
 	return
