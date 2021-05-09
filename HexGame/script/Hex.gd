@@ -10,6 +10,8 @@ var candidate_flavours = {}
 var final_candidate_flavour = ""
 var original_placeable_pos : Vector2
 
+const LetGoParticle = preload("res://scene/Particle/LetGoParticles.tscn")
+
 export var interactable = false
 
 signal player_made_move
@@ -112,7 +114,7 @@ func center_on_grid_hex():
 		place_on_grid(closest_hex)
 	else:
 		#Placing the tile off the grid
-		Global.sound_mgr.letTilego()
+		tile_let_go()
 	return
 
 func place_on_grid(hex : Node2D):
@@ -388,4 +390,11 @@ func hide_hex_glow():
 	if has_node("Flavour"):
 		var glow = get_node("Flavour/Glow")
 		glow.visible = false
+	return
+	
+func tile_let_go():
+	var let_go_cloud = LetGoParticle.instance()
+	let_go_cloud.emitting = true
+	add_child(let_go_cloud)
+	Global.sound_mgr.letTilego()
 	return
