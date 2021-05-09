@@ -29,70 +29,70 @@ __meta__ = {
 [node name="Hex" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 87 )
+position = Vector2( 190, 286 )
 on_grid = true
 interactable = true
 
 [node name="Hex2" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 186 )
+position = Vector2( 190, 385 )
 on_grid = true
 interactable = true
 
 [node name="Hex3" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 285 )
+position = Vector2( 190, 484 )
 on_grid = true
 interactable = true
 
 [node name="Hex4" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 384 )
+position = Vector2( 190, 583 )
 on_grid = true
 interactable = true
 
 [node name="Hex5" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 483 )
+position = Vector2( 190, 682 )
 on_grid = true
 interactable = true
 
 [node name="Hex6" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 582 )
+position = Vector2( 301, 286 )
 on_grid = true
 interactable = true
 
 [node name="Hex7" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 681 )
+position = Vector2( 301, 385 )
 on_grid = true
 interactable = true
 
 [node name="Hex8" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 780 )
+position = Vector2( 301, 484 )
 on_grid = true
 interactable = true
 
 [node name="Hex9" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 879 )
+position = Vector2( 301, 583 )
 on_grid = true
 interactable = true
 
 [node name="Hex10" parent="." groups=[
 "placeable",
 ] instance=ExtResource( 3 )]
-position = Vector2( 63, 978 )
+position = Vector2( 301, 682 )
 on_grid = true
 interactable = true
 
