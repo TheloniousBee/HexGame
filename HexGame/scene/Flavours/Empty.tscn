@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://script/Flavours/Empty.gd" type="Script" id=1]
-[ext_resource path="res://sprite/glow.png" type="Texture" id=2]
+[ext_resource path="res://effects/glow.png" type="Texture" id=2]
 [ext_resource path="res://sprite/hex.png" type="Texture" id=3]
+[ext_resource path="res://effects/shadow.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "GlowPulse"
@@ -37,3 +38,10 @@ texture = ExtResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "GlowPulse"
 anims/GlowPulse = SubResource( 1 )
+
+[node name="Shadow" type="Sprite" parent="."]
+visible = false
+position = Vector2( 3.87768, 8.1825 )
+scale = Vector2( 0.15, 0.15 )
+z_index = -2
+texture = ExtResource( 4 )
