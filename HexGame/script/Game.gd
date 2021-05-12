@@ -24,6 +24,12 @@ func init_level_select_scene():
 	var ls_resource = load("res://scene/LevelSelect.tscn")
 	level_select_scene = ls_resource.instance()
 	add_child(level_select_scene)
+	
+	var levels_completed = load_game_progress()
+	var all_buttons = get_tree().get_nodes_in_group("level_buttons")
+	for button in all_buttons:
+		if button.level_num <= levels_completed+1:
+			button.disabled = false
 	return
 	
 func init_level_scene():
@@ -231,3 +237,25 @@ func level_completion_time():
 func undo_pressed():
 	undo_presses += 1
 	return
+
+func save_game_progress():
+	var dir = Directory.new()
+	if dir.open("user://") == OK:
+		var save_game_file = File.new()
+		var file_path = "user://savegame.dat"
+		save_game_file.open(file_path, File.WRITE)
+		save_game_file.store_16(current_level_num)
+		save_game_file.close()
+	return
+	
+func load_game_progress():
+	var dir = Directory.new()
+	if dir.open("user://") == OK:
+		var save_game_file = File.new()
+		var file_path = "user://savegame.dat"
+		if save_game_file.file_exists(file_path):
+			save_game_file.open(file_path, File.READ)
+			var last_level_completed = save_game_file.get_16()
+			save_game_file.close()
+			return last_level_completed
+	return -1

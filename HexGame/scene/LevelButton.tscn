@@ -3,13 +3,16 @@
 [ext_resource path="res://script/LevelButton.gd" type="Script" id=1]
 [ext_resource path="res://fonts/UI_dynamicfont.tres" type="DynamicFont" id=2]
 
-[node name="LevelButton" type="Button"]
+[node name="LevelButton" type="Button" groups=[
+"level_buttons",
+]]
 margin_left = 11.0
 margin_top = 11.0
 margin_right = 31.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 60, 60 )
 custom_fonts/font = ExtResource( 2 )
+disabled = true
 text = "0"
 script = ExtResource( 1 )
 __meta__ = {

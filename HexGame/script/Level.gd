@@ -6,6 +6,7 @@ signal reset_pressed
 signal return_to_editor
 signal reset_playtest
 signal turn_reversed
+signal level_complete
 
 const Hex = preload("res://scene/Hex.tscn")
 
@@ -36,6 +37,7 @@ func _ready():
 	connect("return_to_editor", get_parent(), "nav_to_editor")
 	connect("reset_playtest", get_parent(), "reset_playtest_level")
 	connect("turn_reversed", get_parent(), "undo_pressed")
+	connect("level_complete", get_parent(), "save_game_progress")
 	return
 
 func _unhandled_input(event):
@@ -177,6 +179,7 @@ func level_completed():
 		#Start short timer so we can actually see the final result
 		$LevelFinishDelay.start()
 	#Mark down the level completed so it can be changed in level select
+	emit_signal("level_complete")
 	return
 	
 func display_finished_level_dialog():
