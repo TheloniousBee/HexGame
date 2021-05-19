@@ -15,8 +15,12 @@ _global_script_class_icons={
 
 [application]
 
-config/name="HexGame"
+config/name="The Travelling Hexagon"
 run/main_scene="res://scene/Master.tscn"
+boot_splash/image="res://bg/splash_v1.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.368627, 0.368627, 0.368627, 1 )
+config/icon="res://sprite/key.png"
 
 [autoload]
 

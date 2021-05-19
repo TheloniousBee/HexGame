@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://script/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/UI_dynamicfont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/Title_dynamicfont.tres" type="DynamicFont" id=3]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
@@ -14,30 +15,35 @@ __meta__ = {
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -35.0
-margin_right = 35.0
-margin_bottom = 14.0
-custom_fonts/font = ExtResource( 2 )
-text = "Game Title"
+margin_left = -370.5
+margin_top = 38.1637
+margin_right = 370.5
+margin_bottom = 113.164
+custom_fonts/font = ExtResource( 3 )
+text = "The Travelling Hexagon"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MainMenuButtons" type="VBoxContainer" parent="."]
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 76.1093
+margin_left = -113.5
 margin_top = -180.0
-margin_right = 303.109
+margin_right = 113.5
 margin_bottom = 180.0
 custom_constants/separation = 20
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="New Game" type="Button" parent="MainMenuButtons"]
+margin_top = 76.0
 margin_right = 226.0
-margin_bottom = 56.0
+margin_bottom = 132.0
 custom_fonts/font = ExtResource( 2 )
 text = "Start"
 
@@ -51,9 +57,9 @@ custom_fonts/font = ExtResource( 2 )
 text = "Continue"
 
 [node name="Options" type="Button" parent="MainMenuButtons"]
-margin_top = 76.0
+margin_top = 152.0
 margin_right = 226.0
-margin_bottom = 132.0
+margin_bottom = 208.0
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
 
@@ -66,9 +72,9 @@ custom_fonts/font = ExtResource( 2 )
 text = "Level Editor"
 
 [node name="Exit" type="Button" parent="MainMenuButtons"]
-margin_top = 152.0
+margin_top = 228.0
 margin_right = 226.0
-margin_bottom = 208.0
+margin_bottom = 284.0
 custom_fonts/font = ExtResource( 2 )
 text = "Exit"
 [connection signal="pressed" from="MainMenuButtons/New Game" to="." method="_on_New_Game_pressed"]
