@@ -1,14 +1,23 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://script/SoundManager.gd" type="Script" id=1]
-[ext_resource path="res://sfx/main_menu_button.wav" type="AudioStream" id=2]
+[ext_resource path="res://sfx/vintage_radio_button_006.wav" type="AudioStream" id=2]
 [ext_resource path="res://sfx/tile_place_fail.wav" type="AudioStream" id=3]
-[ext_resource path="res://sfx/tile_let_go.wav" type="AudioStream" id=4]
+[ext_resource path="res://sfx/tile_click1.wav" type="AudioStream" id=4]
 [ext_resource path="res://sfx/tile_place_success.wav" type="AudioStream" id=5]
-[ext_resource path="res://sfx/tile_ pickup_minus1.wav" type="AudioStream" id=6]
-[ext_resource path="res://sfx/tile_ pickup.wav" type="AudioStream" id=7]
-[ext_resource path="res://sfx/tile_ pickup_plus2.wav" type="AudioStream" id=8]
-[ext_resource path="res://sfx/tile_ pickup_plus1.wav" type="AudioStream" id=9]
+[ext_resource path="res://sfx/saw_wave_beep.wav" type="AudioStream" id=6]
+[ext_resource path="res://sfx/agogoF4.wav" type="AudioStream" id=10]
+[ext_resource path="res://sfx/agogoB3.wav" type="AudioStream" id=11]
+[ext_resource path="res://sfx/agogoC4.wav" type="AudioStream" id=12]
+[ext_resource path="res://sfx/agogoG3.wav" type="AudioStream" id=13]
+[ext_resource path="res://sfx/agogoC3.wav" type="AudioStream" id=14]
+[ext_resource path="res://sfx/agogoF3.wav" type="AudioStream" id=15]
+[ext_resource path="res://sfx/agogoA3.wav" type="AudioStream" id=16]
+[ext_resource path="res://sfx/agogoG4.wav" type="AudioStream" id=17]
+[ext_resource path="res://sfx/agogoE4.wav" type="AudioStream" id=18]
+[ext_resource path="res://sfx/agogoE3.wav" type="AudioStream" id=19]
+[ext_resource path="res://sfx/agogoD3.wav" type="AudioStream" id=20]
+[ext_resource path="res://sfx/agogoD4.wav" type="AudioStream" id=21]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource( 1 )
@@ -19,10 +28,15 @@ script = ExtResource( 1 )
 stream = ExtResource( 2 )
 bus = "SFX"
 
+[node name="OptionClick" type="AudioStreamPlayer" parent="Menu"]
+stream = ExtResource( 6 )
+bus = "SFX"
+
 [node name="TileSounds" type="Node" parent="."]
 
 [node name="TileLetGo" type="AudioStreamPlayer" parent="TileSounds"]
 stream = ExtResource( 4 )
+volume_db = -5.0
 bus = "SFX"
 
 [node name="TilePlaceFail" type="AudioStreamPlayer" parent="TileSounds"]
@@ -33,18 +47,50 @@ bus = "SFX"
 stream = ExtResource( 5 )
 bus = "SFX"
 
-[node name="TilePickupOct4" type="AudioStreamPlayer" parent="TileSounds"]
-stream = ExtResource( 7 )
+[node name="AgogoBellC3" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 14 )
 bus = "SFX"
 
-[node name="TilePickupOct3" type="AudioStreamPlayer" parent="TileSounds"]
-stream = ExtResource( 6 )
+[node name="AgogoBellD3" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 20 )
 bus = "SFX"
 
-[node name="TilePickupOct5" type="AudioStreamPlayer" parent="TileSounds"]
-stream = ExtResource( 9 )
+[node name="AgogoBellE3" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 19 )
 bus = "SFX"
 
-[node name="TilePickupOct6" type="AudioStreamPlayer" parent="TileSounds"]
-stream = ExtResource( 8 )
+[node name="AgogoBellF3" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 15 )
+bus = "SFX"
+
+[node name="AgogoBellG3" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 13 )
+bus = "SFX"
+
+[node name="AgogoBellA3" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 16 )
+bus = "SFX"
+
+[node name="AgogoBellB3" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 11 )
+bus = "SFX"
+
+[node name="AgogoBellC4" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 12 )
+bus = "SFX"
+
+[node name="AgogoBellD4" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 21 )
+bus = "SFX"
+
+[node name="AgogoBellE4" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 18 )
+bus = "SFX"
+
+[node name="AgogoBellF4" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 10 )
+bus = "SFX"
+
+[node name="AgogoBellG4" type="AudioStreamPlayer" parent="TileSounds"]
+stream = ExtResource( 17 )
 bus = "SFX"

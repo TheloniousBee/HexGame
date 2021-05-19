@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/tile_ pickup.wav-e97444278553e9f1c8bcd0191e89dbbf.sample"
+path="res://.import/agogoF4.wav-570d9a1db512e202880ad186ed8b7765.sample"
 
 [deps]
 
-source_file="res://sfx/tile_ pickup.wav"
-dest_files=[ "res://.import/tile_ pickup.wav-e97444278553e9f1c8bcd0191e89dbbf.sample" ]
+source_file="res://sfx/agogoF4.wav"
+dest_files=[ "res://.import/agogoF4.wav-570d9a1db512e202880ad186ed8b7765.sample" ]
 
 [params]
 

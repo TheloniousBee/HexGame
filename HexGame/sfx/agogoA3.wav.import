@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/tile_let_go.wav-1be4b85c70e43708f03083bcf3ae7085.sample"
+path="res://.import/agogoA3.wav-14256ee9c4abe919809029fb4fc1ea58.sample"
 
 [deps]
 
-source_file="res://sfx/tile_let_go.wav"
-dest_files=[ "res://.import/tile_let_go.wav-1be4b85c70e43708f03083bcf3ae7085.sample" ]
+source_file="res://sfx/agogoA3.wav"
+dest_files=[ "res://.import/agogoA3.wav-14256ee9c4abe919809029fb4fc1ea58.sample" ]
 
 [params]
 

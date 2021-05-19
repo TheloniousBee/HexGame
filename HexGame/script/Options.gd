@@ -30,6 +30,7 @@ func _input(event):
 func _on_Fullscreen_toggled(button_pressed):
 	OS.window_fullscreen = button_pressed
 	set_initial_resolution()
+	Global.sound_mgr.playOptionClick()
 	return
 
 
@@ -37,7 +38,7 @@ func _on_SFXVolume_value_changed(value):
 	var max_value = get_node("VBoxContainer/SFXContainer/SFXVolume").max_value
 	var db_value = (value / (max_value / 60)) - 60
 	AudioServer.set_bus_volume_db(SFX_bus,db_value)
-	Global.sound_mgr.playMainMenuClick()
+	Global.sound_mgr.playOptionClick()
 	return
 
 
@@ -72,7 +73,7 @@ func remove_non_numbers(field_text):
 	return text
 
 func _on_Accept_pressed():
-	Global.sound_mgr.playMainMenuClick()
+	Global.sound_mgr.playOptionClick()
 	change_resolution()
 	save_options()
 	emit_signal("options_concluded")
@@ -80,7 +81,7 @@ func _on_Accept_pressed():
 
 
 func _on_Cancel_pressed():
-	Global.sound_mgr.playMainMenuClick()
+	Global.sound_mgr.playOptionClick()
 	emit_signal("options_concluded")
 	return
 
@@ -140,11 +141,13 @@ func load_options():
 
 func _on_Width_text_entered(_new_text):
 	change_resolution()
+	Global.sound_mgr.playOptionClick()
 	return
 
 
 func _on_Height_text_entered(new_text):
 	change_resolution()
+	Global.sound_mgr.playOptionClick()
 	return
 
 func _on_ResolutionTimer_timeout():

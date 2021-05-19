@@ -10,5 +10,6 @@ func _ready():
 
 
 func _on_LevelButton_pressed():
+	Global.sound_mgr.playMainMenuClick()
 	emit_signal("level_button_pressed", level_num)
 	return

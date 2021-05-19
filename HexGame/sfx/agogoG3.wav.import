@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/agogoG3.wav-5aa0ad1747cf831e26a31895dfb46dc8.sample"
+
+[deps]
+
+source_file="res://sfx/agogoG3.wav"
+dest_files=[ "res://.import/agogoG3.wav-5aa0ad1747cf831e26a31895dfb46dc8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
