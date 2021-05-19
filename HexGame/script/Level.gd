@@ -189,11 +189,13 @@ func display_finished_level_dialog():
 
 func _on_Continue_pressed():
 	emit_signal("continue_pressed")
+	Global.sound_mgr.playMainMenuClick()
 	return
 
 
 func _on_Return_pressed():
 	emit_signal("return_pressed")
+	Global.sound_mgr.playMainMenuClick()
 	return
 
 
