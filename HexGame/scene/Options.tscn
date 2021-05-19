@@ -1,6 +1,196 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://script/Options.gd" type="Script" id=1]
+[ext_resource path="res://fonts/UI_dynamicfont.tres" type="DynamicFont" id=2]
 
-[node name="Node" type="Node"]
+[node name="GUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.49829
+margin_bottom = -1.49829
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -539.5
+margin_top = -325.0
+margin_right = 539.5
+margin_bottom = 325.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -457.0
+margin_top = -247.0
+margin_right = 457.0
+margin_bottom = 210.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fullscreen" type="CheckBox" parent="VBoxContainer"]
+margin_right = 914.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Fullscreen"
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXContainer" type="HSplitContainer" parent="VBoxContainer"]
+margin_top = 62.0
+margin_right = 914.0
+margin_bottom = 191.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+dragger_visibility = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXVolume" type="HSlider" parent="VBoxContainer/SFXContainer"]
+margin_right = 648.0
+margin_bottom = 129.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+value = 100.0
+tick_count = 10
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFX_Label" type="Label" parent="VBoxContainer/SFXContainer"]
+margin_left = 660.0
+margin_top = 39.0
+margin_right = 914.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 2 )
+text = "Sound Effects"
+
+[node name="MusicContainer" type="HSplitContainer" parent="VBoxContainer"]
+margin_top = 195.0
+margin_right = 914.0
+margin_bottom = 324.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+split_offset = -149
+dragger_visibility = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicVolume" type="HSlider" parent="VBoxContainer/MusicContainer"]
+margin_right = 648.0
+margin_bottom = 129.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+value = 100.0
+tick_count = 10
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music_Label" type="Label" parent="VBoxContainer/MusicContainer"]
+margin_left = 660.0
+margin_top = 39.0
+margin_right = 914.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 2 )
+text = "Music"
+
+[node name="ResolutionContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 328.0
+margin_right = 914.0
+margin_bottom = 457.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Width" type="LineEdit" parent="VBoxContainer/ResolutionContainer"]
+margin_right = 142.0
+margin_bottom = 60.0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "1920"
+max_length = 5
+
+[node name="Label" type="Label" parent="VBoxContainer/ResolutionContainer"]
+margin_left = 146.0
+margin_right = 170.0
+margin_bottom = 129.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+text = "X"
+align = 1
+
+[node name="Height" type="LineEdit" parent="VBoxContainer/ResolutionContainer"]
+margin_left = 174.0
+margin_right = 316.0
+margin_bottom = 60.0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "1080"
+max_length = 5
+
+[node name="Resolution_Label" type="Label" parent="VBoxContainer/ResolutionContainer"]
+margin_left = 320.0
+margin_right = 914.0
+margin_bottom = 129.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+text = "Resolution"
+
+[node name="Accept" type="Button" parent="."]
+margin_left = 1277.54
+margin_top = 770.746
+margin_right = 1414.54
+margin_bottom = 826.746
+rect_min_size = Vector2( 137, 56 )
+custom_fonts/font = ExtResource( 2 )
+text = "OK"
+
+[node name="Cancel" type="Button" parent="."]
+margin_left = 503.0
+margin_top = 770.746
+margin_right = 640.0
+margin_bottom = 826.746
+custom_fonts/font = ExtResource( 2 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResolutionTimer" type="Timer" parent="."]
+wait_time = 0.15
+autostart = true
+[connection signal="toggled" from="VBoxContainer/Fullscreen" to="." method="_on_Fullscreen_toggled"]
+[connection signal="value_changed" from="VBoxContainer/SFXContainer/SFXVolume" to="." method="_on_SFXVolume_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MusicContainer/MusicVolume" to="." method="_on_MusicVolume_value_changed"]
+[connection signal="text_changed" from="VBoxContainer/ResolutionContainer/Width" to="." method="_on_Width_text_changed"]
+[connection signal="text_entered" from="VBoxContainer/ResolutionContainer/Width" to="." method="_on_Width_text_entered"]
+[connection signal="text_changed" from="VBoxContainer/ResolutionContainer/Height" to="." method="_on_Height_text_changed"]
+[connection signal="text_entered" from="VBoxContainer/ResolutionContainer/Height" to="." method="_on_Height_text_entered"]
+[connection signal="pressed" from="Accept" to="." method="_on_Accept_pressed"]
+[connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="timeout" from="ResolutionTimer" to="." method="_on_ResolutionTimer_timeout"]
