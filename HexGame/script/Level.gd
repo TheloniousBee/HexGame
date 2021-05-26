@@ -219,3 +219,9 @@ func hex_picked_up():
 func hex_released():
 	hex_selected = false
 	return
+
+
+func _on_Quit_pressed():
+	Global.sound_mgr.playMainMenuClick()
+	return_to_previous_screen()
+	return

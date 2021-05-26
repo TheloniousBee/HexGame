@@ -77,3 +77,9 @@ func create_level_buttons_by_number():
 #	last_pos = button.rect_position
 #	add_child(button)
 #	return
+
+
+func _on_Quit_pressed():
+	Global.sound_mgr.playMainMenuClick()
+	emit_signal("escape_pressed")
+	return

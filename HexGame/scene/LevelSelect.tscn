@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://script/LevelSelect.gd" type="Script" id=1]
+[ext_resource path="res://scene/QuitButton.tscn" type="PackedScene" id=2]
 
 [node name="LevelSelect" type="Node"]
 script = ExtResource( 1 )
@@ -43,3 +44,6 @@ margin_top = 120.0
 margin_bottom = 120.0
 custom_constants/separation = 30
 alignment = 1
+
+[node name="Quit" parent="." instance=ExtResource( 2 )]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
