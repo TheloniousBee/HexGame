@@ -40,7 +40,7 @@ func _on_SFXVolume_value_changed(value):
 	var max_value = get_node("VBoxContainer/SFXContainer/SFXVolume").max_value
 	var db_value = (value / (max_value / 60)) - 60
 	AudioServer.set_bus_volume_db(SFX_bus,db_value)
-	Global.sound_mgr.playOptionClick()
+	Global.sound_mgr.playMainMenuClick()
 	return
 
 

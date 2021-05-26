@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sine_wave_beep.wav-c17f90b1134da81125e24e93cdfed84d.sample"
+
+[deps]
+
+source_file="res://sfx/sine_wave_beep.wav"
+dest_files=[ "res://.import/sine_wave_beep.wav-c17f90b1134da81125e24e93cdfed84d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
