@@ -100,6 +100,7 @@ func check_victory():
 	return
 	
 func reverse_turn():
+	$TurnTimer.stop()
 	emit_signal("turn_reversed")
 	#get last snapshot off top of stack
 	var last_grid_state

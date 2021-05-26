@@ -17,6 +17,9 @@ func _ready():
 func _on_Reverse_Step_pressed():
 	Global.sound_mgr.playUndoButton()
 	emit_signal("reverse_step_pressed")
+	if playing:
+		get_node("Play").text = "Play"
+		playing = false
 	return
 
 func _on_Play_pressed():

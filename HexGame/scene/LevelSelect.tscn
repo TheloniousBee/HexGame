@@ -46,4 +46,6 @@ custom_constants/separation = 30
 alignment = 1
 
 [node name="Quit" parent="." instance=ExtResource( 2 )]
+margin_right = 109.0
+margin_bottom = 76.0
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
