@@ -42,7 +42,7 @@ __meta__ = {
 
 [node name="New Game" type="Button" parent="MainMenuButtons"]
 margin_top = 76.0
-margin_right = 226.0
+margin_right = 227.0
 margin_bottom = 132.0
 custom_fonts/font = ExtResource( 2 )
 text = "Start"
@@ -58,22 +58,22 @@ text = "Continue"
 
 [node name="Options" type="Button" parent="MainMenuButtons"]
 margin_top = 152.0
-margin_right = 226.0
+margin_right = 227.0
 margin_bottom = 208.0
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
 
 [node name="Level Editor" type="Button" parent="MainMenuButtons"]
 visible = false
-margin_top = 152.0
+margin_top = 190.0
 margin_right = 227.0
-margin_bottom = 208.0
+margin_bottom = 246.0
 custom_fonts/font = ExtResource( 2 )
 text = "Level Editor"
 
 [node name="Exit" type="Button" parent="MainMenuButtons"]
 margin_top = 228.0
-margin_right = 226.0
+margin_right = 227.0
 margin_bottom = 284.0
 custom_fonts/font = ExtResource( 2 )
 text = "Exit"

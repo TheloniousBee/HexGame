@@ -11,6 +11,8 @@ var original_music_db : float
 var original_fullscreen : bool
 var original_resolution : Vector2
 
+var previous_resolution : Vector2
+
 #So we can filter resolution to numbers only
 onready var regex = RegEx.new()
 
@@ -51,16 +53,17 @@ func _on_MusicVolume_value_changed(value):
 
 func _on_Width_text_changed(new_text):
 	var line_edit = get_node("VBoxContainer/ResolutionContainer/Width")
+	var original_caret_pos = line_edit.caret_position
 	line_edit.text = remove_non_numbers(new_text)
-	line_edit.caret_position = line_edit.text.length()
+	line_edit.caret_position = original_caret_pos
 	return
 
 
 func _on_Height_text_changed(new_text):
 	var line_edit = get_node("VBoxContainer/ResolutionContainer/Height")
+	var original_caret_pos = line_edit.caret_position
 	line_edit.text = remove_non_numbers(new_text)
-	line_edit.caret_position = line_edit.text.length()
-
+	line_edit.caret_position = original_caret_pos
 	return
 
 func remove_non_numbers(field_text):
@@ -151,5 +154,7 @@ func _on_Height_text_entered(new_text):
 	return
 
 func _on_ResolutionTimer_timeout():
-	set_initial_resolution()
+	if(previous_resolution != OS.window_size):
+		previous_resolution = OS.window_size
+		set_initial_resolution()
 	return
