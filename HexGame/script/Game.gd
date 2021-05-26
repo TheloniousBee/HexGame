@@ -6,6 +6,7 @@ signal return_to_main_menu
 
 var level_scene
 var level_select_scene
+var max_level_completed = 0
 
 #Variables for playtesting data
 var time_start
@@ -26,6 +27,7 @@ func init_level_select_scene():
 	add_child(level_select_scene)
 	
 	var levels_completed = load_game_progress()
+	max_level_completed = levels_completed
 	var all_buttons = get_tree().get_nodes_in_group("level_buttons")
 	for button in all_buttons:
 		if button.level_num <= levels_completed+1:
@@ -239,13 +241,14 @@ func undo_pressed():
 	return
 
 func save_game_progress():
-	var dir = Directory.new()
-	if dir.open("user://") == OK:
-		var save_game_file = File.new()
-		var file_path = "user://savegame.dat"
-		save_game_file.open(file_path, File.WRITE)
-		save_game_file.store_16(current_level_num)
-		save_game_file.close()
+	if (current_level_num > max_level_completed):
+		var dir = Directory.new()
+		if dir.open("user://") == OK:
+			var save_game_file = File.new()
+			var file_path = "user://savegame.dat"
+			save_game_file.open(file_path, File.WRITE)
+			save_game_file.store_16(current_level_num)
+			save_game_file.close()
 	return
 	
 func load_game_progress():
