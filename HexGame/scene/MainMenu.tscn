@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://script/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/UI_dynamicfont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://fonts/Title_dynamicfont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://UI/UITHeme.tres" type="Theme" id=4]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.3363
+margin_top = -1.568
+margin_right = 1.3363
+margin_bottom = -1.56799
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -41,10 +46,12 @@ __meta__ = {
 }
 
 [node name="New Game" type="Button" parent="MainMenuButtons"]
-margin_top = 76.0
+margin_top = 70.0
 margin_right = 227.0
-margin_bottom = 132.0
-custom_fonts/font = ExtResource( 2 )
+margin_bottom = 130.0
+focus_mode = 0
+theme = ExtResource( 4 )
+enabled_focus_mode = 0
 text = "Start"
 
 [node name="Continue" type="Button" parent="MainMenuButtons"]
@@ -57,9 +64,10 @@ custom_fonts/font = ExtResource( 2 )
 text = "Continue"
 
 [node name="Options" type="Button" parent="MainMenuButtons"]
-margin_top = 152.0
+margin_top = 150.0
 margin_right = 227.0
-margin_bottom = 208.0
+margin_bottom = 210.0
+theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
 
@@ -72,9 +80,10 @@ custom_fonts/font = ExtResource( 2 )
 text = "Level Editor"
 
 [node name="Exit" type="Button" parent="MainMenuButtons"]
-margin_top = 228.0
+margin_top = 230.0
 margin_right = 227.0
-margin_bottom = 284.0
+margin_bottom = 290.0
+theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 text = "Exit"
 [connection signal="pressed" from="MainMenuButtons/New Game" to="." method="_on_New_Game_pressed"]

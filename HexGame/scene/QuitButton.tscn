@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://fonts/UI_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/UITHeme.tres" type="Theme" id=2]
 
 [node name="Quit" type="Button"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 101.014
-margin_bottom = 70.0158
+margin_right = 155.0
+margin_bottom = 120.0
+theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 1 )
 text = "Quit"
 __meta__ = {
