@@ -180,6 +180,11 @@ func level_completed():
 		$LevelFinishDelay.start()
 	#Mark down the level completed so it can be changed in level select
 	emit_signal("level_complete")
+	
+	#Disable buttons
+	get_node("TimeControls/Reverse Step").disabled = true
+	get_node("TimeControls/Forward Step").disabled = true
+	get_node("TimeControls/Play").disabled = true
 	return
 	
 func display_finished_level_dialog():
