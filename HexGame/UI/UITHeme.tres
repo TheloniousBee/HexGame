@@ -17,7 +17,7 @@ region_rect = Rect2( 0, 0, 509, 208 )
 margin_top = 5.0
 margin_bottom = 5.0
 
-[sub_resource type="StyleBoxTexture" id=5]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 509, 193 )
 margin_top = 5.0
@@ -35,4 +35,4 @@ Button/styles/disabled = null
 Button/styles/focus = null
 Button/styles/hover = SubResource( 1 )
 Button/styles/normal = SubResource( 2 )
-Button/styles/pressed = SubResource( 5 )
+Button/styles/pressed = SubResource( 3 )

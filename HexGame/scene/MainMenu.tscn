@@ -60,15 +60,19 @@ margin_top = 76.0
 margin_right = 226.0
 margin_bottom = 132.0
 rect_pivot_offset = Vector2( 183, -26 )
+focus_mode = 0
 custom_fonts/font = ExtResource( 2 )
+enabled_focus_mode = 0
 text = "Continue"
 
 [node name="Options" type="Button" parent="MainMenuButtons"]
 margin_top = 150.0
 margin_right = 227.0
 margin_bottom = 210.0
+focus_mode = 0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 2 )
+enabled_focus_mode = 0
 text = "Options"
 
 [node name="Level Editor" type="Button" parent="MainMenuButtons"]
@@ -76,15 +80,19 @@ visible = false
 margin_top = 190.0
 margin_right = 227.0
 margin_bottom = 246.0
+focus_mode = 0
 custom_fonts/font = ExtResource( 2 )
+enabled_focus_mode = 0
 text = "Level Editor"
 
 [node name="Exit" type="Button" parent="MainMenuButtons"]
 margin_top = 230.0
 margin_right = 227.0
 margin_bottom = 290.0
+focus_mode = 0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 2 )
+enabled_focus_mode = 0
 text = "Exit"
 [connection signal="pressed" from="MainMenuButtons/New Game" to="." method="_on_New_Game_pressed"]
 [connection signal="pressed" from="MainMenuButtons/Continue" to="." method="_on_Continue_pressed"]
