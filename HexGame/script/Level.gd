@@ -226,3 +226,17 @@ func _on_Quit_pressed():
 	Global.sound_mgr.playMainMenuClick()
 	return_to_previous_screen()
 	return
+
+func show_overlays_on_grid(flavour_weight):
+	var grid = get_node("PlayHexGrid")
+	for hex in grid.get_children():
+		hex.show_valid_overlay(flavour_weight)
+		hex.show_invalid_overlay(flavour_weight)
+	return
+	
+func hide_overlays_on_grid():
+	var grid = get_node("PlayHexGrid")
+	for hex in grid.get_children():
+		hex.hide_valid_overlay()
+		hex.hide_invalid_overlay()
+	return

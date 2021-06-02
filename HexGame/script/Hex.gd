@@ -24,6 +24,8 @@ signal hex_won(coord)
 signal picked_up_hex
 signal hex_let_go
 signal tile_becomes_placeable(flavour)
+signal show_hex_overlays(flavour_val)
+signal hide_hex_overlays()
 
 func _ready():
 	set_flavour()
@@ -37,6 +39,8 @@ func _ready():
 	connect("picked_up_hex", get_parent(), "hex_picked_up")
 	connect("hex_let_go", get_parent(), "hex_released")
 	connect("tile_becomes_placeable", get_parent().get_parent(), "add_placeable_hex")
+	connect("show_hex_overlays", get_parent(), "show_overlays_on_grid")
+	connect("hide_hex_overlays", get_parent(), "hide_overlays_on_grid")
 	return
 	
 func set_coordinate_text():
@@ -93,6 +97,7 @@ func _on_Hex_input_event(_viewport, event, _shape_idx):
 						emit_signal("picked_up_hex")
 						play_pickup_sfx()
 						show_hex_glow()
+						show_possible_placements()
 					#Put tile down
 					if not event.pressed:
 						if(get_parent().hex_selected == true):
@@ -100,6 +105,7 @@ func _on_Hex_input_event(_viewport, event, _shape_idx):
 							center_on_grid_hex()
 							emit_signal("hex_let_go")
 							hide_hex_glow()
+							hide_possible_placements()
 	return
 	
 func center_on_grid_hex():
@@ -397,4 +403,53 @@ func tile_let_go():
 	let_go_cloud.emitting = true
 	add_child(let_go_cloud)
 	Global.sound_mgr.letTilego()
+	return
+
+
+func show_possible_placements():
+	var flavour_val = Global.flavour_dictionary.get(flavour_type)
+	#If clone, we can just place anywhere, so use a super high value
+	if(flavour_type == "Clone"):
+		flavour_val = 99999
+	emit_signal("show_hex_overlays", flavour_val)
+	return
+	
+func hide_possible_placements():
+	emit_signal("hide_hex_overlays")
+	return
+
+func show_valid_overlay(players_hex_weight):
+	var valid = false
+	if has_node("Flavour"):
+		if players_hex_weight == Global.flavour_dictionary.get("Key") and flavour_type == "Lock":
+			valid = true
+		elif players_hex_weight > (Global.flavour_dictionary.get(flavour_type)):
+			valid = true
+	if valid:
+		var valid_effect = get_node("Flavour/ValidOverlay")
+		valid_effect.visible = true
+	return
+	
+func hide_valid_overlay():
+	if has_node("Flavour"):
+		var valid_effect = get_node("Flavour/ValidOverlay")
+		valid_effect.visible = false
+	return
+	
+func show_invalid_overlay(players_hex_weight):
+	var invalid = false
+	if has_node("Flavour"):
+		if players_hex_weight == Global.flavour_dictionary.get("Key") and flavour_type == "Lock":
+			invalid = false
+		elif players_hex_weight <= (Global.flavour_dictionary.get(flavour_type)):
+			invalid = true
+	if invalid:
+		var invalid_effect = get_node("Flavour/InvalidOverlay")
+		invalid_effect.visible = true
+	return
+	
+func hide_invalid_overlay():
+	if has_node("Flavour"):
+		var invalid_effect = get_node("Flavour/InvalidOverlay")
+		invalid_effect.visible = false
 	return
