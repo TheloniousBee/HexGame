@@ -33,6 +33,8 @@ var placeable_hex_positions = [
 ]
 
 func _ready():	
+	$Tutorial/AnimationPlayer.play("TutorialFadeIn")
+	$Tutorial/TutorialStay.start()
 	$LevelFinish.visible = false
 	connect("continue_pressed", get_parent(), "continue_to_next_level")
 	connect("return_pressed", get_parent(), "return_to_level_select")
@@ -76,6 +78,11 @@ func player_move_successful(hexpos : Vector2):
 	#Free up a 'slot' and then sort the remaining positions
 	placeable_hex_positions.append(hexpos)
 	placeable_hex_positions.sort()
+	
+	#Sync up the timer and indicator when the player makes a move
+	$TimeIndicator.frame = 0
+	if !$TurnTimer.is_stopped():
+		$TurnTimer.start()
 	advance_turn()
 	return
 
@@ -147,10 +154,15 @@ func reverse_turn():
 
 func start_play_timer():
 	$TurnTimer.start()
+	$TimeIndicator.visible = true
+	$TimeIndicator.playing = true
+	#$TimeIndicator.play("default")
 	return
 	
 func stop_play_timer():
 	$TurnTimer.stop()
+	$TimeIndicator.visible = false
+	$TimeIndicator.playing = false
 	return
 	
 func _on_TurnTimer_timeout():
@@ -250,4 +262,9 @@ func hide_overlays_on_grid():
 	for hex in grid.get_children():
 		hex.hide_valid_overlay()
 		hex.hide_invalid_overlay()
+	return
+
+
+func _on_TutorialStay_timeout():
+	$Tutorial/AnimationPlayer.play("TutorialFadeOut")
 	return
