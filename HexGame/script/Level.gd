@@ -16,6 +16,9 @@ var playtest = false
 var undo_grid_stack = []
 var undo_placeable_stack = []
 
+var showing_overlays = false
+var last_weight = 0
+
 var placeable_hex_positions = [
 	Vector2(190,286),
 	Vector2(190,385),
@@ -73,7 +76,7 @@ func player_move_successful(hexpos : Vector2):
 	#Free up a 'slot' and then sort the remaining positions
 	placeable_hex_positions.append(hexpos)
 	placeable_hex_positions.sort()
-	advance_turn()
+	#advance_turn()
 	return
 
 func advance_turn():
@@ -82,6 +85,10 @@ func advance_turn():
 	#Each hex will then resolve the conflicts for all the candidate spread
 	var grid = get_node("PlayHexGrid")
 	grid.proliferate_hexes()
+	
+	#Refresh the overlays
+	if(showing_overlays):
+		show_overlays_on_grid(last_weight)
 	
 	#Check if level has been completed
 	check_victory()
@@ -228,6 +235,8 @@ func _on_Quit_pressed():
 	return
 
 func show_overlays_on_grid(flavour_weight):
+	showing_overlays = true
+	last_weight = flavour_weight
 	var grid = get_node("PlayHexGrid")
 	for hex in grid.get_children():
 		hex.show_valid_overlay(flavour_weight)
@@ -235,6 +244,7 @@ func show_overlays_on_grid(flavour_weight):
 	return
 	
 func hide_overlays_on_grid():
+	showing_overlays = false
 	var grid = get_node("PlayHexGrid")
 	for hex in grid.get_children():
 		hex.hide_valid_overlay()
