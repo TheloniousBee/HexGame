@@ -124,8 +124,11 @@ func center_on_grid_hex():
 	return
 
 func place_on_grid(hex : Node2D):
+	var move_failed = false
 	#If the hex to be placed is a higher value than the one on the grid, we replace
-	if(Global.flavour_dictionary.get(flavour_type) > Global.flavour_dictionary.get(hex.flavour_type)):
+	if(hex.flavour_type == "Key"):
+		move_failed = true
+	elif(Global.flavour_dictionary.get(flavour_type) > Global.flavour_dictionary.get(hex.flavour_type)):
 		emit_signal("player_made_move")
 		hex.change_hex_type(flavour_type)
 		hex.emit_place_particles()
@@ -146,6 +149,9 @@ func place_on_grid(hex : Node2D):
 		play_placed_sfx()
 		emit_signal("clone_is_resolved")
 	else:
+		move_failed = true
+		
+	if move_failed:
 		#Reset position if the player makes a illegal move
 		position = original_placeable_pos
 		play_failed_sfx()
@@ -423,6 +429,8 @@ func show_valid_overlay(players_hex_weight):
 	if has_node("Flavour"):
 		if players_hex_weight == Global.flavour_dictionary.get("Key") and flavour_type == "Lock":
 			valid = true
+		elif flavour_type == "Key":
+			valid = false
 		elif players_hex_weight > (Global.flavour_dictionary.get(flavour_type)):
 			valid = true
 	if valid:
@@ -441,6 +449,8 @@ func show_invalid_overlay(players_hex_weight):
 	if has_node("Flavour"):
 		if players_hex_weight == Global.flavour_dictionary.get("Key") and flavour_type == "Lock":
 			invalid = false
+		elif flavour_type == "Key":
+			invalid = true
 		elif players_hex_weight <= (Global.flavour_dictionary.get(flavour_type)):
 			invalid = true
 	if invalid:

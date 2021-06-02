@@ -76,7 +76,7 @@ func player_move_successful(hexpos : Vector2):
 	#Free up a 'slot' and then sort the remaining positions
 	placeable_hex_positions.append(hexpos)
 	placeable_hex_positions.sort()
-	#advance_turn()
+	advance_turn()
 	return
 
 func advance_turn():
