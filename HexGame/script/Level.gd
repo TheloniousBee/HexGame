@@ -177,6 +177,7 @@ func add_placeable_hex(flavour : String):
 	return
 
 func level_completed():
+	$Tutorial.visible = false
 	stop_play_timer()
 	$Confetti.emitting = true
 	$Confetti2.emitting = true

@@ -178,6 +178,7 @@ func load_level(filepath : String):
 	save_file.close()
 	
 	level_scene.record_game_state()
+	display_tutorial()
 	return
 
 
@@ -262,3 +263,34 @@ func load_game_progress():
 			save_game_file.close()
 			return last_level_completed
 	return -1
+
+func display_tutorial():
+	var tut = level_scene.get_node("Tutorial")
+	
+	#Disable time controls at the start to make the game simpler.
+	if(current_level_num <= 1):
+		level_scene.get_node("TimeControls").visible = false
+	
+	#Display a hint
+	match current_level_num:
+		0:
+			tut.text = "Complete the land."
+		2:
+			tut.text = "Time flows."
+		6:
+			tut.text = "March on."
+		12:
+			tut.text = "Chop chop."
+		18:
+			tut.text = "Turn around."
+		30:
+			tut.text = "Unlock."
+		36:
+			tut.text = "Copy the land."
+		48:
+			tut.text = "It's fast."
+		54:
+			tut.text = "Good luck."
+		_:
+			tut.text = ""
+	return
