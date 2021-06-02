@@ -25,9 +25,9 @@ func _on_Reverse_Step_pressed():
 	Global.sound_mgr.playUndoButton()
 	emit_signal("reverse_step_pressed")
 	if playing:
-		get_node("Play").texture_normal = pause_texture_normal
-		get_node("Play").texture_hover = pause_texture_hover
-		get_node("Play").texture_pressed = pause_texture_pressed
+		get_node("Play").texture_normal = play_texture_normal
+		get_node("Play").texture_hover = play_texture_hover
+		get_node("Play").texture_pressed = play_texture_pressed
 		playing = false
 	return
 
