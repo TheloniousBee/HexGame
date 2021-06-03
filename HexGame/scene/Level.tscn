@@ -9,36 +9,36 @@
 [ext_resource path="res://UI/UITHeme.tres" type="Theme" id=7]
 [ext_resource path="res://fonts/Tutorial.tres" type="DynamicFont" id=8]
 
-[sub_resource type="InputEventKey" id=6]
+[sub_resource type="InputEventKey" id=1]
 scancode = 82
 
-[sub_resource type="ShortCut" id=7]
-shortcut = SubResource( 6 )
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.0470588, 0.027451, 0.027451, 0 )
 
-[sub_resource type="DynamicFontData" id=9]
+[sub_resource type="DynamicFontData" id=4]
 font_path = "res://fonts/Quicksand-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=5]
 size = 80
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 extra_spacing_char = 3
-font_data = SubResource( 9 )
+font_data = SubResource( 4 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=6]
 size = 60
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
-font_data = SubResource( 9 )
+font_data = SubResource( 4 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=7]
 length = 3.5
 loop = true
 tracks/0/type = "value"
@@ -54,13 +54,13 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 0.835294, 0, 1 ), Color( 0.333333, 1, 0, 1 ), Color( 0, 1, 0.5, 1 ), Color( 0, 0.666667, 1, 1 ), Color( 0.166667, 0, 1, 1 ), Color( 1, 0, 1, 1 ), Color( 1, 0, 0.166667, 1 ) ]
 }
 
-[sub_resource type="InputEventKey" id=13]
+[sub_resource type="InputEventKey" id=8]
 scancode = 16777217
 
-[sub_resource type="ShortCut" id=14]
-shortcut = SubResource( 13 )
+[sub_resource type="ShortCut" id=9]
+shortcut = SubResource( 8 )
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -74,7 +74,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=11]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -100,9 +100,9 @@ placeable = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
-margin_left = -233.5
-margin_top = -149.046
-margin_right = 233.5
+margin_left = -301.5
+margin_top = -149.0
+margin_right = 301.5
 margin_bottom = -20.0
 alignment = 1
 
@@ -117,7 +117,7 @@ margin_right = -18.0
 margin_bottom = -14.0
 theme = ExtResource( 7 )
 custom_fonts/font = ExtResource( 4 )
-shortcut = SubResource( 7 )
+shortcut = SubResource( 2 )
 text = "Reset"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -129,7 +129,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -142,7 +142,7 @@ margin_left = -354.0
 margin_top = 63.496
 margin_right = 354.0
 margin_bottom = 183.496
-custom_fonts/normal_font = SubResource( 10 )
+custom_fonts/normal_font = SubResource( 5 )
 text = " Congratulations!"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -159,7 +159,7 @@ margin_right = -23.8264
 margin_bottom = 63.0
 focus_mode = 0
 theme = ExtResource( 7 )
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 6 )
 enabled_focus_mode = 0
 text = "Next Level"
 __meta__ = {
@@ -168,7 +168,7 @@ __meta__ = {
 
 [node name="TextColour" type="AnimationPlayer" parent="LevelFinish"]
 autoplay = "TextEffect"
-anims/TextEffect = SubResource( 12 )
+anims/TextEffect = SubResource( 7 )
 
 [node name="LevelFinishDelay" type="Timer" parent="."]
 wait_time = 0.5
@@ -181,7 +181,7 @@ position = Vector2( 395.298, 1080.2 )
 position = Vector2( 1548.58, 1067.12 )
 
 [node name="Quit" parent="." instance=ExtResource( 6 )]
-shortcut = SubResource( 14 )
+shortcut = SubResource( 9 )
 
 [node name="Tutorial" type="RichTextLabel" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -204,8 +204,8 @@ wait_time = 3.5
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial"]
-anims/TutorialFadeIn = SubResource( 15 )
-anims/TutorialFadeOut = SubResource( 16 )
+anims/TutorialFadeIn = SubResource( 10 )
+anims/TutorialFadeOut = SubResource( 11 )
 
 [node name="LevelCount" type="Label" parent="."]
 anchor_left = 1.0
