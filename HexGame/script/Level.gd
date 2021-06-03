@@ -15,8 +15,8 @@ var hex_selected = false
 var playtest = false
 var undo_grid_stack = []
 var undo_placeable_stack = []
-var last_grid_state = []
-var last_placeable_state = []
+var last_grid_undo_state = []
+var last_placeable_undo_state = []
 
 var showing_overlays = false
 var last_weight = 0
@@ -67,11 +67,11 @@ func record_game_state():
 	var grid_state = grid.get_whole_grid_state()		
 	
 	#If both stacks have the same state, don't add a new one ontop.
-	if grid_state != last_grid_state or placeable_hexes != last_placeable_state:
+	if grid_state != last_grid_undo_state or placeable_hexes != last_placeable_undo_state:
 		undo_placeable_stack.append(placeable_hexes)
-		last_placeable_state = placeable_hexes
+		last_placeable_undo_state = placeable_hexes
 		undo_grid_stack.append(grid_state)
-		last_grid_state = grid_state
+		last_grid_undo_state = grid_state
 	return
 
 func player_move_successful(hexpos : Vector2):
@@ -79,8 +79,6 @@ func player_move_successful(hexpos : Vector2):
 	placeable_hex_positions.append(hexpos)
 	placeable_hex_positions.sort()
 	
-	#Sync up the timer and indicator when the player makes a move
-	$TimeIndicator.frame = 0
 	if !$TurnTimer.is_stopped():
 		$TurnTimer.start()
 	advance_turn()
@@ -154,15 +152,10 @@ func reverse_turn():
 
 func start_play_timer():
 	$TurnTimer.start()
-	$TimeIndicator.visible = true
-	$TimeIndicator.playing = true
-	#$TimeIndicator.play("default")
 	return
 	
 func stop_play_timer():
 	$TurnTimer.stop()
-	$TimeIndicator.visible = false
-	$TimeIndicator.playing = false
 	return
 	
 func _on_TurnTimer_timeout():
@@ -267,4 +260,15 @@ func hide_overlays_on_grid():
 
 func _on_TutorialStay_timeout():
 	$Tutorial/AnimationPlayer.play("TutorialFadeOut")
+	return
+
+func speed_up_game(toggled):
+	if toggled:
+		$TurnTimer.wait_time = 0.001
+		#If the timer is already going, skip it now
+		if(!$TurnTimer.is_stopped()):
+			$TurnTimer.stop()
+			$TurnTimer.start()
+	else:
+		$TurnTimer.wait_time = 1
 	return

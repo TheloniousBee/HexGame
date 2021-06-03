@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://script/TimeControls.gd" type="Script" id=1]
 [ext_resource path="res://UI/undo_pressed.png" type="Texture" id=2]
@@ -11,24 +11,27 @@
 [ext_resource path="res://UI/forward.png" type="Texture" id=9]
 [ext_resource path="res://UI/forward_hover.png" type="Texture" id=10]
 [ext_resource path="res://UI/forward_pressed.png" type="Texture" id=11]
+[ext_resource path="res://UI/ff_pressed.png" type="Texture" id=12]
+[ext_resource path="res://UI/ff.png" type="Texture" id=13]
+[ext_resource path="res://UI/ff_hover.png" type="Texture" id=14]
+
+[sub_resource type="InputEventKey" id=1]
+scancode = 16777231
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
 
 [sub_resource type="InputEventKey" id=3]
-scancode = 16777231
+scancode = 32
 
 [sub_resource type="ShortCut" id=4]
 shortcut = SubResource( 3 )
 
 [sub_resource type="InputEventKey" id=5]
-scancode = 32
+scancode = 70
 
 [sub_resource type="ShortCut" id=6]
 shortcut = SubResource( 5 )
-
-[sub_resource type="InputEventKey" id=1]
-scancode = 16777233
-
-[sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 1 )
 
 [node name="TimeControls" type="HBoxContainer"]
 anchor_right = 1.0
@@ -41,7 +44,7 @@ __meta__ = {
 }
 
 [node name="Reverse Step" type="TextureButton" parent="."]
-margin_right = 637.0
+margin_right = 477.0
 margin_bottom = 1080.0
 hint_tooltip = "Undo"
 focus_mode = 0
@@ -49,7 +52,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 enabled_focus_mode = 0
-shortcut = SubResource( 4 )
+shortcut = SubResource( 2 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 7 )
@@ -57,8 +60,8 @@ expand = true
 stretch_mode = 4
 
 [node name="Play" type="TextureButton" parent="."]
-margin_left = 641.0
-margin_right = 1278.0
+margin_left = 481.0
+margin_right = 958.0
 margin_bottom = 1080.0
 hint_tooltip = "Play/Pause"
 focus_mode = 0
@@ -66,7 +69,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 enabled_focus_mode = 0
-shortcut = SubResource( 6 )
+shortcut = SubResource( 4 )
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
@@ -74,8 +77,8 @@ expand = true
 stretch_mode = 4
 
 [node name="Forward Step" type="TextureButton" parent="."]
-margin_left = 1282.0
-margin_right = 1920.0
+margin_left = 962.0
+margin_right = 1439.0
 margin_bottom = 1080.0
 hint_tooltip = "Pass Turn"
 focus_mode = 0
@@ -83,12 +86,31 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 enabled_focus_mode = 0
-shortcut = SubResource( 2 )
+shortcut = SubResource( 6 )
 texture_normal = ExtResource( 9 )
 texture_pressed = ExtResource( 11 )
 texture_hover = ExtResource( 10 )
 expand = true
 stretch_mode = 4
+
+[node name="Fast Forward" type="TextureButton" parent="."]
+margin_left = 1443.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+hint_tooltip = "Fast Forward"
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+toggle_mode = true
+enabled_focus_mode = 0
+shortcut = SubResource( 6 )
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 14 )
+expand = true
+stretch_mode = 4
 [connection signal="pressed" from="Reverse Step" to="." method="_on_Reverse_Step_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Forward Step" to="." method="_on_Forward_Step_pressed"]
+[connection signal="toggled" from="Fast Forward" to="." method="_on_Fast_Forward_toggled"]

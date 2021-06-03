@@ -6,6 +6,7 @@ signal reverse_step_pressed
 signal play_pressed
 signal pause_pressed
 signal forward_step_pressed
+signal ff_toggled(toggled)
 
 const play_texture_normal = preload("res://UI/play.png")
 const play_texture_hover = preload("res://UI/play_hover.png")
@@ -19,6 +20,7 @@ func _ready():
 	connect("play_pressed", get_parent(), "start_play_timer")
 	connect("pause_pressed", get_parent(), "stop_play_timer")
 	connect("forward_step_pressed", get_parent(), "record_and_advance")
+	connect("ff_toggled", get_parent(), "speed_up_game")
 	return
 
 func _on_Reverse_Step_pressed():
@@ -50,4 +52,10 @@ func _on_Play_pressed():
 func _on_Forward_Step_pressed():
 	Global.sound_mgr.playForwardStep()
 	emit_signal("forward_step_pressed")
+	return
+
+
+func _on_Fast_Forward_toggled(button_pressed):
+	Global.sound_mgr.playFastForward()
+	emit_signal("ff_toggled", button_pressed)
 	return

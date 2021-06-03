@@ -26,6 +26,10 @@ func playPauseButton():
 func playForwardStep():
 	get_node("Menu/MainMenuClick").play()
 	return
+	
+func playFastForward():
+	get_node("Menu/MainMenuClick").play()
+	return
 
 func playReset():
 	get_node("Menu/MainMenuClick").play()
