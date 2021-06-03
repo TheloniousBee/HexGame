@@ -21,13 +21,6 @@ func _ready():
 	connect("options_concluded", get_parent(), "load_main_menu")
 	regex.compile("[0-9]+")
 	return
-	
-func _input(event):
-	if event is InputEventKey:
-		if event.scancode == KEY_ESCAPE and event.pressed:
-			emit_signal("options_concluded")
-	return
-
 
 func _on_Fullscreen_toggled(button_pressed):
 	OS.window_fullscreen = button_pressed

@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://script/LevelSelect.gd" type="Script" id=1]
 [ext_resource path="res://scene/QuitButton.tscn" type="PackedScene" id=2]
+
+[sub_resource type="InputEventKey" id=1]
+scancode = 16777217
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
 
 [node name="LevelSelect" type="Node"]
 script = ExtResource( 1 )
@@ -46,5 +52,6 @@ custom_constants/separation = 30
 alignment = 1
 
 [node name="Quit" parent="." instance=ExtResource( 2 )]
+shortcut = SubResource( 2 )
 text = "Menu"
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

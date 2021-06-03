@@ -44,14 +44,6 @@ func _ready():
 	connect("turn_reversed", get_parent(), "undo_pressed")
 	connect("level_complete", get_parent(), "save_game_progress")
 	return
-
-func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_SPACE:
-			record_and_advance()
-		if event.scancode == KEY_ESCAPE and event.pressed:
-			return_to_previous_screen()
-	return
 	
 func return_to_previous_screen():
 	if playtest:

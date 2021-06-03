@@ -13,13 +13,6 @@ func _ready():
 	connect("escape_pressed", get_parent(), "return_to_main_menu")
 	return
 	
-func _input(event):
-	if event is InputEventKey:
-		if event.scancode == KEY_ESCAPE and event.pressed:
-			emit_signal("escape_pressed")
-	return
-	
-
 func level_selected(level_num):
 	emit_signal("level_selected", Global.level_directory[level_num], level_num)
 	return
