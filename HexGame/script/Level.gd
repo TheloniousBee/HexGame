@@ -15,6 +15,8 @@ var hex_selected = false
 var playtest = false
 var undo_grid_stack = []
 var undo_placeable_stack = []
+var last_grid_state = []
+var last_placeable_state = []
 
 var showing_overlays = false
 var last_weight = 0
@@ -60,10 +62,16 @@ func record_game_state():
 		tile.append(i.original_placeable_pos)
 		tile.append(i.flavour_type)
 		placeable_hexes.append(tile)
-	undo_placeable_stack.append(placeable_hexes)
 	
 	var grid = get_node("PlayHexGrid")
-	undo_grid_stack.append(grid.get_whole_grid_state())
+	var grid_state = grid.get_whole_grid_state()		
+	
+	#If both stacks have the same state, don't add a new one ontop.
+	if grid_state != last_grid_state or placeable_hexes != last_placeable_state:
+		undo_placeable_stack.append(placeable_hexes)
+		last_placeable_state = placeable_hexes
+		undo_grid_stack.append(grid_state)
+		last_grid_state = grid_state
 	return
 
 func player_move_successful(hexpos : Vector2):
