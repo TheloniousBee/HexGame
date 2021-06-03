@@ -235,9 +235,7 @@ func init_playtest_data():
 func level_completion_time():
 	var time_end = OS.get_unix_time()
 	var elapsed_time = time_end - time_start
-	var minutes_taken = elapsed_time / 60
-	var seconds_taken = elapsed_time % 60
-	var time_string = (minutes_taken as String) + ":" + (seconds_taken as String)
+	var time_string = (elapsed_time as String)
 	return time_string
 
 func undo_pressed():
