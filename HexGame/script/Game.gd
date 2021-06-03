@@ -32,6 +32,8 @@ func init_level_select_scene():
 	for button in all_buttons:
 		if button.level_num <= levels_completed+1:
 			button.disabled = false
+		else:
+			button.disabled = true
 	return
 	
 func init_level_scene():
