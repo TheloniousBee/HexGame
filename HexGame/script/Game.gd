@@ -181,6 +181,7 @@ func load_level(filepath : String):
 	
 	level_scene.record_game_state()
 	display_tutorial()
+	level_scene.get_node("LevelCount").text = (current_level_num+1) as String
 	return
 
 
