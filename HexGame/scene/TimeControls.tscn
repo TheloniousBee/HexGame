@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://script/TimeControls.gd" type="Script" id=1]
 [ext_resource path="res://UI/undo_pressed.png" type="Texture" id=2]
@@ -28,10 +28,16 @@ scancode = 32
 shortcut = SubResource( 3 )
 
 [sub_resource type="InputEventKey" id=5]
-scancode = 70
+scancode = 16777233
 
 [sub_resource type="ShortCut" id=6]
 shortcut = SubResource( 5 )
+
+[sub_resource type="InputEventKey" id=7]
+scancode = 70
+
+[sub_resource type="ShortCut" id=8]
+shortcut = SubResource( 7 )
 
 [node name="TimeControls" type="HBoxContainer"]
 anchor_right = 1.0
@@ -104,7 +110,7 @@ size_flags_vertical = 3
 theme = ExtResource( 3 )
 toggle_mode = true
 enabled_focus_mode = 0
-shortcut = SubResource( 6 )
+shortcut = SubResource( 8 )
 texture_normal = ExtResource( 13 )
 texture_pressed = ExtResource( 12 )
 texture_hover = ExtResource( 14 )
