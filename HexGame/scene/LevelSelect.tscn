@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://script/LevelSelect.gd" type="Script" id=1]
 [ext_resource path="res://scene/QuitButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/LevelButtonContainer.tscn" type="PackedScene" id=3]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 16777217
@@ -12,46 +13,87 @@ shortcut = SubResource( 1 )
 [node name="LevelSelect" type="Node"]
 script = ExtResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 376.692
-margin_top = 299.146
-margin_right = 376.692
-margin_bottom = 419.146
-custom_constants/separation = 30
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-custom_constants/separation = 30
-alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 30.0
-margin_bottom = 30.0
-custom_constants/separation = 30
-alignment = 1
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 60.0
-margin_bottom = 60.0
-custom_constants/separation = 30
-alignment = 1
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 90.0
-margin_bottom = 90.0
-custom_constants/separation = 30
-alignment = 1
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 120.0
-margin_bottom = 120.0
-custom_constants/separation = 30
-alignment = 1
-
 [node name="Quit" parent="." instance=ExtResource( 2 )]
 shortcut = SubResource( 2 )
 text = "Menu"
+
+[node name="Hub1" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 260.0
+margin_top = -185.252
+margin_right = 300.0
+margin_bottom = -145.252
+
+[node name="Hub2" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 600.0
+margin_top = -185.252
+margin_right = 640.0
+margin_bottom = -145.252
+
+[node name="Hub3" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 960.0
+margin_top = -185.252
+margin_right = 1000.0
+margin_bottom = -145.252
+
+[node name="Hub4" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1300.0
+margin_top = -185.821
+margin_right = 1340.0
+margin_bottom = -145.821
+
+[node name="Hub5" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1640.0
+margin_top = -185.821
+margin_right = 1680.0
+margin_bottom = -145.821
+
+[node name="Hub6" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 260.0
+margin_top = 230.527
+margin_right = 300.0
+margin_bottom = 270.527
+
+[node name="Hub7" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 600.0
+margin_top = 230.527
+margin_right = 640.0
+margin_bottom = 270.527
+
+[node name="Hub8" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 960.0
+margin_top = 230.527
+margin_right = 1000.0
+margin_bottom = 270.527
+
+[node name="Hub9" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1300.0
+margin_top = 229.958
+margin_right = 1340.0
+margin_bottom = 269.958
+
+[node name="Hub10" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1640.0
+margin_top = 229.958
+margin_right = 1680.0
+margin_bottom = 269.958
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
