@@ -131,6 +131,7 @@ func reset_playtest_level():
 	return 
 	
 func return_to_level_select():
+	record_playtest_data()
 	destroy_level_scene()
 	init_level_select_scene()
 	return
