@@ -40,12 +40,3 @@ func enable_hub():
 		$LevelButtonSE.disabled = false
 		$LevelButtonS.disabled = false
 	return
-	
-func enable_all():
-	$LevelButtonN.completed = false
-	$LevelButtonNW.disabled = false
-	$LevelButtonNE.disabled = false
-	$LevelButtonSW.disabled = false
-	$LevelButtonSE.disabled = false
-	$LevelButtonS.disabled = false
-	return

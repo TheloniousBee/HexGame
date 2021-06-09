@@ -42,8 +42,6 @@ func disable_hubs(levels_completed):
 			hub.disable_hub()
 		else:
 			hub.enable_hub()
-			if(hub.unlock_threshold == 54):
-				hub.enable_all()
 	return
 
 func _on_Quit_pressed():
