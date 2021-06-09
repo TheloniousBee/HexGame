@@ -38,13 +38,13 @@ func _ready():
 	$Tutorial/AnimationPlayer.play("TutorialFadeIn")
 	$Tutorial/TutorialStay.start()
 	$LevelFinish.visible = false
-	connect("continue_pressed", get_parent(), "continue_to_next_level")
+	connect("continue_pressed", get_parent(), "return_to_level_select")
 	connect("return_pressed", get_parent(), "return_to_level_select")
 	connect("reset_pressed", get_parent(), "reset_level")
 	connect("return_to_editor", get_parent(), "nav_to_editor")
 	connect("reset_playtest", get_parent(), "reset_playtest_level")
 	connect("turn_reversed", get_parent(), "undo_pressed")
-	connect("level_complete", get_parent(), "save_game_progress")
+	connect("level_complete", get_parent(), "mark_level_as_complete_and_save")
 	return
 	
 func return_to_previous_screen():

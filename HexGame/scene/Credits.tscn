@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fonts/Tutorial.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scene/QuitButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/Credits.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/AmaticSC-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 75
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 75
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://fonts/Quicksand-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 4 )
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Thanks" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -356.5
+margin_top = 62.9289
+margin_right = 356.5
+margin_bottom = 230.929
+custom_fonts/normal_font = ExtResource( 1 )
+text = "Thanks for playing!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MadeBy" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -356.5
+margin_top = -305.583
+margin_right = 356.5
+margin_bottom = -137.583
+custom_fonts/normal_font = SubResource( 2 )
+text = "A game by Liam O'Connell"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TestThanks" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -451.0
+margin_top = -172.099
+margin_right = 451.0
+margin_bottom = -4.09943
+custom_fonts/normal_font = SubResource( 3 )
+text = "Thanks to all my friends who helped test."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -926.0
+margin_top = 666.353
+margin_right = 819.0
+margin_bottom = 1043.35
+custom_fonts/normal_font = SubResource( 5 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Wood texture from: 
+https://www.myfreetextures.com/white-seamless-wood-background-texture/
+Fonts:
+Amatic SC:
+https://fonts.google.com/specimen/Amatic+SC
+Quicksand:
+https://fonts.google.com/specimen/Quicksand
+
+Thanks to the people who work on Godot, Inkscape, LMMS and all the other free software I used."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" parent="." instance=ExtResource( 2 )]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

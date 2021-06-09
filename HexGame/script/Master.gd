@@ -57,6 +57,14 @@ func load_level_editor(load_playtest_data):
 		editor.init_level_editor()
 	return
 	
+func load_credits():
+	remove_current_scene()
+	var credits_resource = load("res://scene/Credits.tscn")
+	var credits = credits_resource.instance()
+	add_child(credits)
+	current_scene = credits
+	return
+	
 func load_playtest(level_data):
 	playtest_cache = level_data
 	remove_current_scene()

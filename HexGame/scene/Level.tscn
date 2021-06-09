@@ -161,7 +161,7 @@ focus_mode = 0
 theme = ExtResource( 7 )
 custom_fonts/font = SubResource( 6 )
 enabled_focus_mode = 0
-text = "Next Level"
+text = "Level Select"
 __meta__ = {
 "_edit_use_anchors_": false
 }

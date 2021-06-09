@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://script/LevelButton.gd" type="Script" id=1]
 [ext_resource path="res://UI/level_button_disabled.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://UI/level_button_pressed.png" type="Texture" id=4]
 [ext_resource path="res://UI/level_button_highlighted.png" type="Texture" id=5]
 [ext_resource path="res://effects/level_button_shadow.png" type="Texture" id=6]
+[ext_resource path="res://UI/star.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 5 )
@@ -60,4 +61,10 @@ show_behind_parent = true
 position = Vector2( 37.3376, 43.9049 )
 scale = Vector2( 0.127829, 0.129106 )
 texture = ExtResource( 6 )
+
+[node name="Star" type="Sprite" parent="."]
+visible = false
+position = Vector2( 57.4397, 5.56218 )
+scale = Vector2( 0.072643, 0.072643 )
+texture = ExtResource( 7 )
 [connection signal="pressed" from="." to="." method="_on_LevelButton_pressed"]

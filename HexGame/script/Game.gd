@@ -3,10 +3,12 @@ extends Node
 var current_level_num = 0
 signal nav_to_editor(load_playtest_data)
 signal return_to_main_menu
+signal credits_started
 
 var level_scene
 var level_select_scene
-var max_level_completed = 0
+var game_progress = {}
+var TOTAL_LEVELS = 60
 
 #Variables for playtesting data
 var time_start
@@ -18,22 +20,36 @@ var playtest_file
 func _ready():
 	connect("nav_to_editor", get_parent(), "load_level_editor")
 	connect("return_to_main_menu", get_parent(), "load_main_menu")
+	connect("credits_started", get_parent(), "load_credits")
+	init_progress_data()
+	migrate_save_from_old_file()
+	load_game_progress()
 	init_playtest_recording()
+	return
+	
+func init_progress_data():
+	for i in range(TOTAL_LEVELS):
+		game_progress[i] = false
 	return
 	
 func init_level_select_scene():
 	var ls_resource = load("res://scene/LevelSelect.tscn")
 	level_select_scene = ls_resource.instance()
 	add_child(level_select_scene)
-	
-	var levels_completed = load_game_progress()
-	max_level_completed = levels_completed
+
+	var levels_completed = 0
 	var all_buttons = get_tree().get_nodes_in_group("level_buttons")
 	for button in all_buttons:
-		if button.level_num <= levels_completed+1:
-			button.disabled = false
-		else:
-			button.disabled = true
+		var is_level_complete = game_progress.get(button.level_num)
+		if is_level_complete:
+			levels_completed += 1
+			button.set_complete(true)
+
+	level_select_scene.set_total_star_count(levels_completed)			
+	level_select_scene.disable_hubs(levels_completed)
+	
+	if levels_completed == TOTAL_LEVELS:
+		level_select_scene.show_credits_button()
 	return
 	
 func init_level_scene():
@@ -62,19 +78,6 @@ func start_game_from_level_select(filepath, level_num):
 	
 func return_to_main_menu():
 	emit_signal("return_to_main_menu")
-	return
-	
-func continue_to_next_level():
-	record_playtest_data()
-	if(Global.level_directory.size() == current_level_num+1):
-		print("Last level completed!")
-		return_to_level_select()
-	else:
-		destroy_level_scene()
-		init_level_scene()
-		current_level_num += 1
-		load_level(Global.level_directory[current_level_num])
-		init_playtest_data()
 	return
 	
 func load_level_from_playtest(level_data):
@@ -243,18 +246,7 @@ func undo_pressed():
 	undo_presses += 1
 	return
 
-func save_game_progress():
-	if (current_level_num > max_level_completed):
-		var dir = Directory.new()
-		if dir.open("user://") == OK:
-			var save_game_file = File.new()
-			var file_path = "user://savegame.dat"
-			save_game_file.open(file_path, File.WRITE)
-			save_game_file.store_16(current_level_num)
-			save_game_file.close()
-	return
-	
-func load_game_progress():
+func migrate_save_from_old_file():
 	var dir = Directory.new()
 	if dir.open("user://") == OK:
 		var save_game_file = File.new()
@@ -263,8 +255,53 @@ func load_game_progress():
 			save_game_file.open(file_path, File.READ)
 			var last_level_completed = save_game_file.get_16()
 			save_game_file.close()
-			return last_level_completed
-	return -1
+			
+			for i in range(last_level_completed):
+				game_progress[i] = true
+			save_game_progress()
+			dir.remove("user://savegame.dat")
+	return
+	
+func mark_level_as_complete_and_save():
+	mark_level_as_complete()
+	save_game_progress()
+	return	
+
+func mark_level_as_complete():
+	game_progress[current_level_num] = true
+	return
+	
+func save_game_progress():
+	var dir = Directory.new()
+	if dir.open("user://") == OK:
+		var save_game_file = File.new()
+		var file_path = "user://save.dat"
+		save_game_file.open(file_path, File.WRITE)
+		for i in game_progress.keys():
+			var val = game_progress.get(i)
+			var line = (i as String)+":"+(val as String)
+			save_game_file.store_line(line)
+		save_game_file.close()
+	return
+	
+func load_game_progress():
+	var dir = Directory.new()
+	if dir.open("user://") == OK:
+		var save_game_file = File.new()
+		var file_path = "user://save.dat"
+		if save_game_file.file_exists(file_path):
+			save_game_file.open(file_path, File.READ)
+			while save_game_file.get_position() < save_game_file.get_len():
+				var line = save_game_file.get_line()
+				var split_line = line.split(":")
+				var level_num = split_line[0] as int
+				var level_has_been_completed = false
+				if(split_line[1] == "True"):
+					level_has_been_completed = true
+				if game_progress.has(level_num):
+					game_progress[level_num] = level_has_been_completed
+			save_game_file.close()
+	return
 
 func display_tutorial():
 	var tut = level_scene.get_node("Tutorial")
@@ -295,4 +332,8 @@ func display_tutorial():
 			tut.text = "Good luck."
 		_:
 			tut.text = ""
+	return
+
+func goto_credits():
+	emit_signal("credits_started")
 	return

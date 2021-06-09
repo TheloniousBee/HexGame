@@ -1,14 +1,48 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://script/LevelSelect.gd" type="Script" id=1]
 [ext_resource path="res://scene/QuitButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scene/LevelButtonContainer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fonts/Title_dynamicfont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scene/Star.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/level_button.png" type="Texture" id=6]
+[ext_resource path="res://UI/level_button_highlighted.png" type="Texture" id=7]
+[ext_resource path="res://UI/level_button_disabled.png" type="Texture" id=8]
+[ext_resource path="res://effects/level_button_shadow.png" type="Texture" id=9]
+[ext_resource path="res://UI/level_button_pressed.png" type="Texture" id=10]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 16777217
 
 [sub_resource type="ShortCut" id=2]
 shortcut = SubResource( 1 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 555, 643 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 10 )
+region_rect = Rect2( 0, 0, 555, 643 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 555, 643 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 555, 643 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://fonts/Quicksand-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 40
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 5 )
 
 [node name="LevelSelect" type="Node"]
 script = ExtResource( 1 )
@@ -32,6 +66,7 @@ margin_left = 600.0
 margin_top = -185.252
 margin_right = 640.0
 margin_bottom = -145.252
+unlock_threshold = 4
 
 [node name="Hub3" parent="." instance=ExtResource( 3 )]
 anchor_top = 0.5
@@ -40,6 +75,7 @@ margin_left = 960.0
 margin_top = -185.252
 margin_right = 1000.0
 margin_bottom = -145.252
+unlock_threshold = 8
 
 [node name="Hub4" parent="." instance=ExtResource( 3 )]
 anchor_top = 0.5
@@ -48,6 +84,7 @@ margin_left = 1300.0
 margin_top = -185.821
 margin_right = 1340.0
 margin_bottom = -145.821
+unlock_threshold = 12
 
 [node name="Hub5" parent="." instance=ExtResource( 3 )]
 anchor_top = 0.5
@@ -56,6 +93,7 @@ margin_left = 1640.0
 margin_top = -185.821
 margin_right = 1680.0
 margin_bottom = -145.821
+unlock_threshold = 16
 
 [node name="Hub6" parent="." instance=ExtResource( 3 )]
 anchor_top = 0.5
@@ -64,6 +102,7 @@ margin_left = 260.0
 margin_top = 230.527
 margin_right = 300.0
 margin_bottom = 270.527
+unlock_threshold = 20
 
 [node name="Hub7" parent="." instance=ExtResource( 3 )]
 anchor_top = 0.5
@@ -72,6 +111,7 @@ margin_left = 600.0
 margin_top = 230.527
 margin_right = 640.0
 margin_bottom = 270.527
+unlock_threshold = 24
 
 [node name="Hub8" parent="." instance=ExtResource( 3 )]
 anchor_top = 0.5
@@ -80,6 +120,7 @@ margin_left = 960.0
 margin_top = 230.527
 margin_right = 1000.0
 margin_bottom = 270.527
+unlock_threshold = 28
 
 [node name="Hub9" parent="." instance=ExtResource( 3 )]
 anchor_top = 0.5
@@ -88,6 +129,7 @@ margin_left = 1300.0
 margin_top = 229.958
 margin_right = 1340.0
 margin_bottom = 269.958
+unlock_threshold = 32
 
 [node name="Hub10" parent="." instance=ExtResource( 3 )]
 anchor_top = 0.5
@@ -96,4 +138,47 @@ margin_left = 1640.0
 margin_top = 229.958
 margin_right = 1680.0
 margin_bottom = 269.958
+unlock_threshold = 36
+
+[node name="Star" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1831.26, 78 )
+scale = Vector2( 0.3, 0.3 )
+
+[node name="TotalStarCount" type="Label" parent="."]
+margin_left = 1623.03
+margin_top = 46.0068
+margin_right = 1754.03
+margin_bottom = 121.007
+custom_fonts/font = ExtResource( 4 )
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Button" parent="."]
+visible = false
+margin_left = 923.508
+margin_top = 23.7985
+margin_right = 993.508
+margin_bottom = 103.799
+rect_min_size = Vector2( 70, 80 )
+focus_mode = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
+enabled_focus_mode = 0
+text = "?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shadow" type="Sprite" parent="Credits"]
+show_behind_parent = true
+position = Vector2( 37.3376, 43.9049 )
+scale = Vector2( 0.127829, 0.129106 )
+texture = ExtResource( 9 )
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
