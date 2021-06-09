@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scene/HexGrid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/TimeControls.tscn" type="PackedScene" id=2]
@@ -88,6 +88,15 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 79.5068, 62.9873 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 325.269, 100.93 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 78.1913, 38.9985 )
 
 [node name="Level" type="Node"]
 script = ExtResource( 3 )
@@ -223,9 +232,45 @@ text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Forbidden" type="Area2D" parent="." groups=[
+"forbidden_zone",
+]]
+position = Vector2( 134.546, 61.634 )
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Forbidden"]
+position = Vector2( -51.9516, 1.04376 )
+shape = SubResource( 12 )
+
+[node name="Forbidden2" type="Area2D" parent="." groups=[
+"forbidden_zone",
+]]
+position = Vector2( 418.607, 521.845 )
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Forbidden2"]
+position = Vector2( 527.53, 469.721 )
+shape = SubResource( 13 )
+
+[node name="Forbidden3" type="Area2D" parent="." groups=[
+"forbidden_zone",
+]]
+position = Vector2( 1866.11, 1041.18 )
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Forbidden3"]
+position = Vector2( -38.7413, -12.0386 )
+shape = SubResource( 14 )
 [connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_TurnTimer_timeout"]
 [connection signal="pressed" from="LevelFinish/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="timeout" from="LevelFinishDelay" to="." method="display_finished_level_dialog"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
 [connection signal="timeout" from="Tutorial/TutorialStay" to="." method="_on_TutorialStay_timeout"]
+[connection signal="area_shape_entered" from="Forbidden" to="." method="_on_Forbidden_area_shape_entered"]
+[connection signal="area_shape_exited" from="Forbidden" to="." method="_on_Forbidden_area_shape_exited"]
+[connection signal="area_shape_entered" from="Forbidden2" to="." method="_on_Forbidden_area_shape_entered"]
+[connection signal="area_shape_exited" from="Forbidden2" to="." method="_on_Forbidden_area_shape_exited"]
+[connection signal="area_shape_entered" from="Forbidden3" to="." method="_on_Forbidden_area_shape_entered"]
+[connection signal="area_shape_exited" from="Forbidden3" to="." method="_on_Forbidden_area_shape_exited"]

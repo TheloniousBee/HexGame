@@ -10,6 +10,8 @@ var candidate_flavours = {}
 var final_candidate_flavour = ""
 var original_placeable_pos : Vector2
 
+var safe : bool = true
+
 const LetGoParticle = preload("res://scene/Particle/LetGoParticles.tscn")
 
 export var interactable = false
@@ -64,9 +66,8 @@ func _physics_process(delta):
 		if is_dragging:
 			var new_position = get_global_mouse_position()
 			velocity = new_position - position;
-		
+			
 		position += velocity*delta*speed
-		
 		#Keep within bounds of screen
 		if(position.x > ProjectSettings.get_setting("display/window/size/width")):
 			position.x = ProjectSettings.get_setting("display/window/size/width")
@@ -76,6 +77,7 @@ func _physics_process(delta):
 			position.y = ProjectSettings.get_setting("display/window/size/height")
 		elif position.y < 0:
 			position.y = 0
+			
 	return
 
 func _on_Hex_input_event(_viewport, event, _shape_idx):
@@ -405,6 +407,8 @@ func hide_hex_glow():
 	return
 	
 func tile_let_go():
+	if !safe:
+		position = original_placeable_pos
 	var let_go_cloud = LetGoParticle.instance()
 	let_go_cloud.emitting = true
 	add_child(let_go_cloud)
@@ -462,4 +466,12 @@ func hide_invalid_overlay():
 	if has_node("Flavour"):
 		var invalid_effect = get_node("Flavour/InvalidOverlay")
 		invalid_effect.visible = false
+	return
+
+func entered_forbidden_zone():
+	safe = false
+	return
+	
+func exited_forbidden_zone():
+	safe = true
 	return

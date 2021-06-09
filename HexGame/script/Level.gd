@@ -272,3 +272,15 @@ func speed_up_game(toggled):
 	else:
 		$TurnTimer.wait_time = 1
 	return
+
+
+func _on_Forbidden_area_shape_entered(_area_id, area, _area_shape, _self_shape):
+	if area.has_method("entered_forbidden_zone"):
+		area.entered_forbidden_zone()
+	return
+
+
+func _on_Forbidden_area_shape_exited(_area_id, area, _area_shape, _self_shape):
+	if area.has_method("exited_forbidden_zone"):
+		area.exited_forbidden_zone()
+	return
