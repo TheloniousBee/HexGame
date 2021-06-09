@@ -16,15 +16,15 @@ func playOptionClick():
 	return
 
 func playUndoButton():
-	get_node("Menu/MainMenuClick").play()
+	get_node("GameUI/Step").play()
 	return
 	
 func playPauseButton():
-	get_node("Menu/MainMenuClick").play()
+	get_node("GameUI/PlayPause").play()
 	return
 	
 func playForwardStep():
-	get_node("Menu/MainMenuClick").play()
+	get_node("GameUI/Step").play()
 	return
 	
 func playFastForward():
@@ -32,7 +32,7 @@ func playFastForward():
 	return
 
 func playReset():
-	get_node("Menu/MainMenuClick").play()
+	get_node("GameUI/Reset").play()
 	return
 	
 func letTilego():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://script/SoundManager.gd" type="Script" id=1]
 [ext_resource path="res://sfx/vintage_radio_button_006.wav" type="AudioStream" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://sfx/tile_click1.wav" type="AudioStream" id=4]
 [ext_resource path="res://sfx/tile_place_success.wav" type="AudioStream" id=5]
 [ext_resource path="res://sfx/sine_wave_beep.wav" type="AudioStream" id=6]
+[ext_resource path="res://sfx/Bluezone_BC0268_switch_button_click_ignition_002_03.wav" type="AudioStream" id=7]
+[ext_resource path="res://sfx/switch_on_042.wav" type="AudioStream" id=8]
+[ext_resource path="res://sfx/button_on_off_064.wav" type="AudioStream" id=9]
 [ext_resource path="res://sfx/agogoF4.wav" type="AudioStream" id=10]
 [ext_resource path="res://sfx/agogoB3.wav" type="AudioStream" id=11]
 [ext_resource path="res://sfx/agogoC4.wav" type="AudioStream" id=12]
@@ -18,6 +21,7 @@
 [ext_resource path="res://sfx/agogoE3.wav" type="AudioStream" id=19]
 [ext_resource path="res://sfx/agogoD3.wav" type="AudioStream" id=20]
 [ext_resource path="res://sfx/agogoD4.wav" type="AudioStream" id=21]
+[ext_resource path="res://sfx/light_switch_019.wav" type="AudioStream" id=22]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource( 1 )
@@ -94,4 +98,26 @@ bus = "SFX"
 
 [node name="AgogoBellG4" type="AudioStreamPlayer" parent="TileSounds"]
 stream = ExtResource( 17 )
+bus = "SFX"
+
+[node name="GameUI" type="Node" parent="."]
+
+[node name="Reset" type="AudioStreamPlayer" parent="GameUI"]
+stream = ExtResource( 7 )
+volume_db = -20.0
+bus = "SFX"
+
+[node name="PlayPause" type="AudioStreamPlayer" parent="GameUI"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+bus = "SFX"
+
+[node name="Step" type="AudioStreamPlayer" parent="GameUI"]
+stream = ExtResource( 22 )
+volume_db = -10.0
+bus = "SFX"
+
+[node name="FastForward" type="AudioStreamPlayer" parent="GameUI"]
+stream = ExtResource( 8 )
+volume_db = -10.0
 bus = "SFX"

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Bluezone_BC0268_switch_button_click_ignition_002_03.wav-a1f72bdf7f182358ddbb7868adf4f55e.sample"
+
+[deps]
+
+source_file="res://sfx/Bluezone_BC0268_switch_button_click_ignition_002_03.wav"
+dest_files=[ "res://.import/Bluezone_BC0268_switch_button_click_ignition_002_03.wav-a1f72bdf7f182358ddbb7868adf4f55e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
