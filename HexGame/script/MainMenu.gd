@@ -10,6 +10,9 @@ func _ready():
 	connect("continue_pressed", get_parent(), "load_game")
 	connect("options_pressed", get_parent(), "load_options")
 	connect("editor_pressed", get_parent(), "load_level_editor")
+	
+	if OS.is_debug_build():
+		$"MainMenuButtons/Level Editor".visible = true
 	return
 
 

@@ -24,7 +24,9 @@ func _ready():
 	init_progress_data()
 	migrate_save_from_old_file()
 	load_game_progress()
-	init_playtest_recording()
+	
+	if OS.is_debug_build():
+		init_playtest_recording()
 	return
 	
 func init_progress_data():
@@ -73,7 +75,8 @@ func start_game_from_level_select(filepath, level_num):
 	destroy_level_select_scene()
 	init_level_scene()
 	load_level(filepath)
-	init_playtest_data()
+	if OS.is_debug_build():
+		init_playtest_data()
 	return
 	
 func return_to_main_menu():
@@ -134,7 +137,8 @@ func reset_playtest_level():
 	return 
 	
 func return_to_level_select():
-	record_playtest_data()
+	if OS.is_debug_build():
+		record_playtest_data()
 	destroy_level_scene()
 	init_level_select_scene()
 	return

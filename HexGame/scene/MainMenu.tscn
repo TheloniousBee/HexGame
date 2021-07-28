@@ -94,6 +94,7 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 enabled_focus_mode = 0
 text = "Exit"
+
 [connection signal="pressed" from="MainMenuButtons/New Game" to="." method="_on_New_Game_pressed"]
 [connection signal="pressed" from="MainMenuButtons/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="MainMenuButtons/Options" to="." method="_on_Options_pressed"]
