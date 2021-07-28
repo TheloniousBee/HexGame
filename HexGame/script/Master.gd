@@ -7,6 +7,7 @@ var current_scene
 var playtest_cache
 
 func _ready():
+	randomize()
 	Global.sound_mgr = $SoundManager
 	load_option_settings()
 	import_level_list()

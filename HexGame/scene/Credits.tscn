@@ -2,7 +2,7 @@
 
 [ext_resource path="res://fonts/Tutorial.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scene/QuitButton.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scene/Credits.gd" type="Script" id=3]
+[ext_resource path="res://script/Credits.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/AmaticSC-Regular.ttf"
@@ -106,4 +106,5 @@ __meta__ = {
 }
 
 [node name="Quit" parent="." instance=ExtResource( 2 )]
+
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
