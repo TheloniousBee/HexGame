@@ -19,7 +19,7 @@ run/main_scene="res://scene/Master.tscn"
 boot_splash/image="res://bg/splash_v1.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.686275, 0.886275, 0.905882, 1 )
-config/icon="res://sprite/key.png"
+config/icon="res://sprite/water.png"
 
 [autoload]
 
