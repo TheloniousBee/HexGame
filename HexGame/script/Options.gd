@@ -30,17 +30,13 @@ func _on_Fullscreen_toggled(button_pressed):
 
 
 func _on_SFXVolume_value_changed(value):
-	var max_value = get_node("VBoxContainer/SFXContainer/SFXVolume").max_value
-	var db_value = (value / (max_value / 60)) - 60
-	AudioServer.set_bus_volume_db(SFX_bus,db_value)
+	AudioServer.set_bus_volume_db(SFX_bus,linear2db(value))
 	Global.sound_mgr.playMainMenuClick()
 	return
 
 
 func _on_MusicVolume_value_changed(value):
-	var max_value = get_node("VBoxContainer/MusicContainer/MusicVolume").max_value
-	var db_value = (value / (max_value / 60)) - 60
-	AudioServer.set_bus_volume_db(Music_bus,db_value)
+	AudioServer.set_bus_volume_db(Music_bus,linear2db(value))
 	return
 
 
@@ -78,6 +74,7 @@ func _on_Accept_pressed():
 
 func _on_Cancel_pressed():
 	Global.sound_mgr.playOptionClick()
+	revert_options()
 	emit_signal("options_concluded")
 	return
 
@@ -116,15 +113,13 @@ func load_options():
 	var sfx_slider = get_node("VBoxContainer/SFXContainer/SFXVolume")
 	var sfx_db_value = AudioServer.get_bus_volume_db(SFX_bus)
 	original_sfx_db = sfx_db_value
-	var sfx_slider_value = (sfx_db_value + 60) * (sfx_slider.max_value / 60)
-	sfx_slider.value = sfx_slider_value
+	sfx_slider.value = db2linear(sfx_db_value)
 	
 	#Set music slider initial value
 	var music_slider = get_node("VBoxContainer/MusicContainer/MusicVolume")
 	var mus_db_value = AudioServer.get_bus_volume_db(Music_bus)
 	original_music_db = mus_db_value
-	var mus_slider_value = (mus_db_value + 60) * (music_slider.max_value / 60)
-	music_slider.value = mus_slider_value
+	music_slider.value = db2linear(mus_db_value)
 	
 	#Set fullscreen initial value
 	original_fullscreen = OS.window_fullscreen
@@ -132,6 +127,14 @@ func load_options():
 	fullscreen_checkbox.pressed = OS.window_fullscreen
 	
 	set_initial_resolution()
+	return
+	
+func revert_options():
+	AudioServer.set_bus_volume_db(SFX_bus,original_sfx_db)
+	AudioServer.set_bus_volume_db(Music_bus,original_music_db)
+	OS.window_fullscreen = original_fullscreen
+	print(original_resolution)
+	OS.window_size = original_resolution
 	return
 
 
@@ -149,5 +152,8 @@ func _on_Height_text_entered(new_text):
 func _on_ResolutionTimer_timeout():
 	if(previous_resolution != OS.window_size):
 		previous_resolution = OS.window_size
-		set_initial_resolution()
+		var width_text_box = get_node("VBoxContainer/ResolutionContainer/Width")
+		var height_text_box = get_node("VBoxContainer/ResolutionContainer/Height")
+		width_text_box.text = previous_resolution.x as String
+		height_text_box.text = previous_resolution.y as String
 	return
